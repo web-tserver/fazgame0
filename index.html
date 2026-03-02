@@ -768,6 +768,7 @@
       50% { filter: drop-shadow(0 0 30px rgba(255,216,77,0.8)) drop-shadow(0 0 60px rgba(255,216,77,0.5)); }
     }
 
+    /* ===== FULL-WIDTH WHATSAPP BUTTON ===== */
     .sticky-cta {
       position: sticky;
       top: 70px;
@@ -775,23 +776,18 @@
       background: transparent;
       padding: 12px 16px;
       text-align: center;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    @media (min-width: 768px) {
-      .sticky-cta {
-        top: 80px;
-        padding: 16px 24px;
-      }
+      width: 100%;
+      max-width: none;        /* remove any width restriction */
+      margin: 0;              /* remove auto margins */
     }
 
     .btn-primary {
-      display: inline-block;
+      display: block;         /* full-width block */
+      width: 100%;            /* take all available width */
       background: var(--accent);
       color: #000;
       border: none;
-      padding: 12px 32px;
+      padding: 14px 0;        /* vertical padding only */
       border-radius: 60px;
       font-weight: 700;
       font-size: 15px;
@@ -803,7 +799,7 @@
 
     @media (min-width: 768px) {
       .btn-primary {
-        padding: 14px 48px;
+        padding: 14px 0;
         font-size: 16px;
       }
     }
@@ -1495,7 +1491,6 @@
       display: flex;
     }
     #modalImg {
-      /* original max constraints removed for zoom */
       width: auto;
       height: auto;
       max-width: none;
@@ -1611,7 +1606,6 @@
       </div>
 
       <div class="social-row">
-        <!-- Social links open in new tab (already have target="_blank") -->
         <a class="social-link" href="https://www.tiktok.com/@syazeone" target="_blank" rel="noopener"><img src="https://api.iconify.design/simple-icons/tiktok.svg" alt="TikTok"></a>
         <a class="social-link" href="https://wa.me/60163691936" target="_blank" rel="noopener"><img src="https://api.iconify.design/simple-icons/whatsapp.svg" alt="WhatsApp"></a>
         <a class="social-link" href="https://www.instagram.com/fazgame_empire/" target="_blank" rel="noopener"><img src="https://api.iconify.design/simple-icons/instagram.svg" alt="Instagram"></a>
@@ -1633,7 +1627,7 @@
   </div>
 </div>
 
-<!-- CTA BUTTON - opens WhatsApp in new tab -->
+<!-- CTA BUTTON - FULL WIDTH BAR -->
 <div class="sticky-cta">
   <button id="cta-whatsapp" class="btn-primary">Chat on WhatsApp</button>
 </div>
