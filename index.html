@@ -68,8 +68,8 @@
       --lamp-color: #ffd84d;
       --lamp-off-color: #94a3b8;
       --header-bg: rgba(11, 11, 15, 0.8);
-      --card-glow-dark: 0 0 5px rgba(255,216,77,0.3), 0 0 10px rgba(255,216,77,0.2); /* sharper edge glow */
-      --card-glow-dark-hot: 0 0 5px rgba(255,216,77,0.4), 0 0 15px rgba(255,216,77,0.25);
+      --card-glow-dark: none;          /* removed glow */
+      --card-glow-dark-hot: none;      /* removed glow */
       --card-shadow: none;
     }
 
@@ -985,9 +985,9 @@
       box-shadow: var(--card-shadow);
     }
 
-    /* Dark mode edge glow - sharper */
+    /* Dark mode - no glow (variables set to none) */
     body:not(.light-mode) .product-card {
-      box-shadow: var(--card-glow-dark);
+      box-shadow: var(--card-glow-dark); /* now none */
     }
 
     @media (min-width: 768px) {
@@ -1001,6 +1001,12 @@
       background: var(--card-hover);
       border-color: var(--accent);
     }
+
+    /* Light mode - remove shadow from stock cards only */
+    body.light-mode .product-card {
+      box-shadow: none;
+    }
+
     .product-icon {
       width: 58px;
       height: 58px;
@@ -1161,9 +1167,9 @@
       box-shadow: var(--card-shadow);
     }
 
-    /* Dark mode edge glow for hot cards - sharper */
+    /* Dark mode - no glow (variables set to none) */
     body:not(.light-mode) .hot-card {
-      box-shadow: var(--card-glow-dark-hot);
+      box-shadow: var(--card-glow-dark-hot); /* now none */
     }
 
     @media (min-width: 768px) {
