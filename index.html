@@ -23,35 +23,45 @@
       --text: #fff;
       --text-secondary: #ffffff;
       --muted: #a0a0b0;
-      --muted-secondary: #6b7280;
+      --muted-secondary: #94a3b8;
       --accent: #ffd84d;
       --accent-dark: #e6c43d;
       --accent-glow: 0 0 20px rgba(255,216,77,0.5);
       --border-color: rgba(255,255,255,0.1);
       --card-hover: rgba(255,255,255,0.12);
       --product-icon-bg: #111;
+      --badge-used-bg: rgba(255,255,255,0.12);
+      --badge-used-text: #fff;
+      --badge-new-bg: rgba(255,216,77,0.45);
+      --badge-new-text: #000;
       --transition: 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
       --lamp-color: #ffd84d;
       --lamp-off-color: #94a3b8;
+      --header-bg: rgba(11, 11, 15, 0.8);
     }
 
-    /* Light mode */
+    /* Light mode - with black pill for used badge */
     body.light-mode {
-      --bg: #f5f7fa;
+      --bg: #f8fafc;
       --bg-secondary: #ffffff;
-      --card-bg: rgba(255, 255, 255, 0.8);
-      --text: #1e293b;
-      --text-secondary: #0f172a;
-      --muted: #64748b;
-      --muted-secondary: #475569;
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --text: #0f172a;
+      --text-secondary: #1e293b;
+      --muted: #475569;
+      --muted-secondary: #334155;
       --accent: #eab308;
       --accent-dark: #ca8a04;
-      --accent-glow: 0 0 20px rgba(234,179,8,0.3);
-      --border-color: rgba(0,0,0,0.1);
-      --card-hover: rgba(0,0,0,0.05);
+      --accent-glow: 0 0 20px rgba(234,179,8,0.2);
+      --border-color: rgba(0,0,0,0.08);
+      --card-hover: #ffffff;
       --product-icon-bg: #e2e8f0;
+      --badge-used-bg: #000000;
+      --badge-used-text: #ffffff;
+      --badge-new-bg: #eab308;
+      --badge-new-text: #ffffff;
       --lamp-color: #eab308;
       --lamp-off-color: #94a3b8;
+      --header-bg: rgba(255, 255, 255, 0.9);
     }
 
     body.light-mode .header-logos img {
@@ -67,25 +77,8 @@
       filter: invert(0);
     }
 
-    body.light-mode .search-box {
-      background: #ffffff;
-      color: #1e293b;
-      border-color: rgba(0,0,0,0.1);
-    }
-
-    body.light-mode .filter-btn {
-      background: #ffffff;
-      color: #1e293b;
-      border-color: rgba(0,0,0,0.1);
-    }
-
-    body.light-mode .product-card {
-      background: rgba(255,255,255,0.9);
-      border-color: rgba(0,0,0,0.1);
-    }
-
-    body.light-mode .product-card:hover {
-      background: #ffffff;
+    body.light-mode .payment-item img {
+      filter: invert(0);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -99,7 +92,7 @@
     }
     a { text-decoration: none; color: inherit; }
 
-    /* ===== HANGING LAMP ===== */
+    /* ===== MODERN MINIMALIST LAMP - FIXED BELOW HEADER ===== */
     .theme-toggle {
       position: fixed;
       top: 80px;
@@ -107,93 +100,125 @@
       z-index: 1001;
       cursor: pointer;
       filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
-      animation: lampSway 8s ease-in-out infinite;
-      transform-origin: top center;
+      transition: filter 0.3s ease;
+      transform-style: preserve-3d;
+      perspective: 800px;
     }
 
-    @keyframes lampSway {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(2deg); }
-      75% { transform: rotate(-2deg); }
+    .theme-toggle:hover {
+      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4));
     }
 
-    .lamp {
-      position: relative;
+    .modern-lamp {
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-
-    .lamp-chain {
-      width: 4px;
-      height: 40px;
-      background: var(--muted);
-      border-radius: 2px;
-      transition: height 0.2s ease;
-    }
-
-    .lamp.pulling .lamp-chain {
-      height: 50px;
-    }
-
-    .lamp-pull {
-      width: 20px;
-      height: 20px;
-      background: var(--muted-secondary);
-      border-radius: 50%;
-      margin-bottom: 5px;
+      transform: rotateX(2deg) rotateY(-2deg);
       transition: transform 0.2s ease;
     }
 
-    .lamp.pulling .lamp-pull {
-      transform: translateY(10px);
+    .theme-toggle:hover .modern-lamp {
+      transform: rotateX(1deg) rotateY(-1deg);
     }
 
+    .modern-lamp.pulling {
+      animation: pullLamp 0.3s ease;
+    }
+
+    @keyframes pullLamp {
+      0% { transform: rotateX(2deg) rotateY(-2deg) translateY(0); }
+      50% { transform: rotateX(4deg) rotateY(-2deg) translateY(4px); }
+      100% { transform: rotateX(2deg) rotateY(-2deg) translateY(0); }
+    }
+
+    /* Cord */
+    .lamp-cord {
+      width: 2px;
+      height: 45px;
+      background: linear-gradient(to bottom, #9ca3af, #6b7280);
+      border-radius: 1px;
+      margin-bottom: 2px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .modern-lamp.pulling .lamp-cord {
+      height: 55px;
+    }
+
+    /* Cylindrical shade */
     .lamp-shade {
-      width: 60px;
-      height: 40px;
-      background: var(--muted);
-      border-radius: 30px 30px 10px 10px;
-      position: relative;
+      width: 40px;
+      height: 28px;
+      background: linear-gradient(145deg, #e5e7eb, #d1d5db);
+      border-radius: 20px 20px 8px 8px;
       display: flex;
       justify-content: center;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      align-items: center;
+      box-shadow: 0 10px 15px -5px rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 2px;
     }
 
-    .lamp-light {
-      width: 100px;
-      height: 100px;
-      background: radial-gradient(circle, var(--lamp-color) 0%, transparent 70%);
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
+    .lamp-bulb {
+      width: 24px;
+      height: 24px;
+      background: radial-gradient(circle at 30% 30%, var(--lamp-color), color-mix(in srgb, var(--lamp-color) 50%, #333));
       border-radius: 50%;
-      opacity: 0.8;
-      transition: opacity 0.3s ease, background 0.3s ease;
+      box-shadow: 0 0 20px var(--lamp-color);
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    body.light-mode .lamp-bulb {
+      background: radial-gradient(circle at 30% 30%, var(--lamp-off-color), color-mix(in srgb, var(--lamp-off-color) 40%, #444));
+      box-shadow: 0 0 15px var(--lamp-off-color);
+    }
+
+    /* Downward light glow */
+    .lamp-glow {
+      position: relative;
+      width: 60px;
+      height: 50px;
+      background: radial-gradient(ellipse at top, var(--lamp-color) 0%, transparent 80%);
+      filter: blur(12px);
+      opacity: 0.6;
+      margin-top: -20px;
       pointer-events: none;
     }
 
-    body.light-mode .lamp-light {
-      opacity: 0.4;
-      background: radial-gradient(circle, var(--lamp-off-color) 0%, transparent 70%);
+    body.light-mode .lamp-glow {
+      background: radial-gradient(ellipse at top, var(--lamp-off-color) 0%, transparent 80%);
+      opacity: 0.3;
     }
 
-    .lamp-off .lamp-light {
-      opacity: 0.2;
-      background: radial-gradient(circle, var(--lamp-off-color) 0%, transparent 70%);
+    /* Pull chain */
+    .lamp-pull {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 2px;
     }
 
-    .lamp-pull-indicator {
-      font-size: 18px;
-      margin-top: 5px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      color: var(--text);
+    .pull-chain {
+      width: 1px;
+      height: 20px;
+      background: #9ca3af;
     }
 
-    .lamp.pulling .lamp-pull-indicator {
-      transform: translateY(5px);
+    .modern-lamp.pulling .pull-chain {
+      height: 28px;
+    }
+
+    .pull-knob {
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(circle at 30% 30%, #e5e7eb, #9ca3af);
+      border-radius: 50%;
+      margin-top: 2px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .modern-lamp.pulling .pull-knob {
+      transform: translateY(6px);
     }
 
     /* ===== HEADER ===== */
@@ -201,7 +226,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(var(--bg-rgb), 0.8);
+      background: var(--header-bg);
       backdrop-filter: blur(12px);
       padding: 16px 24px;
       border-bottom: 1px solid var(--border-color);
@@ -221,11 +246,11 @@
       letter-spacing: -0.5px;
     }
     .logo span:first-child {
-      color: var(--text); /* FAZ - follows theme */
+      color: var(--text);
       transition: color 0.2s ease;
     }
     .logo span:last-child {
-      color: var(--accent); /* GAME - accent color */
+      color: var(--accent);
       transition: color 0.2s ease;
     }
     .header-logos {
@@ -245,10 +270,6 @@
       filter: invert(1) drop-shadow(0 0 8px var(--accent));
     }
 
-    body.light-mode .header-logos img {
-      filter: invert(0);
-    }
-
     /* ===== BANNER ===== */
     .banner {
       position: relative;
@@ -260,7 +281,6 @@
       transition: background-color 0.3s ease;
     }
 
-    /* Abstract background shapes */
     .banner-bg {
       position: absolute;
       inset: 0;
@@ -274,7 +294,7 @@
       transition: opacity 0.3s ease;
     }
     body.light-mode .banner-bg .shape {
-      opacity: 0.2;
+      opacity: 0.15;
     }
     .shape-1 {
       width: 400px;
@@ -311,7 +331,6 @@
       50% { opacity: 0.3; }
     }
 
-    /* Grain overlay */
     .banner::after {
       content: "";
       position: absolute;
@@ -335,24 +354,8 @@
       width: 100%;
     }
 
-    /* Left side – content */
     .banner-content {
       max-width: 600px;
-    }
-
-    .badge-new {
-      display: inline-block;
-      background: rgba(var(--accent-rgb), 0.15);
-      border: 1px solid rgba(var(--accent-rgb), 0.4);
-      color: var(--accent);
-      font-size: 14px;
-      font-weight: 600;
-      padding: 6px 16px;
-      border-radius: 40px;
-      margin-bottom: 24px;
-      backdrop-filter: blur(4px);
-      letter-spacing: 0.5px;
-      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
     }
 
     .hero-title {
@@ -379,7 +382,6 @@
       transition: color 0.2s ease;
     }
 
-    /* Service chips */
     .service-chips {
       display: flex;
       flex-wrap: wrap;
@@ -387,7 +389,7 @@
       margin-bottom: 40px;
     }
     .chip {
-      background: rgba(var(--text-rgb), 0.03);
+      background: rgba(128, 128, 128, 0.1);
       border: 1px solid var(--border-color);
       padding: 10px 22px;
       border-radius: 60px;
@@ -412,7 +414,6 @@
       font-weight: 600;
     }
 
-    /* Stats */
     .hero-stats {
       display: flex;
       gap: 48px;
@@ -435,7 +436,6 @@
       transition: color 0.2s ease;
     }
 
-    /* Social icons */
     .social-row {
       display: flex;
       gap: 16px;
@@ -444,7 +444,7 @@
       width: 46px;
       height: 46px;
       border-radius: 50%;
-      background: rgba(var(--text-rgb), 0.03);
+      background: rgba(128, 128, 128, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -468,11 +468,6 @@
       filter: invert(0);
     }
 
-    body.light-mode .social-link img {
-      filter: invert(0);
-    }
-
-    /* Right side – floating image */
     .banner-visual {
       position: relative;
       display: flex;
@@ -491,7 +486,7 @@
       transition: opacity 0.3s ease;
     }
     body.light-mode .orb {
-      opacity: 0.2;
+      opacity: 0.15;
     }
     .orb-1 {
       top: 10%;
@@ -510,7 +505,6 @@
       50% { opacity: 0.6; transform: scale(1.2); }
     }
 
-    /* Floating image */
     .floating-image {
       width: 100%;
       max-width: 650px;
@@ -524,7 +518,7 @@
     }
 
     body.light-mode .floating-image {
-      filter: drop-shadow(0 0 20px rgba(234,179,8,0.4)) drop-shadow(0 0 40px rgba(234,179,8,0.2));
+      filter: drop-shadow(0 0 20px rgba(234,179,8,0.3)) drop-shadow(0 0 40px rgba(234,179,8,0.15));
     }
 
     @keyframes levitate {
@@ -537,11 +531,6 @@
       50% { filter: drop-shadow(0 0 50px rgba(255,216,77,1)) drop-shadow(0 0 90px rgba(255,216,77,0.6)); }
     }
 
-    body.light-mode .floating-image {
-      animation: levitate 6s ease-in-out infinite;
-    }
-
-    /* CTA Button */
     .sticky-cta {
       position: sticky;
       top: 80px;
@@ -747,17 +736,21 @@
       padding: 3px 8px;
       border-radius: 8px;
       text-transform: uppercase;
+      z-index: 2;
     }
     .card-badge-type {
       top: 12px;
       right: 12px;
+      background: var(--accent);
+      color: #000;
     }
     .card-badge-cond {
       top: 12px;
       left: 12px;
+      background: var(--badge-used-bg);
+      color: var(--badge-used-text);
     }
 
-    /* 3D hover for hot cards */
     .hot-card {
       position: relative;
       border-radius: 24px;
@@ -770,7 +763,6 @@
       perspective: 1000px;
       will-change: transform;
     }
-
     .hot-card img {
       width: 100%;
       height: 100%;
@@ -779,11 +771,9 @@
       transition: transform 0.3s ease;
       transform: translateZ(20px);
     }
-
     .hot-card .badge {
       transform: translateZ(30px);
     }
-
     .hot-card-content {
       position: absolute;
       bottom: 0;
@@ -794,7 +784,6 @@
       z-index: 4;
       transform: translateZ(20px);
     }
-
     .hot-card::after {
       content: "";
       position: absolute;
@@ -809,16 +798,13 @@
       opacity: 0;
       filter: blur(1px);
     }
-
     .hot-card:hover::after {
       animation: metallicShine 0.7s forwards;
       opacity: 1;
     }
-
     @keyframes metallicShine {
       to { left: 180%; }
     }
-
     .hot-card::before {
       content: "";
       position: absolute;
@@ -830,17 +816,12 @@
       z-index: 5;
       background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.2), transparent 60%);
     }
-
     .hot-card:hover::before {
       opacity: 1;
     }
 
-    /* Hide Fast Sales section */
-    #fast-sales {
-      display: none;
-    }
+    #fast-sales { display: none; }
 
-    /* Other sections */
     .installment-banner { margin: 20px auto; max-width: 1200px; font-size: 13px; text-align: center; color: var(--accent); font-weight: 600; letter-spacing: .5px; animation: fadeInInstall 1.2s ease forwards; opacity: 0; transition: color 0.2s ease; }
     @keyframes fadeInInstall { to { opacity: 1; } }
     section:not(#stock) { padding: 60px 24px; max-width: 1200px; margin: 0 auto; }
@@ -853,16 +834,12 @@
     .badge-left { left: 15px; background: rgba(255,255,255,0.9); color: #000; }
     .badge-right { right: 15px; background: var(--accent); color: #000; }
     .badge-red { background: #ff3b3b; color: #fff; }
-    @media (min-width: 600px) {
-      .hot-grid { gap: 24px; }
-    }
+    @media (min-width: 600px) { .hot-grid { gap: 24px; } }
     .payment-icons { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 30px; }
     .payment-item { display: flex; align-items: center; gap: 12px; font-size: 15px; opacity: 0.8; color: var(--text); }
     .payment-item img { height: 28px; filter: invert(1); transition: filter 0.2s ease; }
-    body.light-mode .payment-item img { filter: invert(0); }
     footer { text-align: center; padding: 50px 20px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--border-color); transition: color 0.2s ease, border-color 0.2s ease; }
 
-    /* Responsive */
     @media (max-width: 900px) {
       .banner-container { grid-template-columns: 1fr; text-align: center; }
       .banner-content { margin: 0 auto; }
@@ -871,17 +848,16 @@
       .banner-visual { order: -1; margin-bottom: 20px; }
       .floating-image { max-width: 400px; }
       .sticky-cta { text-align: center; }
-      .theme-toggle { top: 120px; right: 15px; }
+      .theme-toggle { top: 70px; right: 15px; }
     }
     @media (max-width: 600px) {
       .hero-title { font-size: 48px; }
       .hero-stats { gap: 24px; }
       .stat-item h3 { font-size: 28px; }
       .floating-image { max-width: 300px; }
-      .theme-toggle { top: 100px; right: 10px; transform: scale(0.8); }
+      .theme-toggle { top: 60px; right: 10px; transform: scale(0.9); }
     }
 
-    /* Preloader & lightbox */
     #preloader { position: fixed; inset: 0; background: var(--bg); z-index: 10000; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease, background 0.3s ease; }
     #preloader.hide { opacity: 0; pointer-events: none; }
     .loader-bar-wrap { width: 240px; height: 4px; background: #222; margin-top: 20px; border-radius: 10px; overflow: hidden; }
@@ -890,18 +866,6 @@
     #imageModal.show { display: flex; }
     #modalImg { max-width: 95%; max-height: 90vh; border-radius: 16px; box-shadow: 0 0 50px rgba(0,0,0,0.6); transform: scale(0.9); transition: transform 0.3s ease; }
     #imageModal.show #modalImg { transform: scale(1); }
-
-    /* RGB variable fallbacks */
-    body {
-      --bg-rgb: 11, 11, 15;
-      --text-rgb: 255, 255, 255;
-      --accent-rgb: 255, 216, 77;
-    }
-    body.light-mode {
-      --bg-rgb: 245, 247, 250;
-      --text-rgb: 30, 41, 59;
-      --accent-rgb: 234, 179, 8;
-    }
   </style>
 </head>
 <body>
@@ -917,15 +881,18 @@
 
 <div id="imageModal"><img id="modalImg" src="" alt="Preview"></div>
 
-<!-- Hanging Lamp Theme Toggle -->
+<!-- Modern Minimalist Lamp - Fixed below header -->
 <div class="theme-toggle" id="themeToggle">
-  <div class="lamp" id="lamp">
-    <div class="lamp-chain"></div>
-    <div class="lamp-pull"></div>
+  <div class="modern-lamp" id="lamp">
+    <div class="lamp-cord"></div>
     <div class="lamp-shade">
-      <div class="lamp-light"></div>
+      <div class="lamp-bulb"></div>
     </div>
-    <div class="lamp-pull-indicator">💡</div>
+    <div class="lamp-glow"></div>
+    <div class="lamp-pull">
+      <div class="pull-chain"></div>
+      <div class="pull-knob"></div>
+    </div>
   </div>
 </div>
 
@@ -952,7 +919,6 @@
   </div>
   <div class="banner-container">
     <div class="banner-content">
-      <div class="badge-new">🎮 NEW SEASON 2026</div>
       <h1 class="hero-title">LEVEL UP<br>YOUR <span>GAMING</span></h1>
       <p class="hero-desc">Pre‑order the latest consoles, custom PCs, and exclusive accessories with 0% installment.</p>
       
@@ -1007,39 +973,126 @@
 <!-- Fast Sales is hidden -->
 <section id="fast-sales" style="display:none;"></section>
 
-<!-- Preorder PC Builds -->
+<!-- ===== PREORDER PC BUILDS - USING LOCAL IMAGES ===== -->
 <section id="hot">
   <h2 class="section-title">Preorder PC Builds</h2>
   <div class="section-subtitle">🖥 Custom Gaming PCs • Built On Demand</div>
   <div class="hot-grid">
-    <div class="hot-card tilt-card"><span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=RM1000+PC" alt="PC Budget RM1000" loading="lazy"><div class="hot-card-content"><div class="hot-title">PC Budget RM1,000+</div><div class="hot-desc">Entry Gaming</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=RM2000+PC" alt="PC Budget RM2000" loading="lazy"><div class="hot-card-content"><div class="hot-title">PC Budget RM2,000+</div><div class="hot-desc">Entry Gaming</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=RM3000+PC" alt="PC Budget RM3000" loading="lazy"><div class="hot-card-content"><div class="hot-title">PC Budget RM3,000+</div><div class="hot-desc">Balanced Build</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=RM3500+PC" alt="PC Budget RM3500" loading="lazy"><div class="hot-card-content"><div class="hot-title">PC Budget RM3,500+</div><div class="hot-desc">High Performance</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=Custom+PC" alt="Custom PC" loading="lazy"><div class="hot-card-content"><div class="hot-title">Custom PC</div><div class="hot-desc">Free Setup</div></div></div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/pc-budget-1000.jpg" alt="PC Budget RM1000" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM1000';">
+      <div class="hot-card-content">
+        <div class="hot-title">PC Budget RM1,000+</div>
+        <div class="hot-desc">Entry Gaming</div>
+      </div>
+    </div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/pc-budget-2000.jpg" alt="PC Budget RM2000" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM2000';">
+      <div class="hot-card-content">
+        <div class="hot-title">PC Budget RM2,000+</div>
+        <div class="hot-desc">Entry Gaming</div>
+      </div>
+    </div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/pc-budget-3000.jpg" alt="PC Budget RM3000" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM3000';">
+      <div class="hot-card-content">
+        <div class="hot-title">PC Budget RM3,000+</div>
+        <div class="hot-desc">Balanced Build</div>
+      </div>
+    </div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/pc-budget-3500.jpg" alt="PC Budget RM3500" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM3500';">
+      <div class="hot-card-content">
+        <div class="hot-title">PC Budget RM3,500+</div>
+        <div class="hot-desc">High Performance</div>
+      </div>
+    </div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/custom-pc.jpg" alt="Custom PC" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=Custom+PC';">
+      <div class="hot-card-content">
+        <div class="hot-title">Custom PC</div>
+        <div class="hot-desc">Free Setup</div>
+      </div>
+    </div>
   </div>
 </section>
 
 <div class="installment-banner">💳 0% Interest Installment Available • SPayLater</div>
 
-<!-- Preorder Consoles -->
+<!-- ===== PREORDER CONSOLES - USING LOCAL IMAGES (OLD DESIGN NAMES) ===== -->
 <section id="preorder-console">
   <h2 class="section-title">Preorder Consoles</h2>
   <div class="section-subtitle">🎮 Used Units • Reserve Before Stock Arrival</div>
   <div class="hot-grid">
-    <div class="hot-card tilt-card"><span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=PS4+Slim" alt="PS4 Slim" loading="lazy"><div class="hot-card-content"><div class="hot-title">PS4 Slim 500GB</div><div class="hot-desc">RM550</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=PS4+Pro" alt="PS4 Pro" loading="lazy"><div class="hot-card-content"><div class="hot-title">PS4 Pro 1TB</div><div class="hot-desc">RM650</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=PS5+Fat" alt="PS5 Fat" loading="lazy"><div class="hot-card-content"><div class="hot-title">PS5 Fat Disc</div><div class="hot-desc">RM1450</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=PS5+Slim" alt="PS5 Slim" loading="lazy"><div class="hot-card-content"><div class="hot-title">PS5 Slim Disc</div><div class="hot-desc">RM1650</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=PS5+Pro" alt="PS5 Pro" loading="lazy"><div class="hot-card-content"><div class="hot-title">PS5 Pro Digital</div><div class="hot-desc">RM2750</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=Switch+Lite" alt="Switch Lite" loading="lazy"><div class="hot-card-content"><div class="hot-title">Switch Lite</div><div class="hot-desc">RM400</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=OLED+White" alt="Switch OLED White" loading="lazy"><div class="hot-card-content"><div class="hot-title">Switch OLED White</div><div class="hot-desc">RM750</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=OLED+Neon" alt="Switch OLED Neon" loading="lazy"><div class="hot-card-content"><div class="hot-title">Switch OLED Neon</div><div class="hot-desc">RM750</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=Zelda+OLED" alt="Switch OLED Zelda" loading="lazy"><div class="hot-card-content"><div class="hot-title">Switch OLED Zelda</div><div class="hot-desc">RM850</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=Splatoon+OLED" alt="Switch OLED Splatoon" loading="lazy"><div class="hot-card-content"><div class="hot-title">Switch OLED Splatoon</div><div class="hot-desc">RM850</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=Mario+OLED" alt="Switch OLED Mario" loading="lazy"><div class="hot-card-content"><div class="hot-title">Switch OLED Mario</div><div class="hot-desc">RM850</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=Pokemon+OLED" alt="Switch OLED Pokemon" loading="lazy"><div class="hot-card-content"><div class="hot-title">Switch OLED Pokemon</div><div class="hot-desc">RM850</div></div></div>
-    <div class="hot-card tilt-card"><span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span><img src="https://placehold.co/400x500/222/ffd84d?text=Switch+2" alt="Switch 2" loading="lazy"><div class="hot-card-content"><div class="hot-title">Switch 2 Edition</div><div class="hot-desc">RM1700</div></div></div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/ps4-slim.jpg" alt="PS4 Slim" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PS4+Slim';">
+      <div class="hot-card-content"><div class="hot-title">PS4 Slim 500GB</div><div class="hot-desc">RM550</div></div>
+    </div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/ps4-pro.jpg" alt="PS4 Pro" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PS4+Pro';">
+      <div class="hot-card-content"><div class="hot-title">PS4 Pro 1TB</div><div class="hot-desc">RM650</div></div>
+    </div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/ps5-fat.jpg" alt="PS5 Fat" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PS5+Fat';">
+      <div class="hot-card-content"><div class="hot-title">PS5 Fat Disc</div><div class="hot-desc">RM1450</div></div>
+    </div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/ps5-slim.jpg" alt="PS5 Slim" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PS5+Slim';">
+      <div class="hot-card-content"><div class="hot-title">PS5 Slim Disc</div><div class="hot-desc">RM1650</div></div>
+    </div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/ps5-pro.jpg" alt="PS5 Pro" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PS5+Pro';">
+      <div class="hot-card-content"><div class="hot-title">PS5 Pro Digital</div><div class="hot-desc">RM2750</div></div>
+    </div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/switch-lite.jpg" alt="Switch Lite" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=Switch+Lite';">
+      <div class="hot-card-content"><div class="hot-title">Switch Lite</div><div class="hot-desc">RM400</div></div>
+    </div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/switch-oled-white.jpg" alt="Switch OLED White" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=OLED+White';">
+      <div class="hot-card-content"><div class="hot-title">Switch OLED White</div><div class="hot-desc">RM750</div></div>
+    </div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/switch-oled-neon.jpg" alt="Switch OLED Neon" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=OLED+Neon';">
+      <div class="hot-card-content"><div class="hot-title">Switch OLED Neon</div><div class="hot-desc">RM750</div></div>
+    </div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/switch-zelda.jpg" alt="Switch OLED Zelda" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=Zelda+OLED';">
+      <div class="hot-card-content"><div class="hot-title">Switch OLED Zelda</div><div class="hot-desc">RM850</div></div>
+    </div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/switch-splatoon.jpg" alt="Switch OLED Splatoon" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=Splatoon+OLED';">
+      <div class="hot-card-content"><div class="hot-title">Switch OLED Splatoon</div><div class="hot-desc">RM850</div></div>
+    </div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/switch-mario.jpg" alt="Switch OLED Mario" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=Mario+OLED';">
+      <div class="hot-card-content"><div class="hot-title">Switch OLED Mario</div><div class="hot-desc">RM850</div></div>
+    </div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/switch-pokemon.jpg" alt="Switch OLED Pokemon" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=Pokemon+OLED';">
+      <div class="hot-card-content"><div class="hot-title">Switch OLED Pokemon</div><div class="hot-desc">RM850</div></div>
+    </div>
+    <div class="hot-card tilt-card">
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/switch-2.jpg" alt="Switch 2" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=Switch+2';">
+      <div class="hot-card-content"><div class="hot-title">Switch 2 Edition</div><div class="hot-desc">RM1700</div></div>
+    </div>
   </div>
 </section>
 
@@ -1119,13 +1172,14 @@
       grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--accent)">No items found matching your search.</div>`;
     } else {
       grid.innerHTML = filtered.map(p => {
-        const condClass = p.cond === 'new' ? 'rgba(255,216,77,.45)' : 'rgba(255,255,255,.12)';
-        const typeClass = p.type === 'game' ? '#3cff7f' : '#ffd84d';
+        const condClass = p.cond === 'new' ? 'var(--badge-new-bg)' : 'var(--badge-used-bg)';
+        const condColor = p.cond === 'new' ? 'var(--badge-new-text)' : 'var(--badge-used-text)';
+        const typeClass = p.type === 'game' ? '#3cff7f' : 'var(--accent)';
         
         return `
         <div class="product-card">
-          <span class="card-badge card-badge-cond" style="background:${condClass}; color:#fff;">${p.cond || 'USED'}</span>
-          <span class="card-badge card-badge-type" style="background:${typeClass}; color:#000;">${p.type || 'CONSOLE'}</span>
+          <span class="card-badge card-badge-cond" style="background: ${condClass}; color: ${condColor};">${p.cond?.toUpperCase() || 'USED'}</span>
+          <span class="card-badge card-badge-type" style="background: ${typeClass};">${p.type?.toUpperCase() || 'CONSOLE'}</span>
           <div class="product-icon">
             <img src="${icons[p.c] || icons.other}" alt="${p.c}">
           </div>
@@ -1229,7 +1283,6 @@
     });
   }
 
-  // Smooth scroll
   document.querySelectorAll('[data-scroll]').forEach(chip => {
     chip.onclick = () => {
       const target = document.getElementById(chip.dataset.scroll);
@@ -1240,7 +1293,6 @@
     };
   });
 
-  // WhatsApp CTA
   document.getElementById("cta-whatsapp").addEventListener("click", function(e){
     e.preventDefault();
     const phone = "60163691936";
@@ -1248,32 +1300,27 @@
     window.open("https://api.whatsapp.com/send?phone=" + phone + "&text=" + encodeURIComponent(message), '_blank');
   });
 
-  // ===== THEME TOGGLE WITH LAMP ANIMATION =====
+  // ===== THEME TOGGLE WITH MODERN LAMP =====
   const themeToggle = document.getElementById('themeToggle');
   const lamp = document.getElementById('lamp');
   
-  // Check for saved theme preference
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'light') {
     document.body.classList.add('light-mode');
   }
 
   themeToggle.addEventListener('click', () => {
-    // Add pulling animation
     lamp.classList.add('pulling');
     
-    // Toggle theme after short delay (for animation)
     setTimeout(() => {
       document.body.classList.toggle('light-mode');
       
-      // Save preference
       if (document.body.classList.contains('light-mode')) {
         localStorage.setItem('theme', 'light');
       } else {
         localStorage.setItem('theme', 'dark');
       }
       
-      // Remove pulling animation
       setTimeout(() => {
         lamp.classList.remove('pulling');
       }, 200);
