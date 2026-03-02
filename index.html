@@ -71,6 +71,7 @@
       --card-glow-dark: none;
       --card-glow-dark-hot: none;
       --card-shadow: none;
+      --hover-glow: 0 0 15px var(--accent); /* for hover effect */
     }
 
     /* Light mode - with black pill for used badge and iOS shadow */
@@ -98,6 +99,7 @@
       --card-glow-dark: none;
       --card-glow-dark-hot: none;
       --card-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
+      --hover-glow: 0 0 15px var(--accent);
     }
 
     body.light-mode .header-logos img {
@@ -987,7 +989,7 @@
 
     /* Dark mode - no glow (variables set to none) */
     body:not(.light-mode) .product-card {
-      box-shadow: var(--card-glow-dark); /* now none */
+      box-shadow: var(--card-glow-dark);
     }
 
     @media (min-width: 768px) {
@@ -1154,6 +1156,7 @@
       }
     }
 
+    /* ===== PREORDER CARDS (PC & CONSOLE) - HOVER EFFECT ===== */
     .hot-card {
       position: relative;
       border-radius: 20px;
@@ -1169,13 +1172,20 @@
 
     /* Dark mode - no glow (variables set to none) */
     body:not(.light-mode) .hot-card {
-      box-shadow: var(--card-glow-dark-hot); /* now none */
+      box-shadow: var(--card-glow-dark-hot);
     }
 
     @media (min-width: 768px) {
       .hot-card {
         border-radius: 24px;
       }
+    }
+
+    /* Hover popup and edge glow */
+    .hot-card:hover {
+      transform: scale(1.02) translateY(-5px);
+      box-shadow: var(--hover-glow), 0 15px 30px rgba(0,0,0,0.3);
+      z-index: 10;
     }
 
     .hot-card img {
@@ -1243,6 +1253,7 @@
       }
     }
 
+    /* Metallic shine (keep original) */
     .hot-card::after {
       content: "";
       position: absolute;
@@ -1465,7 +1476,7 @@
       }
     }
 
-    /* Lightbox - now zoomable */
+    /* Lightbox - original style but zoomable */
     #imageModal {
       position: fixed;
       inset: 0;
@@ -1476,15 +1487,15 @@
       align-items: center;
       justify-content: center;
       cursor: zoom-out;
-      padding: 0; /* remove padding to allow full use of space */
-      overflow: auto; /* allow scrolling/panning */
+      padding: 0;
+      overflow: auto; /* enable scrolling/pinch zoom */
       -webkit-overflow-scrolling: touch;
     }
     #imageModal.show {
       display: flex;
     }
     #modalImg {
-      /* Natural size, allow zoom via browser pinch/scroll */
+      /* original max constraints removed for zoom */
       width: auto;
       height: auto;
       max-width: none;
@@ -1493,12 +1504,7 @@
       margin: auto;
       box-shadow: 0 0 50px rgba(0,0,0,0.6);
       cursor: zoom-out;
-      /* optional: add a slight transition for smoothness */
       transition: transform 0.2s;
-    }
-    /* Optional: double-tap to zoom? we rely on browser's native pinch */
-    #modalImg:active {
-      transform: scale(1.02); /* subtle feedback */
     }
 
     /* Preloader */
@@ -1605,6 +1611,7 @@
       </div>
 
       <div class="social-row">
+        <!-- Social links open in new tab (already have target="_blank") -->
         <a class="social-link" href="https://www.tiktok.com/@syazeone" target="_blank" rel="noopener"><img src="https://api.iconify.design/simple-icons/tiktok.svg" alt="TikTok"></a>
         <a class="social-link" href="https://wa.me/60163691936" target="_blank" rel="noopener"><img src="https://api.iconify.design/simple-icons/whatsapp.svg" alt="WhatsApp"></a>
         <a class="social-link" href="https://www.instagram.com/fazgame_empire/" target="_blank" rel="noopener"><img src="https://api.iconify.design/simple-icons/instagram.svg" alt="Instagram"></a>
@@ -1626,7 +1633,7 @@
   </div>
 </div>
 
-<!-- CTA BUTTON -->
+<!-- CTA BUTTON - opens WhatsApp in new tab -->
 <div class="sticky-cta">
   <button id="cta-whatsapp" class="btn-primary">Chat on WhatsApp</button>
 </div>
@@ -1839,7 +1846,7 @@
             <h4>${p.n}</h4>
             <div class="price-row">
               <span class="product-price">RM${p.p}</span>
-              <button class="product-buy" onclick="window.open('https://wa.me/60163691936?text=Inquiry: ${encodeURIComponent(p.n)}')">CHECK</button>
+              <button class="product-buy" onclick="window.open('https://wa.me/60163691936?text=Inquiry: ${encodeURIComponent(p.n)}', '_blank')">CHECK</button>
             </div>
           </div>
         </div>`}).join('');
@@ -1950,6 +1957,7 @@
     };
   });
 
+  // WhatsApp CTA - opens in new tab
   document.getElementById("cta-whatsapp").addEventListener("click", function(e){
     e.preventDefault();
     const phone = "60163691936";
