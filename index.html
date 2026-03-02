@@ -35,7 +35,7 @@
     }
     a { text-decoration: none; color: inherit; }
 
-    /* ===== HEADER ===== */
+    /* ===== HEADER - No joystick ===== */
     header {
       position: sticky;
       top: 0;
@@ -56,8 +56,13 @@
       font-family: 'Clash Display', sans-serif;
       font-weight: 700;
       font-size: 24px;
-      color: var(--accent);
       letter-spacing: -0.5px;
+    }
+    .logo span:first-child {
+      color: #ffffff; /* FAZ - white */
+    }
+    .logo span:last-child {
+      color: var(--accent); /* GAME - yellow */
     }
     .header-logos {
       display: flex;
@@ -283,7 +288,7 @@
       filter: invert(0);
     }
 
-    /* ===== RIGHT SIDE – YOUR LOCAL FLOATING IMAGE ===== */
+    /* ===== RIGHT SIDE – BIG FLOATING IMAGE WITH GLOW ===== */
     .banner-visual {
       position: relative;
       display: flex;
@@ -293,57 +298,68 @@
 
     .orb {
       position: absolute;
-      width: 150px;
-      height: 150px;
+      width: 200px;  /* Bigger orbs */
+      height: 200px;
       border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.3;
+      filter: blur(80px);
+      opacity: 0.4;
       z-index: 1;
     }
     .orb-1 {
-      top: 20%;
-      left: 10%;
+      top: 10%;
+      left: 5%;
       background: #ff4d4d;
+      animation: orbPulse 4s ease-in-out infinite;
     }
     .orb-2 {
-      bottom: 10%;
-      right: 10%;
+      bottom: 5%;
+      right: 5%;
       background: #4d79ff;
+      animation: orbPulse 4s ease-in-out infinite reverse;
+    }
+    @keyframes orbPulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.2); }
     }
 
-    /* Your local floating image styling */
+    /* Your local floating image - bigger with glow */
     .floating-image {
       width: 100%;
-      max-width: 500px;
-      filter: drop-shadow(0 20px 30px rgba(0,0,0,0.6));
-      animation: levitate 6s ease-in-out infinite;
+      max-width: 650px;  /* Bigger than before */
+      filter: drop-shadow(0 0 30px rgba(255,216,77,0.8)) drop-shadow(0 0 60px rgba(255,216,77,0.4));
+      animation: levitate 6s ease-in-out infinite, glowPulse 3s ease-in-out infinite;
       transform-origin: center;
       position: relative;
       z-index: 5;
-      opacity: 0.95;
+      opacity: 1;
     }
     @keyframes levitate {
       0% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-15px) rotate(2deg); }
+      50% { transform: translateY(-20px) rotate(3deg); }
       100% { transform: translateY(0) rotate(0deg); }
     }
+    @keyframes glowPulse {
+      0%, 100% { filter: drop-shadow(0 0 30px rgba(255,216,77,0.8)) drop-shadow(0 0 60px rgba(255,216,77,0.4)); }
+      50% { filter: drop-shadow(0 0 50px rgba(255,216,77,1)) drop-shadow(0 0 90px rgba(255,216,77,0.6)); }
+    }
 
-    /* CTA button */
+    /* ===== CTA BUTTON - CENTERED ===== */
     .sticky-cta {
       position: sticky;
       top: 80px;
       z-index: 900;
       background: transparent;
       padding: 16px 24px;
-      text-align: right;
+      text-align: center;  /* Centered */
       max-width: 1400px;
       margin: 0 auto;
     }
     .btn-primary {
+      display: inline-block;  /* For centering */
       background: var(--accent);
       color: #000;
       border: none;
-      padding: 14px 36px;
+      padding: 14px 48px;  /* Wider padding like original */
       border-radius: 60px;
       font-weight: 700;
       font-size: 16px;
@@ -351,6 +367,7 @@
       transition: var(--transition);
       box-shadow: 0 10px 30px -10px rgba(255,216,77,0.3);
       border: 1px solid rgba(255,216,77,0.3);
+      text-decoration: none;
     }
     .btn-primary:hover {
       background: #ffe066;
@@ -646,13 +663,14 @@
       .hero-stats { justify-content: center; }
       .social-row { justify-content: center; }
       .banner-visual { order: -1; margin-bottom: 20px; }
-      .floating-image { max-width: 300px; }
+      .floating-image { max-width: 400px; }
       .sticky-cta { text-align: center; }
     }
     @media (max-width: 600px) {
       .hero-title { font-size: 48px; }
       .hero-stats { gap: 24px; }
       .stat-item h3 { font-size: 28px; }
+      .floating-image { max-width: 300px; }
     }
     #preloader { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease; }
     #preloader.hide { opacity: 0; pointer-events: none; }
@@ -668,7 +686,9 @@
 
 <div id="preloader">
   <div style="text-align: center;">
-    <div class="logo" style="font-size: 32px;">FAZ<span>GAME</span></div>
+    <div class="logo" style="font-size: 32px;">
+      <span>FAZ</span><span>GAME</span>
+    </div>
     <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
   </div>
 </div>
@@ -677,10 +697,12 @@
 
 <header>
   <div class="header-inner">
-    <div class="logo">FAZGAME</div>
+    <!-- Logo with FAZ white, GAME yellow -->
+    <div class="logo">
+      <span>FAZ</span><span>GAME</span>
+    </div>
     <div class="header-logos">
-      <!-- ALL ICONS LOAD FROM CDN (SVG) -->
-      <img src="https://api.iconify.design/ic/baseline-sports-esports.svg?color=white" alt="PS5 Controller">
+      <!-- Only platform icons - no joystick -->
       <img src="https://api.iconify.design/simple-icons/playstation.svg" alt="PlayStation">
       <img src="https://api.iconify.design/simple-icons/xbox.svg" alt="Xbox">
       <img src="https://api.iconify.design/simple-icons/nintendoswitch.svg" alt="Nintendo Switch">
@@ -734,18 +756,19 @@
       </div>
     </div>
 
-    <!-- YOUR LOCAL FLOATING IMAGE - ONLY THIS ONE IS LOCAL -->
+    <!-- YOUR LOCAL FLOATING IMAGE - BIGGER WITH GLOW -->
     <div class="banner-visual">
       <div class="orb orb-1"></div>
       <div class="orb orb-2"></div>
       <img class="floating-image" 
            src="images/your-floating-image.png" 
            alt="Your Custom Image"
-           onerror="this.onerror=null; this.src='https://placehold.co/500x500/222/ffd84d?text=IMAGE+NOT+FOUND';">
+           onerror="this.onerror=null; this.src='https://placehold.co/650x650/222/ffd84d?text=YOUR+IMAGE';">
     </div>
   </div>
 </div>
 
+<!-- CTA BUTTON - CENTERED -->
 <div class="sticky-cta">
   <button id="cta-whatsapp" class="btn-primary">Chat on WhatsApp</button>
 </div>
