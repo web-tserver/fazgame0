@@ -45,9 +45,11 @@
       --lamp-color: #ffd84d;
       --lamp-off-color: #94a3b8;
       --header-bg: rgba(11, 11, 15, 0.8);
+      --card-glow: 0 0 25px rgba(255,216,77,0.2); /* subtle glow in dark mode */
+      --card-shadow: none; /* no shadow in dark mode */
     }
 
-    /* Light mode - with black pill for used badge */
+    /* Light mode - with black pill for used badge and iOS shadow */
     body.light-mode {
       --bg: #f8fafc;
       --bg-secondary: #ffffff;
@@ -69,6 +71,8 @@
       --lamp-color: #eab308;
       --lamp-off-color: #94a3b8;
       --header-bg: rgba(255, 255, 255, 0.9);
+      --card-glow: none;
+      --card-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02); /* iOS soft shadow */
     }
 
     body.light-mode .header-logos img {
@@ -99,7 +103,7 @@
     }
     a { text-decoration: none; color: inherit; }
 
-    /* ===== PREMIUM 3D SWING LAMP - FIXED BELOW HEADER ===== */
+    /* ===== PREMIUM 3D SWING LAMP ===== */
     .theme-toggle {
       position: fixed;
       top: 70px;
@@ -706,7 +710,6 @@
       50% { opacity: 0.6; transform: scale(1.2); }
     }
 
-    /* Floating image - eager loading for above the fold */
     .floating-image {
       width: 100%;
       max-width: 400px;
@@ -717,6 +720,7 @@
       z-index: 5;
       opacity: 1;
       transition: filter 0.3s ease;
+      cursor: zoom-in;
     }
 
     @media (min-width: 768px) {
@@ -957,6 +961,12 @@
       margin: 0 auto;
       width: 100%;
       backdrop-filter: blur(10px);
+      box-shadow: var(--card-shadow); /* iOS soft shadow in light mode, none in dark */
+    }
+
+    /* Dark mode glow effect */
+    body:not(.light-mode) .product-card {
+      box-shadow: 0 0 25px rgba(255,216,77,0.15); /* subtle glow */
     }
 
     @media (min-width: 768px) {
@@ -1129,6 +1139,12 @@
       transform-style: preserve-3d;
       perspective: 1000px;
       will-change: transform;
+      box-shadow: var(--card-shadow);
+    }
+
+    /* Dark mode glow for hot cards */
+    body:not(.light-mode) .hot-card {
+      box-shadow: 0 0 30px rgba(255,216,77,0.2);
     }
 
     @media (min-width: 768px) {
@@ -1144,12 +1160,14 @@
       display: block;
       transition: transform 0.3s ease;
       transform: translateZ(20px);
+      cursor: zoom-in;
     }
 
     .hot-card .badge {
       transform: translateZ(30px);
       font-size: 9px;
       padding: 4px 8px;
+      cursor: default;
     }
 
     @media (min-width: 768px) {
@@ -1168,6 +1186,7 @@
       background: linear-gradient(transparent, rgba(0,0,0,0.95));
       z-index: 4;
       transform: translateZ(20px);
+      pointer-events: none;
     }
 
     @media (min-width: 768px) {
@@ -1423,14 +1442,44 @@
       }
     }
 
-    #preloader { position: fixed; inset: 0; background: var(--bg); z-index: 10000; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease, background 0.3s ease; }
+    /* Lightbox */
+    #imageModal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(6px);
+      z-index: 10001;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      padding: 20px;
+    }
+    #imageModal.show { display: flex; }
+    #modalImg {
+      max-width: 95%;
+      max-height: 90vh;
+      border-radius: 16px;
+      box-shadow: 0 0 50px rgba(0,0,0,0.6);
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+    #imageModal.show #modalImg { transform: scale(1); }
+
+    /* Preloader */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s ease, background 0.3s ease;
+    }
     #preloader.hide { opacity: 0; pointer-events: none; }
     .loader-bar-wrap { width: 200px; height: 4px; background: #222; margin-top: 20px; border-radius: 10px; overflow: hidden; }
     .loader-bar { height: 100%; width: 0%; background: var(--accent); transition: width 0.1s, background 0.2s ease; }
-    #imageModal { position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(6px); z-index: 10001; display: none; align-items: center; justify-content: center; cursor: zoom-out; padding: 20px; }
-    #imageModal.show { display: flex; }
-    #modalImg { max-width: 95%; max-height: 90vh; border-radius: 16px; box-shadow: 0 0 50px rgba(0,0,0,0.6); transform: scale(0.9); transition: transform 0.3s ease; }
-    #imageModal.show #modalImg { transform: scale(1); }
 
     @media (max-width: 380px) {
       .hero-title { font-size: 32px; }
@@ -1807,13 +1856,14 @@
       }
     }, 40);
 
+    // Lightbox for all product images (hot cards and product cards)
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("modalImg");
     document.addEventListener("click", (e) => {
-      const card = e.target.closest(".hot-card");
-      if(card) {
+      const card = e.target.closest(".hot-card") || e.target.closest(".product-card");
+      if (card) {
         const img = card.querySelector("img");
-        if(img) {
+        if (img) {
           modalImg.src = img.src;
           modal.classList.add("show");
           document.body.style.overflow = "hidden";
@@ -1888,6 +1938,18 @@
       localStorage.setItem('theme', 'dark'); // default
     }
   }
+
+  // Listen for system theme changes
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
+    // Only apply if user hasn't manually toggled (i.e., no saved theme)
+    if (!localStorage.getItem('theme')) {
+      if (e.matches) {
+        document.body.classList.add('light-mode');
+      } else {
+        document.body.classList.remove('light-mode');
+      }
+    }
+  });
 
   themeToggle.addEventListener('click', () => {
     // Add a quick pull effect
