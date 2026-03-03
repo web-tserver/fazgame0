@@ -1528,7 +1528,7 @@
       transition: transform 0.2s;
     }
 
-    /* ===== PRELOADER - ADAPTIVE COLORS ===== */
+    /* ===== PRELOADER - WITH LOGO ABOVE TEXT ===== */
     #preloader {
       position: fixed;
       inset: 0;
@@ -1541,11 +1541,25 @@
     }
     #preloader.hide { opacity: 0; pointer-events: none; }
 
+    #preloader .preloader-content {
+      text-align: center;
+    }
+
+    #preloader .preloader-logo {
+      width: 80px;
+      height: auto;
+      margin-bottom: 15px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     #preloader .logo {
       font-family: 'Clash Display', sans-serif;
       font-weight: 700;
       font-size: 32px;
       letter-spacing: -0.5px;
+      margin-bottom: 10px;
     }
     #preloader .logo span:first-child {
       color: var(--preloader-faz);
@@ -1585,7 +1599,9 @@
 <body>
 
 <div id="preloader">
-  <div style="text-align: center;">
+  <div class="preloader-content">
+    <!-- Logo (300x300) sized to 80px for preloader -->
+    <img src="images/logo1.png" alt="FAZGAME Logo" class="preloader-logo" onerror="this.onerror=null; this.src='https://placehold.co/80x80/222/ffd84d?text=FAZ';">
     <div class="logo">
       <span>FAZ</span><span>GAME</span>
     </div>
