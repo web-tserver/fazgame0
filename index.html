@@ -72,6 +72,7 @@
       --card-glow-dark-hot: none;
       --card-shadow: none;
       --hover-glow: 0 0 20px var(--accent);
+      --preloader-faz: #ffffff; /* white in dark mode */
     }
 
     /* Light mode - with black pill for used badge and iOS shadow */
@@ -100,6 +101,7 @@
       --card-glow-dark-hot: none;
       --card-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
       --hover-glow: 0 0 20px var(--accent);
+      --preloader-faz: #0f172a; /* dark text in light mode */
     }
 
     body.light-mode .header-logos img {
@@ -296,7 +298,7 @@
       100% { transform: rotate(4deg); }
     }
 
-    /* ===== HEADER - with logo image ===== */
+    /* ===== HEADER - with logo image and text ===== */
     header {
       position: sticky;
       top: 0;
@@ -322,10 +324,29 @@
       justify-content: space-between;
     }
 
-    .logo img {
-      height: 40px;
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .header-left .logo-img {
+      height: 40px; /* scaled down from 300x300 for header */
       width: auto;
       display: block;
+    }
+
+    .header-left .logo-text {
+      font-family: 'Clash Display', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: -0.5px;
+    }
+    .header-left .logo-text span:first-child {
+      color: var(--text); /* follows theme */
+    }
+    .header-left .logo-text span:last-child {
+      color: var(--accent);
     }
 
     .header-logos {
@@ -1492,7 +1513,7 @@
       transition: transform 0.2s;
     }
 
-    /* ===== PRELOADER - RESTORED BOLD GAMING FONT ===== */
+    /* ===== PRELOADER - ADAPTIVE COLORS ===== */
     #preloader {
       position: fixed;
       inset: 0;
@@ -1512,10 +1533,10 @@
       letter-spacing: -0.5px;
     }
     #preloader .logo span:first-child {
-      color: #ffffff; /* white */
+      color: var(--preloader-faz); /* white in dark, dark in light */
     }
     #preloader .logo span:last-child {
-      color: #ffd84d; /* yellow accent */
+      color: var(--accent); /* yellow in both modes */
     }
 
     .loader-bar-wrap {
@@ -1575,9 +1596,13 @@
 
 <header>
   <div class="header-inner">
-    <div class="logo">
-      <!-- Header logo with fallback if image not found -->
-      <img src="images/logo1.jpeg" alt="FAZGAME" style="height: 40px; width: auto;" onerror="this.onerror=null; this.src='https://placehold.co/300x300/222/ffd84d?text=FAZGAME';">
+    <div class="header-left">
+      <!-- Transparent logo (300x300 scaled down) -->
+      <img src="images/logo1.jpeg" alt="FAZGAME Logo" class="logo-img" onerror="this.onerror=null; this.src='https://placehold.co/300x300/222/ffd84d?text=FAZGAME';">
+      <!-- Text logo with FAZ white/game yellow -->
+      <div class="logo-text">
+        <span>FAZ</span><span>GAME</span>
+      </div>
     </div>
     <div class="header-logos">
       <img src="https://api.iconify.design/simple-icons/playstation.svg" alt="PlayStation">
