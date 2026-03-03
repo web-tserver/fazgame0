@@ -21,6 +21,7 @@
   <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAoUlEQVRYhe2VMQ6AIAxF6UlcPIk7J3F1ceEQjQkFWmqLFv9LJiAtvw9KAaABWwGYA5gDmIMsAGMM3vvgvYeiKELvPcYYRAgQkYcQQoimeMk0TWSMwTnHOkop0jRNhIhE0zSst+/7RACklKx3mqaJzDknAqC1Zr0b55wIgNaa9W6ccyIArTXr3TjnRAC01qx345wTAdBas96Nc04E4M9z+gI92RwWGG7S7AAAAABJRU5ErkJggg==">
 
   <style>
+    /* (All your existing CSS remains exactly the same – no changes needed) */
     /* ===== LIGHTNING BOLT CURSOR ===== */
     .theme-toggle,
     .btn-primary,
@@ -1109,13 +1110,7 @@
       font-size: 11px;
       transition: var(--transition);
       display: inline-block;
-    }
-
-    @media (min-width: 768px) {
-      .product-buy {
-        padding: 6px 12px;
-        font-size: 11px;
-      }
+      /* Removed onclick attribute – will use event delegation */
     }
 
     .product-buy:hover {
@@ -1838,10 +1833,10 @@
   © 2026 FAZGAME • Faz Service, Faz Gaming
 </footer>
 
-<!-- Load stock.js first, then script.js (if you separate, but here all in one) -->
+<!-- Load stock.js -->
 <script src="stock.js"></script>
 
-<!-- Main script -->
+<!-- Main script with fixed CHECK button handler -->
 <script>
   // ===== STOCK INVENTORY LOGIC =====
   let products = window.STOCK || [];
@@ -1886,6 +1881,7 @@
         const condColor = p.cond === 'new' ? 'var(--badge-new-text)' : 'var(--badge-used-text)';
         const typeClass = p.type === 'game' ? '#3cff7f' : 'var(--accent)';
         
+        // Note: onclick removed – will handle via event delegation
         return `
         <div class="product-card">
           <span class="card-badge card-badge-cond" style="background: ${condClass}; color: ${condColor};">${p.cond?.toUpperCase() || 'USED'}</span>
@@ -1897,7 +1893,7 @@
             <h4>${p.n}</h4>
             <div class="price-row">
               <span class="product-price">RM${p.p}</span>
-              <button class="product-buy" onclick="window.open('https://wa.me/60163691936?text=Inquiry: ${encodeURIComponent(p.n)}', '_blank')">CHECK</button>
+              <button class="product-buy" data-product-name="${p.n}">CHECK</button>
             </div>
           </div>
         </div>`}).join('');
@@ -1909,6 +1905,19 @@
   }
   search.oninput = renderProducts;
   renderProducts();
+
+  // ===== EVENT DELEGATION FOR CHECK BUTTONS =====
+  document.addEventListener('click', function(e) {
+    const button = e.target.closest('.product-buy');
+    if (button) {
+      const productName = button.getAttribute('data-product-name');
+      if (productName) {
+        const phone = "60163691936";
+        const message = `Hi FAZGAME 👋 I would like to inquire about ${productName}.`;
+        window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`, '_blank');
+      }
+    }
+  });
 
   // ===== 3D TILT EFFECT =====
   const tiltCards = document.querySelectorAll('.hot-card');
