@@ -635,14 +635,16 @@
       width: 44px;
       height: 44px;
     }
-    /* RESERVE button height reduced */
+
+    /* ===== BUTTONS WITH REDUCED PADDING ===== */
     .reserve-btn,
     .product-buy {
-      padding: 4px 10px; /* reduced vertical padding */
-      border-radius: 8px;
+      padding: 2px 8px;        /* smaller vertical padding */
+      border-radius: 6px;
       font-weight: 800;
       font-size: 11px;
     }
+
     .back-to-top {
       width: 50px;
       height: 50px;
@@ -1207,12 +1209,12 @@
       }
     }
 
+    /* CHECK button uses same reduced padding */
     .product-buy {
       background: var(--accent);
       color: #000;
       border: none;
-      padding: 4px 12px; /* reduced height */
-      border-radius: 8px;
+      border-radius: 6px;
       font-weight: 800;
       font-size: 11px;
       display: inline-block;
@@ -1371,8 +1373,7 @@
       background: var(--accent);
       color: #000;
       border: none;
-      padding: 4px 12px; /* reduced height */
-      border-radius: 8px;
+      border-radius: 6px;
       font-weight: 800;
       font-size: 11px;
       pointer-events: auto;
@@ -1380,6 +1381,7 @@
       z-index: 10;
       position: relative;
       white-space: nowrap;
+      padding: 2px 8px;  /* reduced */
     }
 
     .hot-card .reserve-btn:hover {
@@ -1399,7 +1401,7 @@
       }
       .hot-card .reserve-btn {
         font-size: 13px;
-        padding: 6px 16px; /* slightly taller on desktop */
+        padding: 4px 14px; /* slightly taller on desktop but still compact */
       }
     }
 
@@ -1829,7 +1831,7 @@
       .product-card { padding: 14px 10px; }
       .product-info h4 { font-size: 13px; }
       .product-price { font-size: 15px; }
-      .product-buy { padding: 4px 8px; font-size: 10px; }
+      .product-buy { padding: 2px 6px; font-size: 10px; }
       .card-badge { font-size: 8px; padding: 2px 6px; }
     }
   </style>
