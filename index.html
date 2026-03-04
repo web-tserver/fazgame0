@@ -61,7 +61,6 @@
     .floating-image,
     .social-link,
     .back-to-top,
-    .sound-toggle,
     .trade-btn {
       cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23ffd84d" d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>') 12 0, pointer;
     }
@@ -75,7 +74,6 @@
       .floating-image,
       .social-link,
       .back-to-top,
-      .sound-toggle,
       .trade-btn {
         cursor: pointer;
       }
@@ -1517,6 +1515,60 @@
       color: #fff;
     }
 
+    /* ===== GAME TRADE-IN SECTION WITH LOCAL IMAGE ===== */
+    .trade-section {
+      position: relative;
+      background-image: url('images/trade.webp');
+      background-size: cover;
+      background-position: center;
+      border-radius: 24px;
+      padding: 40px 24px;
+      margin: 40px auto;
+      max-width: 1000px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+    }
+    .trade-section::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      border-radius: 24px;
+      z-index: 0;
+    }
+    .trade-section > * {
+      position: relative;
+      z-index: 1;
+    }
+    .trade-title {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    .trade-desc {
+      font-size: 18px;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 24px;
+    }
+    .trade-btn {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      padding: 14px 36px;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 18px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-block;
+    }
+    .trade-btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 20px 30px -10px rgba(255,216,77,0.5);
+    }
+
     /* ===== PAYMENT SECTION ===== */
     .payment-icons {
       display: flex;
@@ -1705,73 +1757,6 @@
       transform: scale(1.1);
     }
 
-    /* ===== SOUND TOGGLE BUTTON ===== */
-    .sound-toggle {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: var(--card-bg);
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--border-color);
-      color: var(--text);
-      font-size: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
-      z-index: 999;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    .sound-toggle:hover {
-      transform: scale(1.1);
-      background: var(--accent);
-      color: #000;
-    }
-
-    /* ===== GAME TRADE-IN SECTION ===== */
-    .trade-section {
-      background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      border-radius: 24px;
-      padding: 40px 24px;
-      margin: 40px auto;
-      max-width: 1000px;
-      text-align: center;
-      border: 1px solid var(--border-color);
-    }
-    .trade-title {
-      font-size: 32px;
-      font-weight: 800;
-      margin-bottom: 16px;
-      color: var(--text);
-    }
-    .trade-desc {
-      font-size: 18px;
-      color: var(--muted);
-      margin-bottom: 24px;
-    }
-    .trade-btn {
-      background: var(--accent);
-      color: #000;
-      border: none;
-      padding: 14px 36px;
-      border-radius: 60px;
-      font-weight: 700;
-      font-size: 18px;
-      cursor: pointer;
-      transition: var(--transition);
-      display: inline-block;
-    }
-    .trade-btn:hover {
-      background: var(--accent-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 20px 30px -10px rgba(255,216,77,0.5);
-    }
-
     @media (max-width: 380px) {
       .hero-title { font-size: 32px; }
       .stat-item h3 { font-size: 24px; }
@@ -1815,9 +1800,6 @@
   </div>
 </div>
 
-<!-- Sound Toggle Button -->
-<div class="sound-toggle" id="soundToggle">🔊</div>
-
 <!-- Back to Top Button -->
 <div class="back-to-top" id="backToTop">↑</div>
 
@@ -1855,6 +1837,8 @@
         <span class="chip" data-scroll="hot">PC Parts</span>
         <span class="chip" data-scroll="stock">Consoles</span>
         <span class="chip" data-scroll="stock">Games</span>
+        <!-- Trade-in pill -->
+        <span class="chip" data-scroll="trade-section">Trade-in</span>
       </div>
 
       <div class="hero-stats">
@@ -1951,7 +1935,7 @@
 
 <div class="installment-banner reveal">💳 0% Interest Installment Available • SPayLater</div>
 
-<!-- Preorder Consoles (full list) -->
+<!-- Preorder Consoles (original styling, no background) -->
 <section id="preorder-console" class="reveal">
   <h2 class="section-title">Preorder Consoles</h2>
   <div class="section-subtitle">🎮 Used Units • Reserve Before Stock Arrival</div>
@@ -2111,8 +2095,8 @@
   <div class="product-grid" id="grid"></div>
 </section>
 
-<!-- Game Trade-In Section (now below stock) -->
-<section class="trade-section reveal">
+<!-- Game Trade-In Section with local image trade.webp -->
+<section id="trade-section" class="trade-section reveal">
   <h2 class="trade-title">🎮 Game & Console Trade‑In</h2>
   <p class="trade-desc">Got old games or consoles? Trade them in!</p>
   <button class="trade-btn" id="tradeBtn">Inquire About Trade‑In</button>
@@ -2131,11 +2115,6 @@
 <footer>
   © 2026 FAZGAME • Faz Service, Faz Gaming
 </footer>
-
-<!-- Hidden audio element for click sound -->
-<audio id="clickSound" preload="auto">
-  <source src="https://www.soundjay.com/button/button-09.wav" type="audio/wav">
-</audio>
 
 <!-- Load stock.js -->
 <script src="stock.js"></script>
@@ -2206,26 +2185,6 @@
   }
   search.oninput = renderProducts;
   renderProducts();
-
-  // ===== SOUND EFFECT SETUP =====
-  let soundEnabled = true;
-  const clickSound = document.getElementById('clickSound');
-  const soundToggle = document.getElementById('soundToggle');
-  soundToggle.addEventListener('click', () => {
-    soundEnabled = !soundEnabled;
-    soundToggle.textContent = soundEnabled ? '🔊' : '🔇';
-  });
-
-  function playClickSound() {
-    if (soundEnabled && clickSound) {
-      clickSound.currentTime = 0;
-      clickSound.play().catch(() => {});
-    }
-  }
-
-  document.querySelectorAll('.btn-primary, .chip, .hot-card, .product-card, .floating-image, .social-link, .back-to-top, .sound-toggle, .trade-btn, .reserve-btn, .product-buy').forEach(el => {
-    el.addEventListener('click', playClickSound);
-  });
 
   // ===== BACK TO TOP BUTTON =====
   const backToTop = document.getElementById('backToTop');
