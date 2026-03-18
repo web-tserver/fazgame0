@@ -1672,24 +1672,24 @@
       box-shadow: 0 20px 30px -10px rgba(255,216,77,0.5);
     }
 
-    /* ===== 3D COVERFLOW GALLERY – LAYOUT-SAFE VERSION ===== */
+    /* ===== 3D COVERFLOW GALLERY – CLEAN VERSION ===== */
     #gallery {
       padding: 40px 16px !important;
       max-width: 1200px;
       margin: 0 auto;
-      overflow: hidden; /* Prevents any accidental overflow from the section */
+      overflow: hidden;
     }
 
     #gallery .swiper {
       width: 100%;
-      padding: 30px 0 60px; /* No horizontal padding – let slides breathe naturally */
+      padding: 30px 0 60px;
       overflow: visible;
     }
 
     #gallery .swiper-slide {
       background-position: center;
       background-size: cover;
-      width: clamp(180px, 35vw, 280px); /* Responsive: min 180px, max 280px, scales with viewport */
+      width: clamp(180px, 35vw, 280px);
       height: auto;
       aspect-ratio: 3/4;
       border-radius: 20px;
@@ -1731,7 +1731,6 @@
       transform: translateY(0);
     }
 
-    /* Pagination */
     #gallery .swiper-pagination-bullet {
       background: var(--text);
       opacity: 0.5;
@@ -1744,7 +1743,6 @@
       transform: scale(1.2);
     }
 
-    /* Navigation buttons – optional, hide on very small screens if needed */
     #gallery .swiper-button-next,
     #gallery .swiper-button-prev {
       color: var(--accent);
@@ -1760,14 +1758,13 @@
       font-size: 16px;
     }
 
-    /* Mobile adjustments */
     @media (max-width: 768px) {
       #gallery .swiper-slide {
         width: clamp(150px, 40vw, 220px);
       }
       #gallery .swiper-button-next,
       #gallery .swiper-button-prev {
-        display: none; /* Hide navigation on small screens to reduce clutter */
+        display: none;
       }
     }
 
@@ -2100,10 +2097,10 @@
 <!-- Fast Sales (hidden) -->
 <section id="fast-sales" style="display:none;"></section>
 
-<!-- Preorder PC Builds -->
+<!-- Preorder PC Builds – NO ICON -->
 <section id="hot" class="reveal">
   <h2 class="section-title">Preorder PC Builds</h2>
-  <div class="section-subtitle">🖥 Custom Gaming PCs • Built On Demand</div>
+  <div class="section-subtitle">Custom Gaming PCs • Built On Demand</div>
   <div class="hot-grid">
     <div class="hot-card">
       <span class="badge badge-right">PRE-ORDER</span>
@@ -2148,12 +2145,13 @@
   </div>
 </section>
 
-<div class="installment-banner reveal">💳 0% Interest Installment Available • SPayLater</div>
+<!-- Installment Banner – NO ICON -->
+<div class="installment-banner reveal">0% Interest Installment Available • SPayLater</div>
 
-<!-- Preorder Consoles -->
+<!-- Preorder Consoles – NO ICON -->
 <section id="preorder-console" class="reveal">
   <h2 class="section-title">Preorder Consoles</h2>
-  <div class="section-subtitle">🎮 Used Units • Reserve Before Stock Arrival</div>
+  <div class="section-subtitle">Used Units • Reserve Before Stock Arrival</div>
   <div class="hot-grid">
     <!-- Console cards with RESERVE button -->
     <div class="hot-card">
@@ -2310,16 +2308,16 @@
   <div class="product-grid" id="grid"></div>
 </section>
 
-<!-- Game Trade-In Section with local image trade.webp -->
+<!-- Game Trade-In Section – NO ICON -->
 <section id="trade-section" class="trade-section reveal">
-  <h2 class="trade-title">🎮 Game & Console Trade‑In</h2>
+  <h2 class="trade-title">Game & Console Trade‑In</h2>
   <p class="trade-desc">Got old games or consoles? Trade them in!</p>
   <button class="trade-btn" id="tradeBtn">Inquire About Trade‑In</button>
 </section>
 
-<!-- ===== 3D COVERFLOW GALLERY WITH LOCAL IMAGES (g1.webp ... g6.webp) ===== -->
+<!-- ===== 3D COVERFLOW GALLERY WITH LOCAL IMAGES (g1.webp ... g6.webp) – NO ICON ===== -->
 <section id="gallery" class="reveal" style="max-width: 1200px; margin: 0 auto;">
-  <h2 class="section-title">📸 Gallery</h2>
+  <h2 class="section-title">Gallery</h2>
   <div class="section-subtitle">Immersive 3D • Gaming setups, events, and behind the scenes</div>
 
   <!-- Swiper Container -->
