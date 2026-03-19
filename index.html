@@ -67,7 +67,9 @@
     .trade-btn,
     .reserve-btn,
     .product-buy,
-    .swiper-slide {
+    .swiper-slide,
+    .faq-question,
+    .testimonial-card {
       cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23ffd84d" d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>') 12 0, pointer;
     }
 
@@ -83,7 +85,9 @@
       .trade-btn,
       .reserve-btn,
       .product-buy,
-      .swiper-slide {
+      .swiper-slide,
+      .faq-question,
+      .testimonial-card {
         cursor: pointer;
       }
     }
@@ -108,6 +112,8 @@
       --badge-used-text: #fff;
       --badge-new-bg: rgba(255,216,77,0.45);
       --badge-new-text: #000;
+      --badge-scarcity-bg: #ff3b3b;
+      --badge-scarcity-text: #fff;
       --transition: 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
       --lamp-color: #ffd84d;
       --lamp-off-color: #94a3b8;
@@ -139,6 +145,8 @@
       --badge-used-text: #ffffff;
       --badge-new-bg: #eab308;
       --badge-new-text: #ffffff;
+      --badge-scarcity-bg: #dc2626;
+      --badge-scarcity-text: #ffffff;
       --lamp-color: #eab308;
       --lamp-off-color: #94a3b8;
       --header-bg: rgba(255, 255, 255, 0.9);
@@ -206,6 +214,11 @@
       transform: scale(0.8);
       transform-origin: top right;
       cursor: pointer;
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
     }
 
     @media (min-width: 768px) {
@@ -615,13 +628,18 @@
     .product-buy,
     .back-to-top,
     .trade-btn,
-    .swiper-slide {
+    .swiper-slide,
+    .faq-question {
       min-width: 44px;
       min-height: 44px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .reserve-btn, .product-buy {
+      min-height: 40px; /* increased from 32px for better tap target */
     }
 
     /* Active state scaling for touch feedback */
@@ -632,7 +650,8 @@
     .product-buy:active,
     .back-to-top:active,
     .trade-btn:active,
-    .swiper-slide:active {
+    .swiper-slide:active,
+    .faq-question:active {
       transform: scale(0.97);
     }
 
@@ -648,7 +667,7 @@
     .reserve-btn,
     .product-buy {
       padding: 3px 8px;
-      border-radius: 8px;        /* rectangle */
+      border-radius: 8px;
       font-weight: 800;
       font-size: 11px;
     }
@@ -664,6 +683,22 @@
     /* Badge padding reference */
     .card-badge {
       padding: 3px 8px;
+    }
+
+    /* Scarcity badge (kept for potential use, but not used now) */
+    .scarcity-badge {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: var(--badge-scarcity-bg);
+      color: var(--badge-scarcity-text);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 30px;
+      z-index: 3;
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
     /* RESERVE button animations */
@@ -726,6 +761,11 @@
       font-weight: 500;
       color: var(--text);
       backdrop-filter: blur(8px);
+    }
+
+    .chip:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
     }
 
     @media (min-width: 768px) {
@@ -810,6 +850,11 @@
       border-radius: 50%;
       background: rgba(128, 128, 128, 0.1);
       border: 1px solid var(--border-color);
+    }
+
+    .social-link:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
     }
 
     .social-link img {
@@ -937,6 +982,11 @@
       max-width: none;
     }
 
+    .btn-primary:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
     @media (min-width: 768px) {
       .btn-primary {
         padding: 14px 0;
@@ -1013,6 +1063,11 @@
       transition: var(--transition);
     }
 
+    .search-box:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
     @media (min-width: 768px) {
       .search-box {
         padding: 14px 24px;
@@ -1052,6 +1107,11 @@
       font-weight: 600;
       transition: var(--transition);
       min-height: 44px;
+    }
+
+    .filter-btn:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
     }
 
     @media (min-width: 768px) {
@@ -1124,6 +1184,11 @@
       box-shadow: var(--card-shadow);
     }
 
+    .product-card:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
     body:not(.light-mode) .product-card {
       box-shadow: var(--card-glow-dark);
     }
@@ -1138,10 +1203,12 @@
     .product-card:hover {
       background: var(--card-hover);
       border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
 
-    body.light-mode .product-card {
-      box-shadow: none;
+    body.light-mode .product-card:hover {
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
     }
 
     .product-icon {
@@ -1297,6 +1364,11 @@
       box-shadow: var(--card-shadow);
     }
 
+    .hot-card:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
     body:not(.light-mode) .hot-card {
       box-shadow: var(--card-glow-dark-hot);
     }
@@ -1397,7 +1469,7 @@
       position: relative;
       white-space: nowrap;
       padding: 3px 8px;
-      min-height: 32px;
+      min-height: 40px; /* increased for better tap */
     }
 
     .hot-card .reserve-btn:hover {
@@ -1672,7 +1744,97 @@
       box-shadow: 0 20px 30px -10px rgba(255,216,77,0.5);
     }
 
-    /* ===== 3D COVERFLOW GALLERY – ALL CAPTIONS "Custom PC" ===== */
+    /* ===== RECENTLY VIEWED SECTION ===== */
+    #recently-viewed {
+      padding: 40px 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .recent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .recent-item {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+
+    .recent-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .recent-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 8px;
+      filter: invert(0.8);
+    }
+
+    .recent-item p {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* ===== FAQ SECTION ===== */
+    #faq {
+      padding: 40px 16px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 8px 0;
+    }
+
+    .faq-question:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .faq-answer.open {
+      max-height: 200px;
+      padding-top: 12px;
+    }
+
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .faq-icon.open {
+      transform: rotate(45deg);
+    }
+
+    /* ===== 3D COVERFLOW GALLERY ===== */
     #gallery {
       padding: 40px 16px !important;
       max-width: 1200px;
@@ -1780,7 +1942,7 @@
       }
     }
 
-    /* ===== PAYMENT SECTION ===== */
+    /* ===== PAYMENT SECTION WITH TRUST BADGES ===== */
     .payment-icons {
       display: flex;
       justify-content: center;
@@ -1823,6 +1985,32 @@
       .payment-item img {
         height: 20px;
       }
+    }
+
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 30px 0 20px;
+      flex-wrap: wrap;
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .trust-badge img {
+      width: 24px;
+      height: 24px;
+      filter: invert(0.8);
+    }
+
+    body.light-mode .trust-badge img {
+      filter: invert(0.2);
     }
 
     footer {
@@ -1968,6 +2156,11 @@
       transform: scale(1.1);
     }
 
+    .back-to-top:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
     @media (max-width: 380px) {
       .hero-title { font-size: 32px; }
       .stat-item h3 { font-size: 24px; }
@@ -1998,7 +2191,7 @@
 <div id="imageModal"><img id="modalImg" src="" alt="Preview"></div>
 
 <!-- Premium 3D Swing Lamp (clickable only) -->
-<div class="theme-toggle" id="themeToggle">
+<div class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
   <div class="lamp-scene">
     <div class="lamp-wrap" id="lampWrap">
       <div class="wire"></div>
@@ -2051,6 +2244,8 @@
         <span class="chip" data-scroll="stock">Games</span>
         <span class="chip" data-scroll="trade-section">Trade-in</span>
         <span class="chip" data-scroll="gallery">Gallery</span>
+        <span class="chip" data-scroll="faq">FAQ</span>
+        <span class="chip" data-scroll="recently-viewed">Recent</span>
       </div>
 
       <div class="hero-stats">
@@ -2147,12 +2342,25 @@
 
 <div class="installment-banner reveal">0% Interest Installment Available • SPayLater</div>
 
-<!-- Preorder Consoles -->
+<!-- Preorder Consoles (without scarcity badges and countdown) -->
 <section id="preorder-console" class="reveal">
   <h2 class="section-title">Preorder Consoles</h2>
   <div class="section-subtitle">Used Units • Reserve Before Stock Arrival</div>
   <div class="hot-grid">
-    <!-- Console cards with RESERVE button -->
+    <!-- PS5 Pro (removed countdown and scarcity badge) -->
+    <div class="hot-card">
+      <span class="badge badge-left">USED</span>
+      <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/ps5-pro.webp" alt="PS5 Pro" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PS5+Pro';">
+      <div class="hot-card-content">
+        <div class="hot-title">PS5 Pro Digital</div>
+        <div class="hot-price-row">
+          <span class="hot-desc">RM2750</span>
+          <button class="reserve-btn" data-console="PS5 Pro Digital">RESERVE</button>
+        </div>
+      </div>
+    </div>
+    <!-- Other consoles (no scarcity badges) -->
     <div class="hot-card">
       <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
       <img src="images/ps4-slim.webp" alt="PS4 Slim" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PS4+Slim';">
@@ -2194,17 +2402,6 @@
         <div class="hot-price-row">
           <span class="hot-desc">RM1650</span>
           <button class="reserve-btn" data-console="PS5 Slim Disc">RESERVE</button>
-        </div>
-      </div>
-    </div>
-    <div class="hot-card">
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/ps5-pro.webp" alt="PS5 Pro" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PS5+Pro';">
-      <div class="hot-card-content">
-        <div class="hot-title">PS5 Pro Digital</div>
-        <div class="hot-price-row">
-          <span class="hot-desc">RM2750</span>
-          <button class="reserve-btn" data-console="PS5 Pro Digital">RESERVE</button>
         </div>
       </div>
     </div>
@@ -2307,65 +2504,94 @@
   <div class="product-grid" id="grid"></div>
 </section>
 
-<!-- Game Trade-In Section -->
+<!-- Game Trade-In Section (estimator removed) -->
 <section id="trade-section" class="trade-section reveal">
   <h2 class="trade-title">Game & Console Trade‑In</h2>
   <p class="trade-desc">Got old games or consoles? Trade them in!</p>
   <button class="trade-btn" id="tradeBtn">Inquire About Trade‑In</button>
 </section>
 
-<!-- ===== 3D COVERFLOW GALLERY WITH LOCAL IMAGES ===== -->
+<!-- Recently Viewed Section -->
+<section id="recently-viewed" class="reveal">
+  <h2 class="section-title">Recently Viewed</h2>
+  <div class="recent-grid" id="recent-grid">
+    <!-- Will be populated by JavaScript -->
+  </div>
+</section>
+
+<!-- Gallery -->
 <section id="gallery" class="reveal" style="max-width: 1200px; margin: 0 auto;">
   <h2 class="section-title">Gallery</h2>
   <div class="section-subtitle">Immersive 3D • Custom PC builds and gaming setups</div>
-
-  <!-- Swiper Container – All captions now "Custom PC" -->
   <div class="swiper mySwiper">
     <div class="swiper-wrapper">
-      <!-- Slide 1 -->
       <div class="swiper-slide">
         <img src="images/g1.webp" alt="Custom PC 1" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+1';">
         <div class="slide-caption">Custom PC</div>
       </div>
-      <!-- Slide 2 -->
       <div class="swiper-slide">
         <img src="images/g2.webp" alt="Custom PC 2" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+2';">
         <div class="slide-caption">Custom PC</div>
       </div>
-      <!-- Slide 3 -->
       <div class="swiper-slide">
         <img src="images/g3.webp" alt="Custom PC 3" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+3';">
         <div class="slide-caption">Custom PC</div>
       </div>
-      <!-- Slide 4 -->
       <div class="swiper-slide">
         <img src="images/g4.webp" alt="Custom PC 4" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+4';">
         <div class="slide-caption">Custom PC</div>
       </div>
-      <!-- Slide 5 -->
       <div class="swiper-slide">
         <img src="images/g5.webp" alt="Custom PC 5" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/600x800/222/ffd84d?text=Custom+PC+5';">
         <div class="slide-caption">Custom PC</div>
       </div>
-      <!-- Slide 6 -->
       <div class="swiper-slide">
         <img src="images/g6.webp" alt="Custom PC 6" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+6';">
         <div class="slide-caption">Custom PC</div>
       </div>
     </div>
-
-    <!-- Navigation Buttons -->
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
-
-    <!-- Pagination Dots -->
     <div class="swiper-pagination"></div>
   </div>
 </section>
 
-<!-- Payment Methods -->
+<!-- FAQ Section -->
+<section id="faq" class="reveal">
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-question" tabindex="0" role="button" aria-expanded="false">
+        <span>How does 0% installment work?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">We partner with SPayLater to offer 0% installment for 3, 6, or 12 months. No interest, no hidden fees.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" tabindex="0" role="button" aria-expanded="false">
+        <span>How long does pre‑order take?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Pre‑ordered items typically arrive within 7‑14 working days after payment. You'll receive tracking info via WhatsApp.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" tabindex="0" role="button" aria-expanded="false">
+        <span>What's the trade‑in process?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Send us photos of your item via WhatsApp, we'll quote you within 24h. If accepted, ship it to us or drop by our store.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Payment Methods with Trust Badges -->
 <section id="payment" class="reveal">
   <h2 class="section-title" style="text-align:center">Payment Methods</h2>
+  <div class="trust-badges">
+    <div class="trust-badge"><img src="https://api.iconify.design/ic/baseline-verified.svg" alt="Verified"> Verified Business</div>
+    <div class="trust-badge"><img src="https://api.iconify.design/ic/baseline-security.svg" alt="Secure"> Secure Checkout</div>
+    <div class="trust-badge"><img src="https://api.iconify.design/ic/baseline-return.svg" alt="Returns"> 7-Day Returns</div>
+  </div>
   <div class="payment-icons">
     <div class="payment-item"><img src="https://cdn.simpleicons.org/shopee/ee4d2d" alt="Shopee"><span class="shopee-text">SPayLater Available</span></div>
     <div class="payment-item"><img src="https://cdn.simpleicons.org/visa/1a1f71" alt="Visa"><span>FPX Online Banking</span></div>
@@ -2377,15 +2603,21 @@
   © 2026 FAZGAME • Faz Service, Faz Gaming
 </footer>
 
-<!-- Load stock.js -->
+<!-- Load stock.js (placeholder) -->
 <script src="stock.js"></script>
 
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
-  // ===== STOCK INVENTORY LOGIC =====
-  let products = window.STOCK || [];
+  // ===== STOCK INVENTORY LOGIC (simplified for demo) =====
+  let products = window.STOCK || [
+    { n: "PS5 Digital Edition", p: "1850", c: "ps5", cond: "new", type: "console" },
+    { n: "Xbox Series X", p: "2100", c: "xbox", cond: "new", type: "console" },
+    { n: "Nintendo Switch OLED", p: "1250", c: "switch", cond: "new", type: "console" },
+    { n: "RTX 4070 Ti", p: "3500", c: "pc", cond: "new", type: "part" },
+    { n: "Logitech G Pro X", p: "450", c: "other", cond: "used", type: "accessory" },
+  ];
   
   const icons = {
     console: 'https://api.iconify.design/mdi/console.svg',
@@ -2426,6 +2658,7 @@
         const condClass = p.cond === 'new' ? 'var(--badge-new-bg)' : 'var(--badge-used-bg)';
         const condColor = p.cond === 'new' ? 'var(--badge-new-text)' : 'var(--badge-used-text)';
         const typeClass = p.type === 'game' ? '#3cff7f' : 'var(--accent)';
+        // No scarcity badges here
         return `
         <div class="product-card">
           <span class="card-badge card-badge-cond" style="background: ${condClass}; color: ${condColor};">${p.cond?.toUpperCase() || 'USED'}</span>
@@ -2450,10 +2683,10 @@
   search.oninput = renderProducts;
   renderProducts();
 
-  // ===== BACK TO TOP BUTTON =====
+  // ===== BACK TO TOP BUTTON (threshold 200px) =====
   const backToTop = document.getElementById('backToTop');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
+    if (window.scrollY > 200) {
       backToTop.classList.add('visible');
     } else {
       backToTop.classList.remove('visible');
@@ -2480,6 +2713,71 @@
     const phone = "60163691936";
     const message = "Hi FAZGAME 👋 I'm interested in trading in my games/consoles.";
     window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`, '_blank');
+  });
+
+  // ===== RECENTLY VIEWED (using localStorage) =====
+  function addToRecentlyViewed(productName, productIcon) {
+    let recent = JSON.parse(localStorage.getItem('recentlyViewed')) || [];
+    // avoid duplicates, keep max 5
+    recent = recent.filter(item => item.name !== productName);
+    recent.unshift({ name: productName, icon: productIcon || 'https://api.iconify.design/mdi/package.svg' });
+    if (recent.length > 5) recent.pop();
+    localStorage.setItem('recentlyViewed', JSON.stringify(recent));
+    displayRecentlyViewed();
+  }
+
+  function displayRecentlyViewed() {
+    const recentGrid = document.getElementById('recent-grid');
+    if (!recentGrid) return;
+    const recent = JSON.parse(localStorage.getItem('recentlyViewed')) || [];
+    if (recent.length === 0) {
+      recentGrid.innerHTML = '<p style="grid-column:1/-1; text-align:center;">No items viewed yet.</p>';
+      return;
+    }
+    recentGrid.innerHTML = recent.map(item => `
+      <div class="recent-item">
+        <img src="${item.icon}" alt="" onerror="this.src='https://api.iconify.design/mdi/package.svg';">
+        <p>${item.name}</p>
+      </div>
+    `).join('');
+  }
+
+  // Call on load
+  displayRecentlyViewed();
+
+  // Track product clicks
+  document.addEventListener('click', function(e) {
+    const card = e.target.closest('.product-card') || e.target.closest('.hot-card');
+    if (card) {
+      const title = card.querySelector('.hot-title, .product-info h4')?.textContent || 'Product';
+      const icon = card.querySelector('.product-icon img')?.src || '';
+      addToRecentlyViewed(title, icon);
+    }
+  });
+
+  // ===== FAQ ACCORDION =====
+  document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', function() {
+      const expanded = this.getAttribute('aria-expanded') === 'true' ? false : true;
+      this.setAttribute('aria-expanded', expanded);
+      const answer = this.nextElementSibling;
+      const icon = this.querySelector('.faq-icon');
+      if (expanded) {
+        answer.classList.add('open');
+        icon.classList.add('open');
+        icon.textContent = '−';
+      } else {
+        answer.classList.remove('open');
+        icon.classList.remove('open');
+        icon.textContent = '+';
+      }
+    });
+    question.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        question.click();
+      }
+    });
   });
 
   // ===== EVENT DELEGATION FOR CHECK, RESERVE, AND LIGHTBOX =====
@@ -2549,7 +2847,7 @@
     });
   });
 
-  // ===== 3D COVERFLOW GALLERY INITIALIZATION WITH LIGHTBOX ON CLICK =====
+  // ===== 3D COVERFLOW GALLERY INITIALIZATION =====
   if (document.querySelector('.mySwiper')) {
     const swiper = new Swiper(".mySwiper", {
       effect: "coverflow",
@@ -2582,9 +2880,7 @@
     // Add click handler for all slides to open lightbox
     document.querySelectorAll('.swiper-slide').forEach(slide => {
       slide.addEventListener('click', (e) => {
-        // Prevent click if interacting with navigation buttons
         if (e.target.closest('.swiper-button-next') || e.target.closest('.swiper-button-prev')) return;
-
         const img = slide.querySelector('img');
         if (img) {
           const modal = document.getElementById('imageModal');
@@ -2596,7 +2892,6 @@
       });
     });
 
-    // Pause autoplay on hover
     const swiperContainer = document.querySelector('.mySwiper');
     swiperContainer.addEventListener('mouseenter', () => swiper.autoplay.stop());
     swiperContainer.addEventListener('mouseleave', () => swiper.autoplay.start());
@@ -2669,7 +2964,7 @@
     window.open("https://api.whatsapp.com/send?phone=" + phone + "&text=" + encodeURIComponent(message), '_blank');
   });
 
-  // ===== THEME TOGGLE WITH AUTO DETECTION =====
+  // ===== THEME TOGGLE =====
   const themeToggle = document.getElementById('themeToggle');
   const savedTheme = localStorage.getItem('theme');
   
