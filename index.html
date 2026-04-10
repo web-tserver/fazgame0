@@ -2536,8 +2536,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+<script src="stock.js"></script>
+
 <script>
-  // ===== INVENTORY LOGIC (working version) =====
+  // ===== INVENTORY LOGIC =====
   let products = window.STOCK || [
     { n: "PS5 Digital Edition", p: "1850", c: "ps5", cond: "new", type: "console" },
     { n: "Xbox Series X", p: "2100", c: "xbox", cond: "new", type: "console" },
@@ -2545,6 +2547,7 @@
     { n: "RTX 4070 Ti", p: "3500", c: "pc", cond: "new", type: "part" },
     { n: "Logitech G Pro X", p: "450", c: "other", cond: "used", type: "accessory" },
   ];
+  
   const icons = {
     console: 'https://api.iconify.design/mdi/console.svg',
     ps5: 'https://api.iconify.design/simple-icons/playstation.svg',
@@ -2554,11 +2557,13 @@
     pc: 'https://api.iconify.design/mdi/desktop-classic.svg',
     other: 'https://api.iconify.design/mdi/gamepad-variant.svg'
   };
+  
   const categories = ['all', 'console', 'ps5', 'ps4', 'xbox', 'switch', 'pc', 'other'];
   let activeCat = 'all';
   const filters = document.getElementById('filters');
   const grid = document.getElementById('grid');
   const search = document.getElementById('search');
+  
   categories.forEach(cat => {
     const btn = document.createElement('button');
     btn.className = 'filter-btn' + (cat === 'all' ? ' active' : '');
@@ -2571,9 +2576,11 @@
     };
     filters.appendChild(btn);
   });
+
   function renderProducts() {
     const q = search.value.toLowerCase();
     const filtered = products.filter(p => (activeCat === 'all' || p.c === activeCat) && p.n.toLowerCase().includes(q));
+    
     if (filtered.length === 0) {
       grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--accent)">No items found matching your search.</div>`;
     } else {
@@ -2598,11 +2605,13 @@
         </div>`;
       }).join('');
     }
+    
     categories.forEach(c => {
       const el = document.getElementById('count-' + c);
       if(el) el.textContent = c === 'all' ? products.length : products.filter(p => p.c === c).length;
     });
   }
+  
   search.oninput = renderProducts;
   renderProducts();
 
