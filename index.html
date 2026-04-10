@@ -6,7 +6,6 @@
   <title>FAZGAME | Faz Service, Faz Gaming</title>
   <meta name="description" content="FAZGAME – Faz Service, Faz Gaming. Preorder consoles, custom PCs, and used gaming gear with 0% installment.">
 
-  <!-- Open Graph Meta Tags for Social Sharing -->
   <meta property="og:title" content="FAZGAME - Faz Service, Faz Gaming">
   <meta property="og:description" content="Preorder consoles, custom PCs, and used gaming gear with 0% installment.">
   <meta property="og:image" content="https://yourdomain.com/images/og-image.jpg">
@@ -14,7 +13,6 @@
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Structured Data (JSON-LD) for SEO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -37,7 +35,6 @@
   }
   </script>
 
-  <!-- Preconnect for faster external resource loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://api.iconify.design">
@@ -45,11 +42,9 @@
   <link rel="preconnect" href="https://placehold.co">
   <link rel="preconnect" href="https://cdn.simpleicons.org">
 
-  <!-- Fonts: Inter + Clash Display -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,700,600&display=swap" rel="stylesheet">
 
-  <!-- Swiper CSS (for 3D Coverflow) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAoUlEQVRYhe2VMQ6AIAxF6UlcPIk7J3F1ceEQjQkFWmqLFv9LJiAtvw9KAaABWwGYA5gDmIMsAGMM3vvgvYeiKELvPcYYRAgQkYcQQoimeMk0TWSMwTnHOkop0jRNhIhE0zSst+/7RACklKx3mqaJzDknAqC1Zr0b55wIgNaa9W6ccyIArTXr3TjnRAC01qx345wTAdBas96Nc04E4M9z+gI92RwWGG7S7AAAAABJRU5ErkJggg==">
@@ -71,7 +66,8 @@
     .faq-question,
     .modal-close,
     .pc-builder-select,
-    .quote-btn {
+    .quote-btn,
+    .condition-btn {
       cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23ffd84d" d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>') 12 0, pointer;
     }
 
@@ -91,7 +87,8 @@
       .faq-question,
       .modal-close,
       .pc-builder-select,
-      .quote-btn {
+      .quote-btn,
+      .condition-btn {
         cursor: pointer;
       }
     }
@@ -575,7 +572,8 @@
     .faq-question,
     .modal-close,
     .pc-builder-select,
-    .quote-btn {
+    .quote-btn,
+    .condition-btn {
       min-width: 44px;
       min-height: 44px;
       display: inline-flex;
@@ -597,7 +595,8 @@
     .faq-question:active,
     .modal-close:active,
     .pc-builder-select:active,
-    .quote-btn:active {
+    .quote-btn:active,
+    .condition-btn:active {
       transform: scale(0.97);
     }
     .chip {
@@ -1620,6 +1619,42 @@
       transform: translateY(-2px);
     }
 
+    /* ===== CONDITION TOGGLE ===== */
+    .condition-toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 30px;
+      padding: 12px;
+      background: var(--bg-secondary);
+      border-radius: 60px;
+      border: 1px solid var(--border-color);
+    }
+    .condition-label {
+      font-weight: 600;
+      color: var(--text);
+    }
+    .condition-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text);
+    }
+    .condition-btn.active {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+    }
+    .condition-btn:hover:not(.active) {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
     /* ===== OPTIMIZATIONS ===== */
     @media (hover: none) and (pointer: coarse) {
       .hot-card::after {
@@ -2144,7 +2179,6 @@
 </head>
 <body>
 
-<!-- Preloader -->
 <div id="preloader">
   <div class="preloader-content">
     <img src="images/logo1.png" alt="FAZGAME Logo" class="preloader-logo" onerror="this.onerror=null; this.src='https://placehold.co/100x100/222/ffd84d?text=FAZ';">
@@ -2155,10 +2189,8 @@
   </div>
 </div>
 
-<!-- Lightbox Modal (for gallery) -->
 <div id="imageModal"><img id="modalImg" src="" alt="Preview"></div>
 
-<!-- Detail Modal -->
 <div id="detailModal" class="modal">
   <div class="modal-content">
     <button class="modal-close" id="modalCloseBtn">&times;</button>
@@ -2173,7 +2205,6 @@
   </div>
 </div>
 
-<!-- Premium 3D Swing Lamp -->
 <div class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
   <div class="lamp-scene">
     <div class="lamp-wrap" id="lampWrap">
@@ -2187,7 +2218,6 @@
   </div>
 </div>
 
-<!-- Back to Top Button -->
 <div class="back-to-top" id="backToTop">↑</div>
 
 <header>
@@ -2207,7 +2237,6 @@
   </div>
 </header>
 
-<!-- Banner -->
 <div class="banner">
   <div class="banner-bg">
     <div class="shape shape-1"></div>
@@ -2258,12 +2287,10 @@
   </div>
 </div>
 
-<!-- Sticky CTA -->
 <div class="sticky-cta">
   <button id="cta-whatsapp" class="btn-primary">Chat on WhatsApp</button>
 </div>
 
-<!-- Preorder PC Builds -->
 <section id="hot" class="reveal">
   <h2 class="section-title">Preorder PC Builds</h2>
   <div class="section-subtitle">Custom Gaming PCs • Built On Demand</div>
@@ -2313,12 +2340,10 @@
 
 <div class="installment-banner reveal">0% Interest Installment Available • SPayLater</div>
 
-<!-- Preorder Consoles (no reserve button) -->
 <section id="preorder-console" class="reveal">
   <h2 class="section-title">Preorder Consoles</h2>
   <div class="section-subtitle">Used Units • Reserve Before Stock Arrival</div>
   <div class="hot-grid">
-    <!-- Console cards (abbreviated for brevity – same as before) -->
     <div class="hot-card" data-product='{"name":"PS5 Pro Digital","price":"RM2750","image":"images/ps5-pro.webp","specs":["Condition: Used","Storage: 2TB SSD","Includes: DualSense Controller","Wi-Fi 6, 4K Gaming","Backwards Compatible","Warranty: 14 Days"]}'>
       <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
       <img src="images/ps5-pro.webp" alt="PS5 Pro" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PS5+Pro';">
@@ -2327,12 +2352,105 @@
         <div class="hot-price-row"><span class="hot-desc">RM2750</span></div>
       </div>
     </div>
-    <!-- ... (all other console cards with similar data-product structure) ... -->
-    <!-- For brevity, I'm showing only one; the full version would include all 13 -->
+    <div class="hot-card" data-product='{"name":"PS4 Slim 500GB","price":"RM550","image":"images/ps4-slim.webp","specs":["Condition: Used","Storage: 500GB HDD","Includes: DualShock 4","HDMI Cable","Warranty: 14 Days"]}'>
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/ps4-slim.webp" alt="PS4 Slim" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PS4+Slim';">
+      <div class="hot-card-content">
+        <div class="hot-title">PS4 Slim 500GB</div>
+        <div class="hot-price-row"><span class="hot-desc">RM550</span></div>
+      </div>
+    </div>
+    <div class="hot-card" data-product='{"name":"PS4 Pro 1TB","price":"RM650","image":"images/ps4-pro.webp","specs":["Condition: Used","Storage: 1TB HDD","4K Gaming","Includes: DualShock 4","Warranty: 14 Days"]}'>
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/ps4-pro.webp" alt="PS4 Pro" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PS4+Pro';">
+      <div class="hot-card-content">
+        <div class="hot-title">PS4 Pro 1TB</div>
+        <div class="hot-price-row"><span class="hot-desc">RM650</span></div>
+      </div>
+    </div>
+    <div class="hot-card" data-product='{"name":"PS5 Fat Disc","price":"RM1450","image":"images/ps5-fat.webp","specs":["Condition: Used","Storage: 825GB SSD","Disc Version","Includes: DualSense","Warranty: 14 Days"]}'>
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/ps5-fat.webp" alt="PS5 Fat" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PS5+Fat';">
+      <div class="hot-card-content">
+        <div class="hot-title">PS5 Fat Disc</div>
+        <div class="hot-price-row"><span class="hot-desc">RM1450</span></div>
+      </div>
+    </div>
+    <div class="hot-card" data-product='{"name":"PS5 Slim Disc","price":"RM1650","image":"images/ps5-slim.webp","specs":["Condition: Used","Storage: 1TB SSD","Slim Design","Disc Version","Warranty: 14 Days"]}'>
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/ps5-slim.webp" alt="PS5 Slim" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PS5+Slim';">
+      <div class="hot-card-content">
+        <div class="hot-title">PS5 Slim Disc</div>
+        <div class="hot-price-row"><span class="hot-desc">RM1650</span></div>
+      </div>
+    </div>
+    <div class="hot-card" data-product='{"name":"Switch Lite","price":"RM400","image":"images/switch-lite.webp","specs":["Condition: Used","Handheld Only","Battery: 3-7 hours","Includes: Charger","Warranty: 14 Days"]}'>
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/switch-lite.webp" alt="Switch Lite" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=Switch+Lite';">
+      <div class="hot-card-content">
+        <div class="hot-title">Switch Lite</div>
+        <div class="hot-price-row"><span class="hot-desc">RM400</span></div>
+      </div>
+    </div>
+    <div class="hot-card" data-product='{"name":"Switch OLED White","price":"RM750","image":"images/switch-oled-white.webp","specs":["Condition: Used","7-inch OLED Screen","64GB Storage","Includes: Joy-Cons","Dock Included","Warranty: 14 Days"]}'>
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/switch-oled-white.webp" alt="Switch OLED White" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=OLED+White';">
+      <div class="hot-card-content">
+        <div class="hot-title">Switch OLED White</div>
+        <div class="hot-price-row"><span class="hot-desc">RM750</span></div>
+      </div>
+    </div>
+    <div class="hot-card" data-product='{"name":"Switch OLED Neon","price":"RM750","image":"images/switch-oled-neon.webp","specs":["Condition: Used","7-inch OLED Screen","64GB Storage","Neon Joy-Cons","Dock Included","Warranty: 14 Days"]}'>
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/switch-oled-neon.webp" alt="Switch OLED Neon" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=OLED+Neon';">
+      <div class="hot-card-content">
+        <div class="hot-title">Switch OLED Neon</div>
+        <div class="hot-price-row"><span class="hot-desc">RM750</span></div>
+      </div>
+    </div>
+    <div class="hot-card" data-product='{"name":"Switch OLED Zelda","price":"RM850","image":"images/switch-zelda.webp","specs":["Condition: Used","Limited Edition","7-inch OLED Screen","Zelda Themed Dock","Warranty: 14 Days"]}'>
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/switch-zelda.webp" alt="Switch OLED Zelda" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=Zelda+OLED';">
+      <div class="hot-card-content">
+        <div class="hot-title">Switch OLED Zelda</div>
+        <div class="hot-price-row"><span class="hot-desc">RM850</span></div>
+      </div>
+    </div>
+    <div class="hot-card" data-product='{"name":"Switch OLED Splatoon","price":"RM850","image":"images/switch-splatoon.webp","specs":["Condition: Used","Limited Edition","Splatoon Themed","OLED Screen","Warranty: 14 Days"]}'>
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/switch-splatoon.webp" alt="Switch OLED Splatoon" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=Splatoon+OLED';">
+      <div class="hot-card-content">
+        <div class="hot-title">Switch OLED Splatoon</div>
+        <div class="hot-price-row"><span class="hot-desc">RM850</span></div>
+      </div>
+    </div>
+    <div class="hot-card" data-product='{"name":"Switch OLED Mario","price":"RM850","image":"images/switch-mario.webp","specs":["Condition: Used","Mario Red Edition","OLED Screen","Includes: Carry Case","Warranty: 14 Days"]}'>
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/switch-mario.webp" alt="Switch OLED Mario" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=Mario+OLED';">
+      <div class="hot-card-content">
+        <div class="hot-title">Switch OLED Mario</div>
+        <div class="hot-price-row"><span class="hot-desc">RM850</span></div>
+      </div>
+    </div>
+    <div class="hot-card" data-product='{"name":"Switch OLED Pokemon","price":"RM850","image":"images/switch-pokemon.webp","specs":["Condition: Used","Pokemon Edition","OLED Screen","Special Backplate","Warranty: 14 Days"]}'>
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/switch-pokemon.webp" alt="Switch OLED Pokemon" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=Pokemon+OLED';">
+      <div class="hot-card-content">
+        <div class="hot-title">Switch OLED Pokemon</div>
+        <div class="hot-price-row"><span class="hot-desc">RM850</span></div>
+      </div>
+    </div>
+    <div class="hot-card" data-product='{"name":"Switch 2 Edition","price":"RM1700","image":"images/switch-2.webp","specs":["Condition: Used","Next-gen Switch","Enhanced Performance","Larger Screen","Backwards Compatible","Warranty: 14 Days"]}'>
+      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+      <img src="images/switch-2.webp" alt="Switch 2" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=Switch+2';">
+      <div class="hot-card-content">
+        <div class="hot-title">Switch 2 Edition</div>
+        <div class="hot-price-row"><span class="hot-desc">RM1700</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- Inventory Section -->
 <section id="stock" class="reveal">
   <h2 class="section-title">Stock Available</h2>
   <div class="controls"><input id="search" class="search-box" placeholder="Search item..."></div>
@@ -2340,7 +2458,6 @@
   <div class="product-grid" id="grid"></div>
 </section>
 
-<!-- PC Builder Tool -->
 <section id="pc-builder" class="reveal">
   <div class="pc-builder">
     <h2 class="builder-title">🛠️ Custom PC Builder</h2>
@@ -2349,14 +2466,12 @@
   </div>
 </section>
 
-<!-- Game Trade-In Section -->
 <section id="trade-section" class="trade-section reveal">
   <h2 class="trade-title">Game & Console Trade‑In</h2>
   <p class="trade-desc">Got old games or consoles? Trade them in!</p>
   <button class="trade-btn" id="tradeBtn">Inquire About Trade‑In</button>
 </section>
 
-<!-- Gallery -->
 <section id="gallery" class="reveal" style="max-width: 1200px; margin: 0 auto;">
   <h2 class="section-title">Gallery</h2>
   <div class="section-subtitle">Immersive 3D • Custom PC builds and gaming setups</div>
@@ -2375,7 +2490,6 @@
   </div>
 </section>
 
-<!-- FAQ Section -->
 <section id="faq" class="reveal">
   <h2 class="section-title">Frequently Asked Questions</h2>
   <div class="faq-list">
@@ -2403,7 +2517,6 @@
   </div>
 </section>
 
-<!-- Payment Methods -->
 <section id="payment" class="reveal">
   <h2 class="section-title" style="text-align:center">Payment Methods</h2>
   <div class="trust-badges">
@@ -2421,10 +2534,10 @@
   © 2026 FAZGAME • Faz Service, Faz Gaming
 </footer>
 
-<script src="stock.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <script>
-  // ===== INVENTORY LOGIC (simplified for demo) =====
+  // ===== INVENTORY LOGIC (working version) =====
   let products = window.STOCK || [
     { n: "PS5 Digital Edition", p: "1850", c: "ps5", cond: "new", type: "console" },
     { n: "Xbox Series X", p: "2100", c: "xbox", cond: "new", type: "console" },
@@ -2543,7 +2656,7 @@
     });
   });
 
-  // ===== MODAL LOGIC (for product details) =====
+  // ===== MODAL LOGIC =====
   const modal = document.getElementById('detailModal');
   const modalClose = document.getElementById('modalCloseBtn');
   const modalImg = document.getElementById('modalProductImg');
@@ -2584,67 +2697,7 @@
     });
   });
 
-  // ===== PC BUILDER DATA & LOGIC =====
-  const componentData = {
-    cpu: { label: "💻 CPU / Processor", items: [{ name: "Intel Core i3-12100", price: 450, selected: true },{ name: "Intel Core i5-12400F", price: 650 },{ name: "Intel Core i5-13400", price: 850 },{ name: "Intel Core i7-13700K", price: 1450 },{ name: "Intel Core i9-13900K", price: 2250 },{ name: "AMD Ryzen 5 5600X", price: 750 },{ name: "AMD Ryzen 7 7700X", price: 1450 },{ name: "AMD Ryzen 9 7900X", price: 2150 }] },
-    cooler: { label: "❄️ CPU Cooler", items: [{ name: "Stock Cooler (included)", price: 0, selected: true },{ name: "Air Cooler (e.g. Cooler Master Hyper 212)", price: 150 },{ name: "240mm AIO Liquid Cooler", price: 350 },{ name: "360mm AIO Liquid Cooler", price: 550 }] },
-    motherboard: { label: "🔧 Motherboard", items: [{ name: "H610 / A620 (Budget)", price: 350, selected: true },{ name: "B660 / B650 (Mid-range)", price: 550 },{ name: "Z690 / X670 (High-end)", price: 850 },{ name: "Z790 / X670E (Premium)", price: 1200 }] },
-    ram: { label: "🧠 RAM", items: [{ name: "8GB DDR4 3200MHz", price: 150 },{ name: "16GB DDR4 3200MHz", price: 250, selected: true },{ name: "32GB DDR4 3200MHz", price: 450 },{ name: "16GB DDR5 5200MHz", price: 350 },{ name: "32GB DDR5 5600MHz", price: 650 }] },
-    gpu: { label: "🎮 Graphics Card (GPU)", items: [{ name: "Integrated Graphics", price: 0 },{ name: "GTX 1650 4GB", price: 550 },{ name: "RTX 3060 12GB", price: 850, selected: true },{ name: "RTX 4060 Ti 8GB", price: 1350 },{ name: "RTX 4070 12GB", price: 1950 },{ name: "RTX 4080 16GB", price: 3200 },{ name: "AMD RX 6600 8GB", price: 750 },{ name: "AMD RX 7700 XT 12GB", price: 1650 }] },
-    storage: { label: "💾 Storage", items: [{ name: "256GB NVMe SSD", price: 120 },{ name: "512GB NVMe SSD", price: 200, selected: true },{ name: "1TB NVMe SSD", price: 350 },{ name: "2TB NVMe SSD", price: 550 },{ name: "1TB HDD + 256GB SSD", price: 250 }] },
-    psu: { label: "⚡ Power Supply (PSU)", items: [{ name: "500W 80+ Bronze", price: 200, selected: true },{ name: "650W 80+ Bronze", price: 280 },{ name: "750W 80+ Gold", price: 450 },{ name: "850W 80+ Gold", price: 550 },{ name: "1000W 80+ Gold", price: 750 }] },
-    case: { label: "🖥️ PC Case", items: [{ name: "Budget ATX (e.g. Tecware)", price: 150, selected: true },{ name: "Mid Tower with Tempered Glass", price: 250 },{ name: "Premium RGB Case (e.g. Lian Li)", price: 450 },{ name: "Small Form Factor (ITX)", price: 300 }] },
-    monitor: { label: "🖥️ Monitor", items: [{ name: "None", price: 0 },{ name: '22" 75Hz IPS', price: 350 },{ name: '24" 144Hz Gaming', price: 550, selected: true },{ name: '27" 165Hz Curved', price: 850 },{ name: '32" 4K UHD', price: 1350 }] },
-    accessories: { label: "🎧 Accessories (Keyboard + Mouse)", items: [{ name: "None", price: 0 },{ name: "Basic Combo", price: 100, selected: true },{ name: "Mechanical + Gaming Mouse", price: 250 },{ name: "RGB Mechanical + Wireless Mouse", price: 400 }] }
-  };
-
-  function buildPCBuilder() {
-    const container = document.getElementById('pc-builder-container');
-    if (!container) return;
-    let html = '<div class="builder-group-list">';
-    for (const [key, category] of Object.entries(componentData)) {
-      html += `<div class="builder-group"><label>${category.label}</label><select id="${key}Select" class="pc-builder-select">`;
-      category.items.forEach(item => {
-        const selected = item.selected ? 'selected' : '';
-        html += `<option value="${item.price}" ${selected}>${item.name} - RM${item.price}</option>`;
-      });
-      html += `</select></div>`;
-    }
-    html += '</div><div class="total-price">Estimated Total: <span id="totalPrice">RM0</span></div><button id="quoteBtn" class="quote-btn">Request Quote via WhatsApp</button>';
-    container.innerHTML = html;
-    document.querySelectorAll('.pc-builder-select').forEach(select => select.addEventListener('change', updateTotal));
-    updateTotal();
-    document.getElementById('quoteBtn').addEventListener('click', requestQuote);
-  }
-
-  function updateTotal() {
-    let total = 0;
-    for (const key of Object.keys(componentData)) {
-      const select = document.getElementById(`${key}Select`);
-      if (select) total += parseInt(select.value) || 0;
-    }
-    const totalSpan = document.getElementById('totalPrice');
-    if (totalSpan) totalSpan.textContent = `RM${total.toLocaleString()}`;
-  }
-
-  function requestQuote() {
-    let message = "Hi FAZGAME 👋 I'd like to request a quote for a custom PC with these components:\n\n";
-    for (const [key, category] of Object.entries(componentData)) {
-      const select = document.getElementById(`${key}Select`);
-      if (select) {
-        const selectedOption = select.options[select.selectedIndex];
-        message += `- ${category.label}: ${selectedOption.text}\n`;
-      }
-    }
-    const totalSpan = document.getElementById('totalPrice');
-    const total = totalSpan ? totalSpan.textContent : "RM0";
-    message += `\nEstimated Total: ${total}\n\nCan you provide a final price and availability?`;
-    window.open(`https://api.whatsapp.com/send?phone=60163691936&text=${encodeURIComponent(message)}`, '_blank');
-  }
-
-  buildPCBuilder();
-
-  // ===== EVENT DELEGATION (product-buy, etc.) =====
+  // ===== EVENT DELEGATION =====
   document.addEventListener('click', function(e) {
     const button = e.target.closest('.product-buy');
     if (button) {
@@ -2740,7 +2793,7 @@
     }
   });
 
-  // ===== PRELOADER =====
+  // ===== PRELOADER & COUNTERS =====
   window.addEventListener("DOMContentLoaded", () => {
     let progress = 0;
     const bar = document.getElementById("loaderBar");
@@ -2757,7 +2810,6 @@
       }
     }, 40);
   });
-
   function startCounters() {
     document.querySelectorAll(".stat-item h3").forEach(counter => {
       const target = parseInt(counter.dataset.target);
@@ -2819,5 +2871,8 @@
     });
   }
 </script>
+
+<script src="pc-builder.js"></script>
+
 </body>
 </html>
