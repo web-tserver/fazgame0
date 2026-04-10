@@ -13,28 +13,6 @@
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "FAZGAME",
-    "description": "Preorder consoles, custom PCs, and used gaming gear with 0% installment.",
-    "url": "https://yourdomain.com",
-    "logo": "https://yourdomain.com/images/logo1.png",
-    "sameAs": [
-      "https://www.tiktok.com/@syazeone",
-      "https://www.instagram.com/fazgame_empire/",
-      "https://www.facebook.com/share/1DHZdLi62G/",
-      "https://t.me/fazgameofficial"
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Malaysia"
-    },
-    "priceRange": "$$"
-  }
-  </script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://api.iconify.design">
@@ -44,10 +22,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,700,600&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAoUlEQVRYhe2VMQ6AIAxF6UlcPIk7J3F1ceEQjQkFWmqLFv9LJiAtvw9KAaABWwGYA5gDmIMsAGMM3vvgvYeiKELvPcYYRAgQkYcQQoimeMk0TWSMwTnHOkop0jRNhIhE0zSst+/7RACklKx3mqaJzDknAqC1Zr0b55wIgNaa9W6ccyIArTXr3TjnRAC01qx345wTAdBas96Nc04E4M9z+gI92RwWGG7S7AAAAABJRU5ErkJggg==">
 
   <style>
     /* ===== LIGHTNING BOLT CURSOR ===== */
@@ -164,7 +139,6 @@
       filter: invert(0);
     }
 
-    /* Payment icons */
     .payment-item img {
       transition: filter 0.2s ease;
     }
@@ -558,7 +532,7 @@
       }
     }
 
-    /* ===== IMPROVED TAP TARGETS ===== */
+    /* ===== TAP TARGETS ===== */
     .btn-primary,
     .chip,
     .social-link,
@@ -620,7 +594,6 @@
       padding: 3px 8px;
     }
 
-    /* RESERVE button animations */
     .reserve-btn {
       position: relative;
       overflow: hidden;
@@ -742,7 +715,6 @@
       }
     }
 
-    /* ===== SOCIAL ICONS ===== */
     .social-row {
       display: flex;
       gap: 12px;
@@ -852,7 +824,6 @@
       50% { filter: drop-shadow(0 0 15px rgba(255,216,77,0.6)) drop-shadow(0 0 30px rgba(255,216,77,0.3)); }
     }
 
-    /* ===== FULL-WIDTH WHATSAPP BUTTON ===== */
     .sticky-cta {
       position: sticky;
       top: 70px;
@@ -893,7 +864,6 @@
       box-shadow: 0 20px 30px -10px rgba(255,216,77,0.5);
     }
 
-    /* ===== INVENTORY SECTION ===== */
     #stock {
       padding: 30px 14px;
       max-width: 1200px;
@@ -1202,7 +1172,7 @@
       }
     }
 
-    /* ===== PREORDER CARDS ===== */
+    /* PREORDER CARDS */
     .hot-card {
       position: relative;
       border-radius: 20px;
@@ -1376,7 +1346,6 @@
       opacity: 1;
     }
 
-    /* ===== GRID LAYOUTS ===== */
     .hot-grid {
       display: grid;
       gap: 14px;
@@ -1430,7 +1399,7 @@
       }
     }
 
-    /* ===== DETAIL MODAL ===== */
+    /* MODAL */
     .modal {
       display: none;
       position: fixed;
@@ -1537,14 +1506,14 @@
       transform: translateY(-2px);
     }
 
-    /* ===== PC BUILDER SECTION ===== */
+    /* PC BUILDER SECTION */
     .pc-builder {
       background: var(--card-bg);
       backdrop-filter: blur(10px);
       border-radius: 28px;
       padding: 24px;
       margin: 40px auto;
-      max-width: 900px;
+      max-width: 1200px;
       border: 1px solid var(--border-color);
     }
     .builder-title {
@@ -1561,8 +1530,8 @@
     }
     .builder-group-list {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
     }
     .builder-group {
       margin-bottom: 0;
@@ -1572,6 +1541,7 @@
       font-weight: 600;
       margin-bottom: 8px;
       color: var(--text);
+      font-size: 14px;
     }
     .pc-builder-select {
       width: 100%;
@@ -1615,7 +1585,6 @@
       transform: translateY(-2px);
     }
 
-    /* ===== OPTIMIZATIONS ===== */
     @media (hover: none) and (pointer: coarse) {
       .hot-card::after {
         display: none !important;
@@ -1627,14 +1596,6 @@
         transform: translateY(15px);
       }
     }
-    @media (max-width: 768px) {
-      .reserve-btn,
-      .product-buy {
-        font-weight: 800 !important;
-      }
-    }
-    #fast-sales { display: none; }
-
     .installment-banner {
       margin: 20px auto;
       max-width: 1200px;
@@ -1728,12 +1689,7 @@
         right: 15px;
       }
     }
-    .badge-red {
-      background: #ff3b3b;
-      color: #fff;
-    }
 
-    /* ===== GAME TRADE-IN SECTION ===== */
     .trade-section {
       position: relative;
       background-image: url('images/trade.webp');
@@ -1787,7 +1743,6 @@
       box-shadow: 0 20px 30px -10px rgba(255,216,77,0.5);
     }
 
-    /* ===== FAQ SECTION ===== */
     #faq {
       padding: 40px 16px;
       max-width: 800px;
@@ -1829,7 +1784,6 @@
       transform: rotate(45deg);
     }
 
-    /* ===== 3D COVERFLOW GALLERY ===== */
     #gallery {
       padding: 40px 16px !important;
       max-width: 1200px;
@@ -1913,18 +1867,7 @@
         display: none;
       }
     }
-    @media (max-width: 480px) {
-      #gallery .swiper-slide {
-        width: clamp(130px, 50vw, 180px);
-      }
-    }
-    @media (max-width: 360px) {
-      #gallery .swiper-slide {
-        width: clamp(120px, 60vw, 150px);
-      }
-    }
 
-    /* ===== PAYMENT SECTION ===== */
     .payment-icons {
       display: flex;
       justify-content: center;
@@ -1997,7 +1940,6 @@
       }
     }
 
-    /* Lightbox */
     #imageModal {
       position: fixed;
       inset: 0;
@@ -2027,7 +1969,6 @@
       transition: transform 0.2s;
     }
 
-    /* ===== PRELOADER ===== */
     #preloader {
       position: fixed;
       inset: 0;
@@ -2078,7 +2019,6 @@
       transition: width 0.1s, background 0.2s ease;
     }
 
-    /* ===== SCROLL REVEAL ===== */
     .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -2089,7 +2029,6 @@
       transform: translateY(0);
     }
 
-    /* ===== BACK TO TOP ===== */
     .back-to-top {
       position: fixed;
       bottom: 30px;
@@ -2418,7 +2357,6 @@
   <div class="product-grid" id="grid"></div>
 </section>
 
-<!-- PC BUILDER SECTION (external script loads here) -->
 <section id="pc-builder" class="reveal">
   <div class="pc-builder">
     <h2 class="builder-title">🛠️ Custom PC Builder</h2>
@@ -2497,15 +2435,18 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<!-- Main site scripts (excluding PC Builder) -->
+<!-- ==================== STOCK.JS (Inventory Logic) ==================== -->
 <script>
-  // ===== INVENTORY LOGIC =====
+  // Stock inventory data (original stock.js content)
   let products = window.STOCK || [
     { n: "PS5 Digital Edition", p: "1850", c: "ps5", cond: "new", type: "console" },
     { n: "Xbox Series X", p: "2100", c: "xbox", cond: "new", type: "console" },
     { n: "Nintendo Switch OLED", p: "1250", c: "switch", cond: "new", type: "console" },
     { n: "RTX 4070 Ti", p: "3500", c: "pc", cond: "new", type: "part" },
     { n: "Logitech G Pro X", p: "450", c: "other", cond: "used", type: "accessory" },
+    { n: "PS4 Slim 500GB", p: "550", c: "ps4", cond: "used", type: "console" },
+    { n: "Xbox Series S", p: "1200", c: "xbox", cond: "new", type: "console" },
+    { n: "Gaming Chair", p: "399", c: "other", cond: "new", type: "accessory" }
   ];
   
   const icons = {
@@ -2572,10 +2513,315 @@
     });
   }
   
-  search.oninput = renderProducts;
+  if (search) search.oninput = renderProducts;
   renderProducts();
+</script>
 
-  // ===== BACK TO TOP =====
+<!-- ==================== PC-BUILDER.JS (Full Component List) ==================== -->
+<script>
+  (function() {
+    const componentData = {
+      cpu: {
+        label: "💻 CPU / Processor",
+        items: [
+          { name: "Intel Core i3-10100 (New)", price: 380 },
+          { name: "Intel Core i3-10100 (Used)", price: 280 },
+          { name: "Intel Core i3-12100 (New)", price: 450, selected: true },
+          { name: "Intel Core i3-12100 (Used)", price: 350 },
+          { name: "Intel Core i5-12400F (New)", price: 650 },
+          { name: "Intel Core i5-12400F (Used)", price: 500 },
+          { name: "Intel Core i5-13400 (New)", price: 850 },
+          { name: "Intel Core i5-13400 (Used)", price: 650 },
+          { name: "Intel Core i7-13700K (New)", price: 1450 },
+          { name: "Intel Core i7-13700K (Used)", price: 1100 },
+          { name: "AMD Ryzen 5 3600 (New)", price: 450 },
+          { name: "AMD Ryzen 5 3600 (Used)", price: 350 },
+          { name: "AMD Ryzen 5 5600X (New)", price: 750 },
+          { name: "AMD Ryzen 5 5600X (Used)", price: 550 },
+          { name: "AMD Ryzen 7 5700X (New)", price: 950 },
+          { name: "AMD Ryzen 7 5700X (Used)", price: 750 },
+          { name: "AMD Ryzen 7 7700X (New)", price: 1450 },
+          { name: "AMD Ryzen 7 7700X (Used)", price: 1100 },
+          { name: "AMD Ryzen 9 7900X (New)", price: 2150 },
+          { name: "AMD Ryzen 9 7900X (Used)", price: 1600 }
+        ]
+      },
+      cooler: {
+        label: "❄️ CPU Cooler",
+        items: [
+          { name: "Stock Cooler (included)", price: 0, selected: true },
+          { name: "Air Cooler (Budget - ID-Cooling)", price: 120 },
+          { name: "Air Cooler (New - Generic)", price: 150 },
+          { name: "Air Cooler (Used)", price: 100 },
+          { name: "240mm AIO Liquid Cooler (New)", price: 350 },
+          { name: "240mm AIO Liquid Cooler (Used)", price: 250 },
+          { name: "360mm AIO Liquid Cooler (New)", price: 550 },
+          { name: "360mm AIO Liquid Cooler (Used)", price: 400 },
+          { name: "Cooler Master Hyper 212 (New)", price: 180 },
+          { name: "Cooler Master Hyper 212 (Used)", price: 120 }
+        ]
+      },
+      motherboard: {
+        label: "🔧 Motherboard",
+        items: [
+          { name: "H610 / A520 (Budget) (New)", price: 320, selected: true },
+          { name: "H610 / A520 (Budget) (Used)", price: 220 },
+          { name: "B660 / B550 (Mid-range) (New)", price: 550 },
+          { name: "B660 / B550 (Mid-range) (Used)", price: 400 },
+          { name: "Z690 / X570 (High-end) (New)", price: 850 },
+          { name: "Z690 / X570 (High-end) (Used)", price: 600 },
+          { name: "Z790 / X670E (Premium) (New)", price: 1200 },
+          { name: "Z790 / X670E (Premium) (Used)", price: 850 }
+        ]
+      },
+      ram: {
+        label: "🧠 RAM",
+        items: [
+          { name: "8GB DDR4 2666MHz (New)", price: 120 },
+          { name: "8GB DDR4 2666MHz (Used)", price: 80 },
+          { name: "8GB DDR4 3200MHz (New)", price: 150 },
+          { name: "8GB DDR4 3200MHz (Used)", price: 100 },
+          { name: "16GB DDR4 3200MHz (New)", price: 250, selected: true },
+          { name: "16GB DDR4 3200MHz (Used)", price: 180 },
+          { name: "32GB DDR4 3200MHz (New)", price: 450 },
+          { name: "32GB DDR4 3200MHz (Used)", price: 320 },
+          { name: "16GB DDR5 5200MHz (New)", price: 350 },
+          { name: "16GB DDR5 5200MHz (Used)", price: 250 },
+          { name: "32GB DDR5 5600MHz (New)", price: 650 },
+          { name: "32GB DDR5 5600MHz (Used)", price: 450 }
+        ]
+      },
+      gpu: {
+        label: "🎮 Graphics Card (GPU)",
+        items: [
+          { name: "Integrated Graphics", price: 0 },
+          { name: "GT 1030 2GB (New)", price: 350 },
+          { name: "GT 1030 2GB (Used)", price: 250 },
+          { name: "GTX 1650 4GB (New)", price: 550 },
+          { name: "GTX 1650 4GB (Used)", price: 400 },
+          { name: "GTX 1660 Super 6GB (New)", price: 750 },
+          { name: "GTX 1660 Super 6GB (Used)", price: 550 },
+          { name: "RTX 3060 12GB (New)", price: 850, selected: true },
+          { name: "RTX 3060 12GB (Used)", price: 650 },
+          { name: "RTX 3060 Ti 8GB (New)", price: 1150 },
+          { name: "RTX 3060 Ti 8GB (Used)", price: 850 },
+          { name: "RTX 4060 8GB (New)", price: 1250 },
+          { name: "RTX 4060 8GB (Used)", price: 950 },
+          { name: "RTX 4060 Ti 8GB (New)", price: 1450 },
+          { name: "RTX 4060 Ti 8GB (Used)", price: 1100 },
+          { name: "RTX 4070 12GB (New)", price: 1950 },
+          { name: "RTX 4070 12GB (Used)", price: 1450 },
+          { name: "AMD RX 6600 8GB (New)", price: 750 },
+          { name: "AMD RX 6600 8GB (Used)", price: 550 },
+          { name: "AMD RX 6600 XT 8GB (New)", price: 950 },
+          { name: "AMD RX 6600 XT 8GB (Used)", price: 700 },
+          { name: "AMD RX 6700 XT 12GB (New)", price: 1250 },
+          { name: "AMD RX 6700 XT 12GB (Used)", price: 900 },
+          { name: "AMD RX 7700 XT 12GB (New)", price: 1650 },
+          { name: "AMD RX 7700 XT 12GB (Used)", price: 1200 },
+          { name: "AMD RX 7800 XT 16GB (New)", price: 2100 },
+          { name: "AMD RX 7800 XT 16GB (Used)", price: 1600 }
+        ]
+      },
+      storage: {
+        label: "💾 Storage",
+        items: [
+          { name: "240GB SSD (New)", price: 80 },
+          { name: "240GB SSD (Used)", price: 50 },
+          { name: "480GB SSD (New)", price: 120 },
+          { name: "480GB SSD (Used)", price: 80 },
+          { name: "512GB NVMe SSD (New)", price: 200, selected: true },
+          { name: "512GB NVMe SSD (Used)", price: 140 },
+          { name: "1TB HDD (New)", price: 150 },
+          { name: "1TB HDD (Used)", price: 100 },
+          { name: "1TB NVMe SSD (New)", price: 350 },
+          { name: "1TB NVMe SSD (Used)", price: 250 },
+          { name: "2TB NVMe SSD (New)", price: 550 },
+          { name: "2TB NVMe SSD (Used)", price: 400 },
+          { name: "1TB HDD + 256GB SSD (New)", price: 250 },
+          { name: "1TB HDD + 256GB SSD (Used)", price: 180 },
+          { name: "2TB HDD + 512GB SSD (New)", price: 380 },
+          { name: "2TB HDD + 512GB SSD (Used)", price: 280 }
+        ]
+      },
+      psu: {
+        label: "⚡ Power Supply (PSU)",
+        items: [
+          { name: "450W 80+ White (New)", price: 150 },
+          { name: "450W 80+ White (Used)", price: 100 },
+          { name: "500W 80+ Bronze (New)", price: 200, selected: true },
+          { name: "500W 80+ Bronze (Used)", price: 140 },
+          { name: "550W 80+ Bronze (Cooler Master) (New)", price: 250 },
+          { name: "550W 80+ Bronze (Used)", price: 180 },
+          { name: "650W 80+ Bronze (New)", price: 280 },
+          { name: "650W 80+ Bronze (Used)", price: 200 },
+          { name: "650W 80+ Gold (Corsair) (New)", price: 380 },
+          { name: "650W 80+ Gold (Used)", price: 280 },
+          { name: "750W 80+ Gold (New)", price: 450 },
+          { name: "750W 80+ Gold (Used)", price: 320 },
+          { name: "850W 80+ Gold (New)", price: 550 },
+          { name: "850W 80+ Gold (Used)", price: 400 },
+          { name: "1000W 80+ Gold (New)", price: 750 },
+          { name: "1000W 80+ Gold (Used)", price: 550 }
+        ]
+      },
+      pcCase: {
+        label: "🖥️ PC Case",
+        items: [
+          { name: "Budget ATX (Tecware Flatline) (New)", price: 150, selected: true },
+          { name: "Budget ATX (Tecware Flatline) (Used)", price: 100 },
+          { name: "Mid Tower with Tempered Glass (New)", price: 250 },
+          { name: "Mid Tower with Tempered Glass (Used)", price: 180 },
+          { name: "Armaggeddon Mid Tower (New)", price: 220 },
+          { name: "Armaggeddon Mid Tower (Used)", price: 160 },
+          { name: "Premium RGB Case (Lian Li) (New)", price: 450 },
+          { name: "Premium RGB Case (Lian Li) (Used)", price: 320 },
+          { name: "Small Form Factor (ITX) (New)", price: 300 },
+          { name: "Small Form Factor (ITX) (Used)", price: 220 },
+          { name: "Cooler Master TD500 (New)", price: 350 },
+          { name: "Cooler Master TD500 (Used)", price: 250 }
+        ]
+      },
+      monitor: {
+        label: "🖥️ Monitor",
+        items: [
+          { name: "None", price: 0 },
+          { name: '20" 60Hz TN (New)', price: 250 },
+          { name: '20" 60Hz TN (Used)', price: 150 },
+          { name: '22" 75Hz IPS (New)', price: 350 },
+          { name: '22" 75Hz IPS (Used)', price: 250 },
+          { name: '24" 144Hz Gaming (PRISM+) (New)', price: 550, selected: true },
+          { name: '24" 144Hz Gaming (Used)', price: 400 },
+          { name: '24" 165Hz Curved (New)', price: 650 },
+          { name: '24" 165Hz Curved (Used)', price: 480 },
+          { name: '27" 144Hz Curved (ViewSonic) (New)', price: 750 },
+          { name: '27" 144Hz Curved (Used)', price: 550 },
+          { name: '27" 165Hz IPS (New)', price: 850 },
+          { name: '27" 165Hz IPS (Used)', price: 650 },
+          { name: '32" 4K UHD (New)', price: 1350 },
+          { name: '32" 4K UHD (Used)', price: 950 }
+        ]
+      },
+      accessories: {
+        label: "🎧 Accessories (Keyboard + Mouse)",
+        items: [
+          { name: "None", price: 0 },
+          { name: "Basic Combo (New)", price: 100, selected: true },
+          { name: "Basic Combo (Used)", price: 70 },
+          { name: "Mechanical + Gaming Mouse (New)", price: 250 },
+          { name: "Mechanical + Gaming Mouse (Used)", price: 180 },
+          { name: "RGB Mechanical + Wireless Mouse (New)", price: 400 },
+          { name: "RGB Mechanical + Wireless Mouse (Used)", price: 280 },
+          { name: "Logitech G102 + Keyboard (New)", price: 200 },
+          { name: "Logitech G102 + Keyboard (Used)", price: 140 }
+        ]
+      },
+      wifiAdapter: {
+        label: "📡 WiFi / Bluetooth Adapter",
+        items: [
+          { name: "None", price: 0, selected: true },
+          { name: "USB WiFi Dongle (New)", price: 30 },
+          { name: "USB WiFi Dongle (Used)", price: 15 },
+          { name: "PCIe WiFi 6 + BT 5.0 (New)", price: 120 },
+          { name: "PCIe WiFi 6 + BT 5.0 (Used)", price: 80 },
+          { name: "TP-Link Archer T4U (New)", price: 90 },
+          { name: "TP-Link Archer T4U (Used)", price: 60 }
+        ]
+      },
+      os: {
+        label: "🪟 Operating System",
+        items: [
+          { name: "None (I'll install myself)", price: 0, selected: true },
+          { name: "Windows 11 Home (License + Installation)", price: 150 },
+          { name: "Windows 11 Pro (License + Installation)", price: 250 },
+          { name: "Windows 10 Home (License + Installation)", price: 120 },
+          { name: "Windows 10 Pro (License + Installation)", price: 200 }
+        ]
+      },
+      assembly: {
+        label: "🔧 Assembly & Testing",
+        items: [
+          { name: "Free Assembly & Testing", price: 0, selected: true },
+          { name: "Express Assembly (24h) + Cable Management", price: 50 },
+          { name: "Custom Watercooling Loop Setup", price: 300 }
+        ]
+      }
+    };
+
+    function buildPCBuilder() {
+      const container = document.getElementById('pc-builder-container');
+      if (!container) return;
+
+      let html = '<div class="builder-group-list">';
+      for (const [key, category] of Object.entries(componentData)) {
+        html += `
+          <div class="builder-group">
+            <label>${category.label}</label>
+            <select id="${key}Select" class="pc-builder-select">
+        `;
+        category.items.forEach(item => {
+          const selectedAttr = item.selected ? 'selected' : '';
+          html += `<option value="${item.price}" ${selectedAttr}>${item.name} - RM${item.price}</option>`;
+        });
+        html += `</select></div>`;
+      }
+      html += '</div>';
+
+      html += `
+        <div class="total-price">
+          Estimated Total: <span id="totalPrice">RM0</span>
+        </div>
+        <button id="quoteBtn" class="quote-btn">Request Quote via WhatsApp</button>
+      `;
+      container.innerHTML = html;
+
+      document.querySelectorAll('.pc-builder-select').forEach(select => {
+        select.addEventListener('change', updateTotal);
+      });
+      updateTotal();
+
+      const quoteBtn = document.getElementById('quoteBtn');
+      if (quoteBtn) quoteBtn.addEventListener('click', requestQuote);
+    }
+
+    function updateTotal() {
+      let total = 0;
+      for (const key of Object.keys(componentData)) {
+        const select = document.getElementById(`${key}Select`);
+        if (select) {
+          total += parseInt(select.value) || 0;
+        }
+      }
+      const totalSpan = document.getElementById('totalPrice');
+      if (totalSpan) totalSpan.textContent = `RM${total.toLocaleString()}`;
+    }
+
+    function requestQuote() {
+      let message = "Hi FAZGAME 👋 I'd like to request a quote for a custom PC with these components:\n\n";
+      for (const [key, category] of Object.entries(componentData)) {
+        const select = document.getElementById(`${key}Select`);
+        if (select) {
+          const selectedOption = select.options[select.selectedIndex];
+          message += `- ${category.label}: ${selectedOption.text}\n`;
+        }
+      }
+      const totalSpan = document.getElementById('totalPrice');
+      const total = totalSpan ? totalSpan.textContent : "RM0";
+      message += `\nEstimated Total: ${total}\n\nCan you provide a final price and availability?`;
+      window.open(`https://api.whatsapp.com/send?phone=60163691936&text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', buildPCBuilder);
+    } else {
+      buildPCBuilder();
+    }
+  })();
+</script>
+
+<!-- ==================== COMMON SITE INTERACTIONS ==================== -->
+<script>
+  // Back to top
   const backToTop = document.getElementById('backToTop');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 200) backToTop.classList.add('visible');
@@ -2583,7 +2829,7 @@
   });
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  // ===== SCROLL REVEAL =====
+  // Scroll reveal
   const revealElements = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -2595,12 +2841,12 @@
   }, { threshold: 0.1 });
   revealElements.forEach(el => observer.observe(el));
 
-  // ===== TRADE-IN BUTTON =====
+  // Trade-in button
   document.getElementById('tradeBtn').addEventListener('click', () => {
     window.open(`https://api.whatsapp.com/send?phone=60163691936&text=${encodeURIComponent("Hi FAZGAME 👋 I'm interested in trading in my games/consoles.")}`, '_blank');
   });
 
-  // ===== FAQ ACCORDION =====
+  // FAQ accordion
   document.querySelectorAll('.faq-question').forEach(question => {
     question.addEventListener('click', function() {
       const expanded = this.getAttribute('aria-expanded') === 'true' ? false : true;
@@ -2625,7 +2871,7 @@
     });
   });
 
-  // ===== MODAL LOGIC =====
+  // Modal logic
   const modal = document.getElementById('detailModal');
   const modalClose = document.getElementById('modalCloseBtn');
   const modalImg = document.getElementById('modalProductImg');
@@ -2666,7 +2912,7 @@
     });
   });
 
-  // ===== EVENT DELEGATION =====
+  // Event delegation for product-buy buttons
   document.addEventListener('click', function(e) {
     const button = e.target.closest('.product-buy');
     if (button) {
@@ -2699,25 +2945,26 @@
     }
   });
 
-  // ===== 3D TILT =====
-  document.querySelectorAll('.hot-card').forEach(card => {
-    if ('ontouchstart' in window) return;
-    card.addEventListener('mousemove', e => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = -(y - centerY) / 15;
-      const rotateY = (x - centerX) / 15;
-      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
-      card.style.setProperty('--x', `${x}px`);
-      card.style.setProperty('--y', `${y}px`);
+  // 3D tilt on hot cards (desktop only)
+  if (!('ontouchstart' in window)) {
+    document.querySelectorAll('.hot-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = -(y - centerY) / 15;
+        const rotateY = (x - centerX) / 15;
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+        card.style.setProperty('--x', `${x}px`);
+        card.style.setProperty('--y', `${y}px`);
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
     });
-    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-  });
+  }
 
-  // ===== SWIPER GALLERY =====
+  // Swiper gallery
   if (document.querySelector('.mySwiper')) {
     const swiper = new Swiper(".mySwiper", {
       effect: "coverflow",
@@ -2749,7 +2996,7 @@
     swiperContainer.addEventListener('mouseleave', () => swiper.autoplay.start());
   }
 
-  // ===== LIGHTBOX CLOSE =====
+  // Lightbox close
   const modalLightbox = document.getElementById('imageModal');
   modalLightbox.onclick = () => {
     modalLightbox.classList.remove('show');
@@ -2762,7 +3009,7 @@
     }
   });
 
-  // ===== PRELOADER & COUNTERS =====
+  // Preloader & counters
   window.addEventListener("DOMContentLoaded", () => {
     let progress = 0;
     const bar = document.getElementById("loaderBar");
@@ -2778,7 +3025,6 @@
         }, 400);
       }
     }, 40);
-    // Safety timeout
     setTimeout(() => {
       if (preloader && !preloader.classList.contains('hide')) {
         preloader.classList.add('hide');
@@ -2818,7 +3064,7 @@
     window.open("https://api.whatsapp.com/send?phone=60163691936&text=" + encodeURIComponent("Hi FAZGAME 👋 I would like to inquire about your products."), '_blank');
   });
 
-  // ===== THEME TOGGLE =====
+  // Theme toggle
   const themeToggle = document.getElementById('themeToggle');
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'light') document.body.classList.add('light-mode');
@@ -2847,8 +3093,5 @@
     });
   }
 </script>
-
-<!-- External PC Builder script -->
-<script src="pc-builder.js" defer></script>
 </body>
 </html>
