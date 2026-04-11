@@ -1452,8 +1452,9 @@
     }
     .modal-img {
       width: 100%;
-      max-height: 260px;
-      object-fit: cover;
+      max-height: 280px;
+      object-fit: contain;
+      background: #0a0a0c;
       border-radius: 20px;
       margin-bottom: 20px;
     }
@@ -2773,7 +2774,9 @@
         `;
         category.items.forEach(item => {
           const selectedAttr = item.selected ? 'selected' : '';
-          html += `<option value="${item.price}" ${selectedAttr}>${item.name} - RM${item.price}</option>`;
+          // Only show price suffix if price > 0
+          const priceText = item.price > 0 ? ` - RM${item.price}` : '';
+          html += `<option value="${item.price}" ${selectedAttr}>${item.name}${priceText}</option>`;
         });
         html += `</select></div>`;
       }
@@ -2814,7 +2817,13 @@
         const select = document.getElementById(`${key}Select`);
         if (select) {
           const selectedOption = select.options[select.selectedIndex];
-          message += `- ${category.label}: ${selectedOption.text}\n`;
+          // Check if it's the default unselected item (starts with "-- Select" or "None" but we can check price 0 and name pattern)
+          const isUnselected = selectedOption.value === "0" && (selectedOption.text.startsWith("-- Select") || selectedOption.text === "None" || selectedOption.text === "None (I'll install myself)" || selectedOption.text === "Free Assembly & Testing");
+          if (isUnselected) {
+            message += `- ${category.label}: Unselected\n`;
+          } else {
+            message += `- ${category.label}: ${selectedOption.text}\n`;
+          }
         }
       }
       const totalSpan = document.getElementById('totalPrice');
