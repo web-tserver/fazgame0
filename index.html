@@ -1399,7 +1399,7 @@
       }
     }
 
-    /* MODAL - improved for phone & image zoom */
+    /* MODAL - improved for phone & image zoom + new spec layout */
     .modal {
       display: none;
       position: fixed;
@@ -1478,12 +1478,20 @@
       font-size: 22px;
       font-weight: 800;
       margin-bottom: 6px;
-      color: var(--accent);
+      color: var(--text);
     }
     .modal-price {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 14px;
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+    .modal-subtitle {
+      font-size: 14px;
+      color: var(--muted-secondary);
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
     }
     .modal-specs {
       margin: 16px 0;
@@ -1492,22 +1500,40 @@
       max-height: 40vh;
       overflow-y: auto;
     }
-    .modal-specs h4 {
-      font-weight: 700;
-      margin-bottom: 10px;
-      font-size: 16px;
+    .spec-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-    .modal-specs ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    .modal-specs li {
-      margin-bottom: 8px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-    .modal-specs li strong {
+    .spec-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      font-size: 14px;
       color: var(--text);
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 6px;
+    }
+    .spec-label {
+      font-weight: 600;
+      color: var(--accent);
+      min-width: 100px;
+    }
+    .spec-value {
+      color: var(--muted);
+      text-align: right;
+      flex: 1;
+    }
+    .warranty-badge {
+      margin-top: 12px;
+      background: rgba(255,216,77,0.15);
+      padding: 8px 12px;
+      border-radius: 40px;
+      font-size: 13px;
+      text-align: center;
+      color: var(--accent);
+      font-weight: 600;
     }
     .modal-reserve {
       background: var(--accent);
@@ -1520,6 +1546,7 @@
       cursor: pointer;
       width: 100%;
       transition: transform 0.2s, background 0.2s;
+      margin-top: 12px;
     }
     .modal-reserve:hover {
       background: var(--accent-dark);
@@ -2116,11 +2143,12 @@
     <img id="modalProductImg" class="modal-img" src="" alt="Product">
     <h2 id="modalProductTitle" class="modal-title"></h2>
     <div id="modalProductPrice" class="modal-price"></div>
+    <div id="modalSubtitle" class="modal-subtitle"></div>
     <div class="modal-specs">
-      <h4>Specifications</h4>
-      <ul id="modalSpecList"></ul>
+      <div id="modalSpecList" class="spec-details"></div>
+      <div id="modalWarranty" class="warranty-badge"></div>
     </div>
-    <button id="modalReserveBtn" class="modal-reserve">Reserve Now</button>
+    <button id="modalReserveBtn" class="modal-reserve">Reserve Now →</button>
   </div>
 </div>
 
@@ -2299,7 +2327,7 @@
         <div class="hot-price-row"><span class="hot-desc">RM650</span></div>
       </div>
     </div>
-    <div class="hot-card" data-product='{"name":"PS5 Fat Disc","price":"RM1450","image":"images/ps5-fat.webp","specs":["Condition: Used","Storage: 825GB SSD","Disc Version","Includes: DualSense","Warranty: 14 Days"]}'>
+    <div class="hot-card" data-product='{"name":"PS5 Fat Disc","price":"RM1450","image":"images/ps5-fat.webp","specs":["Condition: Used (Like New)","Storage: 825GB SSD","Version: Disc Edition (4K UHD)","Includes: DualSense Controller","Warranty: 14 Days (Return & Testing)"]}'>
       <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
       <img src="images/ps5-fat.webp" alt="PS5 Fat" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x500/222/ffd84d?text=PS5+Fat';">
       <div class="hot-card-content">
@@ -2793,7 +2821,6 @@
         `;
         category.items.forEach(item => {
           const selectedAttr = item.selected ? 'selected' : '';
-          // Only show price suffix if price > 0
           const priceText = item.price > 0 ? ` - RM${item.price}` : '';
           html += `<option value="${item.price}" ${selectedAttr}>${item.name}${priceText}</option>`;
         });
@@ -2836,7 +2863,6 @@
         const select = document.getElementById(`${key}Select`);
         if (select) {
           const selectedOption = select.options[select.selectedIndex];
-          // Check if it's the default unselected item (starts with "-- Select" or "None" but we can check price 0 and name pattern)
           const isUnselected = selectedOption.value === "0" && (selectedOption.text.startsWith("-- Select") || selectedOption.text === "None" || selectedOption.text === "None (I'll install myself)" || selectedOption.text === "Free Assembly & Testing");
           if (isUnselected) {
             message += `- ${category.label}: Unselected\n`;
@@ -2910,21 +2936,66 @@
     });
   });
 
-  // Modal logic
+  // Enhanced modal logic with formatted specs
   const modal = document.getElementById('detailModal');
   const modalClose = document.getElementById('modalCloseBtn');
   const modalImg = document.getElementById('modalProductImg');
   const modalTitle = document.getElementById('modalProductTitle');
   const modalPrice = document.getElementById('modalProductPrice');
+  const modalSubtitle = document.getElementById('modalSubtitle');
   const modalSpecList = document.getElementById('modalSpecList');
+  const modalWarranty = document.getElementById('modalWarranty');
   const modalReserveBtn = document.getElementById('modalReserveBtn');
+
+  function formatSpecs(specsArray) {
+    let warrantyText = '';
+    const specItems = [];
+    for (let spec of specsArray) {
+      const [label, ...valueParts] = spec.split(':');
+      const value = valueParts.join(':').trim();
+      if (label.toLowerCase().includes('warranty')) {
+        warrantyText = value || spec;
+      } else {
+        specItems.push({ label: label.trim(), value: value || spec });
+      }
+    }
+    // Build HTML
+    let specsHtml = '';
+    for (let item of specItems) {
+      specsHtml += `
+        <div class="spec-item">
+          <span class="spec-label">${item.label}</span>
+          <span class="spec-value">${item.value}</span>
+        </div>
+      `;
+    }
+    return { specsHtml, warrantyText };
+  }
 
   function openModal(productData) {
     modalImg.src = productData.image;
     modalImg.onerror = function() { this.src = 'https://placehold.co/600x400/222/ffd84d?text=Product'; };
     modalTitle.textContent = productData.name;
     modalPrice.textContent = productData.price;
-    modalSpecList.innerHTML = productData.specs.map(spec => `<li><strong>•</strong> ${spec}</li>`).join('');
+    
+    // Determine subtitle (e.g., "Pre-Owned · Premium Unit")
+    let isUsed = false;
+    let subtitle = '';
+    if (productData.specs && productData.specs.some(s => s.toLowerCase().includes('condition: used'))) {
+      isUsed = true;
+      subtitle = 'Pre-Owned · Premium Unit';
+    }
+    modalSubtitle.textContent = subtitle;
+    
+    const { specsHtml, warrantyText } = formatSpecs(productData.specs || []);
+    modalSpecList.innerHTML = specsHtml;
+    if (warrantyText) {
+      modalWarranty.innerHTML = `✅ ${warrantyText} · Full Functional Test`;
+      modalWarranty.style.display = 'block';
+    } else {
+      modalWarranty.style.display = 'none';
+    }
+    
     modal.classList.add('show');
     document.body.style.overflow = 'hidden';
     modalReserveBtn.onclick = () => {
@@ -2933,6 +3004,7 @@
       window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`, '_blank');
     };
   }
+  
   function closeModal() {
     modal.classList.remove('show');
     document.body.style.overflow = 'auto';
