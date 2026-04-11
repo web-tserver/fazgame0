@@ -95,6 +95,9 @@
       --hover-glow: 0 0 20px var(--accent);
       --preloader-faz: #ffffff;
       --theme-transition: background-color 0.5s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      --modal-image-frame-bg: transparent;
+      --modal-image-padding: 0px;
+      --modal-image-radius: 20px;
     }
 
     body.light-mode {
@@ -123,6 +126,9 @@
       --card-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
       --hover-glow: 0 0 20px var(--accent);
       --preloader-faz: #0f172a;
+      --modal-image-frame-bg: #ffffff;
+      --modal-image-padding: 12px;
+      --modal-image-radius: 24px;
     }
 
     body {
@@ -1399,7 +1405,7 @@
       }
     }
 
-    /* MODAL - improved for phone & image zoom + new spec layout */
+    /* MODAL - keep previous design, only add image frame + lightbox */
     .modal {
       display: none;
       position: fixed;
@@ -1436,12 +1442,37 @@
         max-width: 92vw;
       }
     }
+    /* Image frame wrapper */
+    .modal-image-frame {
+      background: var(--modal-image-frame-bg);
+      padding: var(--modal-image-padding);
+      border-radius: var(--modal-image-radius);
+      margin: -10px -10px 0 -10px;
+      transition: background 0.3s ease, padding 0.3s ease;
+    }
+    .modal-img {
+      width: 100%;
+      max-height: 280px;
+      object-fit: contain;
+      border-radius: 20px;
+      margin-bottom: 0;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .modal-img:hover {
+      transform: scale(1.02);
+    }
+    @media (max-width: 480px) {
+      .modal-img {
+        max-height: 220px;
+      }
+    }
     .modal-close {
       position: absolute;
       top: 12px;
       right: 16px;
       font-size: 28px;
-      background: none;
+      background: rgba(0,0,0,0.5);
       border: none;
       color: var(--text);
       cursor: pointer;
@@ -1456,81 +1487,57 @@
       z-index: 10;
     }
     .modal-close:hover {
-      background: rgba(255,255,255,0.1);
-    }
-    .modal-img {
-      width: 100%;
-      max-height: 360px;
-      object-fit: contain;
-      background: #0a0a0c;
-      border-radius: 20px;
-      margin-bottom: 16px;
-      transform: scale(1.08);
-      transition: transform 0.2s ease;
-    }
-    @media (max-width: 480px) {
-      .modal-img {
-        max-height: 280px;
-        transform: scale(1.05);
-      }
+      background: #ff3b30;
     }
     .modal-title {
       font-size: 22px;
       font-weight: 800;
-      margin-bottom: 6px;
+      margin: 16px 0 6px;
       color: var(--text);
     }
     .modal-price {
-      font-size: 26px;
-      font-weight: 800;
+      font-size: 20px;
+      font-weight: 700;
       margin-bottom: 8px;
       color: var(--accent);
     }
     .modal-subtitle {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--muted-secondary);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       border-bottom: 1px solid var(--border-color);
-      padding-bottom: 12px;
+      padding-bottom: 10px;
     }
     .modal-specs {
-      margin: 16px 0;
+      margin: 12px 0;
       border-top: 1px solid var(--border-color);
-      padding-top: 14px;
+      padding-top: 12px;
       max-height: 40vh;
       overflow-y: auto;
     }
-    .spec-details {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .modal-specs ul {
+      list-style: none;
+      padding-left: 0;
     }
-    .spec-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap;
-      font-size: 14px;
-      color: var(--text);
-      border-bottom: 1px dashed var(--border-color);
-      padding-bottom: 6px;
-    }
-    .spec-label {
-      font-weight: 600;
-      color: var(--accent);
-      min-width: 100px;
-    }
-    .spec-value {
+    .modal-specs li {
+      margin-bottom: 8px;
+      font-size: 13px;
       color: var(--muted);
-      text-align: right;
-      flex: 1;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .modal-specs li strong {
+      color: var(--text);
+      min-width: 90px;
+      font-weight: 600;
     }
     .warranty-badge {
       margin-top: 12px;
       background: rgba(255,216,77,0.15);
       padding: 8px 12px;
       border-radius: 40px;
-      font-size: 13px;
+      font-size: 12px;
       text-align: center;
       color: var(--accent);
       font-weight: 600;
@@ -1546,11 +1553,63 @@
       cursor: pointer;
       width: 100%;
       transition: transform 0.2s, background 0.2s;
-      margin-top: 12px;
+      margin-top: 16px;
     }
     .modal-reserve:hover {
       background: var(--accent-dark);
       transform: translateY(-2px);
+    }
+
+    /* Lightbox overlay for modal image */
+    .modal-lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10003;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.2s, opacity 0.25s ease;
+      cursor: pointer;
+    }
+    .modal-lightbox.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .modal-lightbox-img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 24px;
+      box-shadow: 0 30px 45px rgba(0,0,0,0.4);
+      border: 3px solid rgba(255,255,255,0.2);
+    }
+    .modal-lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .modal-lightbox-close:hover {
+      background: #ff3b30;
     }
 
     /* PC BUILDER SECTION */
@@ -2110,6 +2169,14 @@
       outline-offset: 2px;
     }
 
+    /* No data message */
+    .no-data-message {
+      text-align: center;
+      padding: 40px;
+      color: var(--accent);
+      font-size: 16px;
+    }
+
     @media (max-width: 380px) {
       .hero-title { font-size: 32px; }
       .stat-item h3 { font-size: 24px; }
@@ -2140,16 +2207,24 @@
 <div id="detailModal" class="modal">
   <div class="modal-content">
     <button class="modal-close" id="modalCloseBtn">&times;</button>
-    <img id="modalProductImg" class="modal-img" src="" alt="Product">
+    <div class="modal-image-frame">
+      <img id="modalProductImg" class="modal-img" src="" alt="Product">
+    </div>
     <h2 id="modalProductTitle" class="modal-title"></h2>
     <div id="modalProductPrice" class="modal-price"></div>
     <div id="modalSubtitle" class="modal-subtitle"></div>
     <div class="modal-specs">
-      <div id="modalSpecList" class="spec-details"></div>
+      <ul id="modalSpecList"></ul>
       <div id="modalWarranty" class="warranty-badge"></div>
     </div>
-    <button id="modalReserveBtn" class="modal-reserve">Reserve Now →</button>
+    <button id="modalReserveBtn" class="modal-reserve">Reserve Now</button>
   </div>
+</div>
+
+<!-- Lightbox for modal image -->
+<div id="modalLightbox" class="modal-lightbox">
+  <button class="modal-lightbox-close" id="modalLightboxClose">&times;</button>
+  <img id="modalLightboxImg" class="modal-lightbox-img" alt="Zoomed view">
 </div>
 
 <div class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
@@ -2293,7 +2368,9 @@
   <div class="pc-builder">
     <h2 class="builder-title">🛠️ Custom PC Builder</h2>
     <div class="builder-subtitle">Select your components and get an instant price estimate</div>
-    <div id="pc-builder-container"></div>
+    <div id="pc-builder-container">
+      <div class="no-data-message">Loading PC Builder...</div>
+    </div>
   </div>
 </section>
 
@@ -2414,7 +2491,9 @@
   <h2 class="section-title">Stock Available</h2>
   <div class="controls"><input id="search" class="search-box" placeholder="Search item..."></div>
   <div class="filter-tabs" id="filters"></div>
-  <div class="product-grid" id="grid"></div>
+  <div class="product-grid" id="grid">
+    <div class="no-data-message">Loading stock data...</div>
+  </div>
 </section>
 
 <section id="trade-section" class="trade-section reveal">
@@ -2487,403 +2566,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+<!-- External scripts - no internal fallback data -->
 <script src="stock.js?v=3"></script>
-
-<script>
-  // Stock inventory data (falls back to this array if stock.js fails to load)
-  let products = window.STOCK || [
-    { n: "PS5 Digital Edition", p: "1850", c: "ps5", cond: "new", type: "console" },
-    { n: "Xbox Series X", p: "2100", c: "xbox", cond: "new", type: "console" },
-    { n: "Nintendo Switch OLED", p: "1250", c: "switch", cond: "new", type: "console" },
-    { n: "RTX 4070 Ti", p: "3500", c: "pc", cond: "new", type: "part" },
-    { n: "Logitech G Pro X", p: "450", c: "other", cond: "used", type: "accessory" },
-    { n: "PS4 Slim 500GB", p: "550", c: "ps4", cond: "used", type: "console" },
-    { n: "Xbox Series S", p: "1200", c: "xbox", cond: "new", type: "console" },
-    { n: "Gaming Chair", p: "399", c: "other", cond: "new", type: "accessory" }
-  ];
-  
-  const icons = {
-    console: 'https://api.iconify.design/mdi/console.svg',
-    ps5: 'https://api.iconify.design/simple-icons/playstation.svg',
-    ps4: 'https://api.iconify.design/simple-icons/playstation.svg',
-    xbox: 'https://api.iconify.design/simple-icons/xbox.svg',
-    switch: 'https://api.iconify.design/simple-icons/nintendoswitch.svg',
-    pc: 'https://api.iconify.design/mdi/desktop-classic.svg',
-    other: 'https://api.iconify.design/mdi/gamepad-variant.svg'
-  };
-  
-  const categories = ['all', 'console', 'ps5', 'ps4', 'xbox', 'switch', 'pc', 'other'];
-  let activeCat = 'all';
-  const filters = document.getElementById('filters');
-  const grid = document.getElementById('grid');
-  const search = document.getElementById('search');
-  
-  categories.forEach(cat => {
-    const btn = document.createElement('button');
-    btn.className = 'filter-btn' + (cat === 'all' ? ' active' : '');
-    btn.innerHTML = `${cat.toUpperCase()} <span class="filter-count" id="count-${cat}">0</span>`;
-    btn.onclick = () => {
-      activeCat = cat;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderProducts();
-    };
-    filters.appendChild(btn);
-  });
-
-  function renderProducts() {
-    const q = search.value.toLowerCase();
-    const filtered = products.filter(p => (activeCat === 'all' || p.c === activeCat) && p.n.toLowerCase().includes(q));
-    
-    if (filtered.length === 0) {
-      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--accent)">No items found matching your search.</div>`;
-    } else {
-      grid.innerHTML = filtered.map(p => {
-        const condClass = p.cond === 'new' ? 'var(--badge-new-bg)' : 'var(--badge-used-bg)';
-        const condColor = p.cond === 'new' ? 'var(--badge-new-text)' : 'var(--badge-used-text)';
-        const typeClass = p.type === 'game' ? '#3cff7f' : 'var(--accent)';
-        return `
-        <div class="product-card">
-          <span class="card-badge card-badge-cond" style="background: ${condClass}; color: ${condColor};">${p.cond?.toUpperCase() || 'USED'}</span>
-          <span class="card-badge card-badge-type" style="background: ${typeClass};">${p.type?.toUpperCase() || 'CONSOLE'}</span>
-          <div class="product-icon">
-            <img src="${icons[p.c] || icons.other}" alt="${p.c}">
-          </div>
-          <div class="product-info">
-            <h4>${p.n}</h4>
-            <div class="price-row">
-              <span class="product-price">RM${p.p}</span>
-              <button class="product-buy" data-product-name="${p.n}">CHECK STOCK</button>
-            </div>
-          </div>
-        </div>`;
-      }).join('');
-    }
-    
-    categories.forEach(c => {
-      const el = document.getElementById('count-' + c);
-      if(el) el.textContent = c === 'all' ? products.length : products.filter(p => p.c === c).length;
-    });
-  }
-  
-  if (search) search.oninput = renderProducts;
-  renderProducts();
-</script>
-
-<script>
-  (function() {
-    const componentData = {
-      cpu: {
-        label: "💻 CPU / Processor",
-        items: [
-          { name: "-- Select CPU --", price: 0, selected: true },
-          { name: "Intel Core i3-10100 (New)", price: 380 },
-          { name: "Intel Core i3-10100 (Used)", price: 280 },
-          { name: "Intel Core i3-12100 (New)", price: 450 },
-          { name: "Intel Core i3-12100 (Used)", price: 350 },
-          { name: "Intel Core i5-12400F (New)", price: 650 },
-          { name: "Intel Core i5-12400F (Used)", price: 500 },
-          { name: "Intel Core i5-13400 (New)", price: 850 },
-          { name: "Intel Core i5-13400 (Used)", price: 650 },
-          { name: "Intel Core i7-13700K (New)", price: 1450 },
-          { name: "Intel Core i7-13700K (Used)", price: 1100 },
-          { name: "AMD Ryzen 5 3600 (New)", price: 450 },
-          { name: "AMD Ryzen 5 3600 (Used)", price: 350 },
-          { name: "AMD Ryzen 5 5600X (New)", price: 750 },
-          { name: "AMD Ryzen 5 5600X (Used)", price: 550 },
-          { name: "AMD Ryzen 7 5700X (New)", price: 950 },
-          { name: "AMD Ryzen 7 5700X (Used)", price: 750 },
-          { name: "AMD Ryzen 7 7700X (New)", price: 1450 },
-          { name: "AMD Ryzen 7 7700X (Used)", price: 1100 },
-          { name: "AMD Ryzen 9 7900X (New)", price: 2150 },
-          { name: "AMD Ryzen 9 7900X (Used)", price: 1600 }
-        ]
-      },
-      cooler: {
-        label: "❄️ CPU Cooler",
-        items: [
-          { name: "-- Select Cooler --", price: 0, selected: true },
-          { name: "Stock Cooler (included)", price: 0 },
-          { name: "Air Cooler (Budget - ID-Cooling)", price: 120 },
-          { name: "Air Cooler (New - Generic)", price: 150 },
-          { name: "Air Cooler (Used)", price: 100 },
-          { name: "240mm AIO Liquid Cooler (New)", price: 350 },
-          { name: "240mm AIO Liquid Cooler (Used)", price: 250 },
-          { name: "360mm AIO Liquid Cooler (New)", price: 550 },
-          { name: "360mm AIO Liquid Cooler (Used)", price: 400 },
-          { name: "Cooler Master Hyper 212 (New)", price: 180 },
-          { name: "Cooler Master Hyper 212 (Used)", price: 120 }
-        ]
-      },
-      motherboard: {
-        label: "🔧 Motherboard",
-        items: [
-          { name: "-- Select Motherboard --", price: 0, selected: true },
-          { name: "H610 / A520 (Budget) (New)", price: 320 },
-          { name: "H610 / A520 (Budget) (Used)", price: 220 },
-          { name: "B660 / B550 (Mid-range) (New)", price: 550 },
-          { name: "B660 / B550 (Mid-range) (Used)", price: 400 },
-          { name: "Z690 / X570 (High-end) (New)", price: 850 },
-          { name: "Z690 / X570 (High-end) (Used)", price: 600 },
-          { name: "Z790 / X670E (Premium) (New)", price: 1200 },
-          { name: "Z790 / X670E (Premium) (Used)", price: 850 }
-        ]
-      },
-      ram: {
-        label: "🧠 RAM",
-        items: [
-          { name: "-- Select RAM --", price: 0, selected: true },
-          { name: "8GB DDR4 2666MHz (New)", price: 120 },
-          { name: "8GB DDR4 2666MHz (Used)", price: 80 },
-          { name: "8GB DDR4 3200MHz (New)", price: 150 },
-          { name: "8GB DDR4 3200MHz (Used)", price: 100 },
-          { name: "16GB DDR4 3200MHz (New)", price: 250 },
-          { name: "16GB DDR4 3200MHz (Used)", price: 180 },
-          { name: "32GB DDR4 3200MHz (New)", price: 450 },
-          { name: "32GB DDR4 3200MHz (Used)", price: 320 },
-          { name: "16GB DDR5 5200MHz (New)", price: 350 },
-          { name: "16GB DDR5 5200MHz (Used)", price: 250 },
-          { name: "32GB DDR5 5600MHz (New)", price: 650 },
-          { name: "32GB DDR5 5600MHz (Used)", price: 450 }
-        ]
-      },
-      gpu: {
-        label: "🎮 Graphics Card (GPU)",
-        items: [
-          { name: "-- Select GPU --", price: 0, selected: true },
-          { name: "Integrated Graphics", price: 0 },
-          { name: "GT 1030 2GB (New)", price: 350 },
-          { name: "GT 1030 2GB (Used)", price: 250 },
-          { name: "GTX 1650 4GB (New)", price: 550 },
-          { name: "GTX 1650 4GB (Used)", price: 400 },
-          { name: "GTX 1660 Super 6GB (New)", price: 750 },
-          { name: "GTX 1660 Super 6GB (Used)", price: 550 },
-          { name: "RTX 3060 12GB (New)", price: 850 },
-          { name: "RTX 3060 12GB (Used)", price: 650 },
-          { name: "RTX 3060 Ti 8GB (New)", price: 1150 },
-          { name: "RTX 3060 Ti 8GB (Used)", price: 850 },
-          { name: "RTX 4060 8GB (New)", price: 1250 },
-          { name: "RTX 4060 8GB (Used)", price: 950 },
-          { name: "RTX 4060 Ti 8GB (New)", price: 1450 },
-          { name: "RTX 4060 Ti 8GB (Used)", price: 1100 },
-          { name: "RTX 4070 12GB (New)", price: 1950 },
-          { name: "RTX 4070 12GB (Used)", price: 1450 },
-          { name: "AMD RX 6600 8GB (New)", price: 750 },
-          { name: "AMD RX 6600 8GB (Used)", price: 550 },
-          { name: "AMD RX 6600 XT 8GB (New)", price: 950 },
-          { name: "AMD RX 6600 XT 8GB (Used)", price: 700 },
-          { name: "AMD RX 6700 XT 12GB (New)", price: 1250 },
-          { name: "AMD RX 6700 XT 12GB (Used)", price: 900 },
-          { name: "AMD RX 7700 XT 12GB (New)", price: 1650 },
-          { name: "AMD RX 7700 XT 12GB (Used)", price: 1200 },
-          { name: "AMD RX 7800 XT 16GB (New)", price: 2100 },
-          { name: "AMD RX 7800 XT 16GB (Used)", price: 1600 }
-        ]
-      },
-      storage: {
-        label: "💾 Storage",
-        items: [
-          { name: "-- Select Storage --", price: 0, selected: true },
-          { name: "240GB SSD (New)", price: 80 },
-          { name: "240GB SSD (Used)", price: 50 },
-          { name: "480GB SSD (New)", price: 120 },
-          { name: "480GB SSD (Used)", price: 80 },
-          { name: "512GB NVMe SSD (New)", price: 200 },
-          { name: "512GB NVMe SSD (Used)", price: 140 },
-          { name: "1TB HDD (New)", price: 150 },
-          { name: "1TB HDD (Used)", price: 100 },
-          { name: "1TB NVMe SSD (New)", price: 350 },
-          { name: "1TB NVMe SSD (Used)", price: 250 },
-          { name: "2TB NVMe SSD (New)", price: 550 },
-          { name: "2TB NVMe SSD (Used)", price: 400 },
-          { name: "1TB HDD + 256GB SSD (New)", price: 250 },
-          { name: "1TB HDD + 256GB SSD (Used)", price: 180 },
-          { name: "2TB HDD + 512GB SSD (New)", price: 380 },
-          { name: "2TB HDD + 512GB SSD (Used)", price: 280 }
-        ]
-      },
-      psu: {
-        label: "⚡ Power Supply (PSU)",
-        items: [
-          { name: "-- Select PSU --", price: 0, selected: true },
-          { name: "450W 80+ White (New)", price: 150 },
-          { name: "450W 80+ White (Used)", price: 100 },
-          { name: "500W 80+ Bronze (New)", price: 200 },
-          { name: "500W 80+ Bronze (Used)", price: 140 },
-          { name: "550W 80+ Bronze (Cooler Master) (New)", price: 250 },
-          { name: "550W 80+ Bronze (Used)", price: 180 },
-          { name: "650W 80+ Bronze (New)", price: 280 },
-          { name: "650W 80+ Bronze (Used)", price: 200 },
-          { name: "650W 80+ Gold (Corsair) (New)", price: 380 },
-          { name: "650W 80+ Gold (Used)", price: 280 },
-          { name: "750W 80+ Gold (New)", price: 450 },
-          { name: "750W 80+ Gold (Used)", price: 320 },
-          { name: "850W 80+ Gold (New)", price: 550 },
-          { name: "850W 80+ Gold (Used)", price: 400 },
-          { name: "1000W 80+ Gold (New)", price: 750 },
-          { name: "1000W 80+ Gold (Used)", price: 550 }
-        ]
-      },
-      pcCase: {
-        label: "🖥️ PC Case",
-        items: [
-          { name: "-- Select Case --", price: 0, selected: true },
-          { name: "Budget ATX (Tecware Flatline) (New)", price: 150 },
-          { name: "Budget ATX (Tecware Flatline) (Used)", price: 100 },
-          { name: "Mid Tower with Tempered Glass (New)", price: 250 },
-          { name: "Mid Tower with Tempered Glass (Used)", price: 180 },
-          { name: "Armaggeddon Mid Tower (New)", price: 220 },
-          { name: "Armaggeddon Mid Tower (Used)", price: 160 },
-          { name: "Premium RGB Case (Lian Li) (New)", price: 450 },
-          { name: "Premium RGB Case (Lian Li) (Used)", price: 320 },
-          { name: "Small Form Factor (ITX) (New)", price: 300 },
-          { name: "Small Form Factor (ITX) (Used)", price: 220 },
-          { name: "Cooler Master TD500 (New)", price: 350 },
-          { name: "Cooler Master TD500 (Used)", price: 250 }
-        ]
-      },
-      monitor: {
-        label: "🖥️ Monitor",
-        items: [
-          { name: "None", price: 0, selected: true },
-          { name: '20" 60Hz TN (New)', price: 250 },
-          { name: '20" 60Hz TN (Used)', price: 150 },
-          { name: '22" 75Hz IPS (New)', price: 350 },
-          { name: '22" 75Hz IPS (Used)', price: 250 },
-          { name: '24" 144Hz Gaming (PRISM+) (New)', price: 550 },
-          { name: '24" 144Hz Gaming (Used)', price: 400 },
-          { name: '24" 165Hz Curved (New)', price: 650 },
-          { name: '24" 165Hz Curved (Used)', price: 480 },
-          { name: '27" 144Hz Curved (ViewSonic) (New)', price: 750 },
-          { name: '27" 144Hz Curved (Used)', price: 550 },
-          { name: '27" 165Hz IPS (New)', price: 850 },
-          { name: '27" 165Hz IPS (Used)', price: 650 },
-          { name: '32" 4K UHD (New)', price: 1350 },
-          { name: '32" 4K UHD (Used)', price: 950 }
-        ]
-      },
-      accessories: {
-        label: "🎧 Accessories (Keyboard + Mouse)",
-        items: [
-          { name: "None", price: 0, selected: true },
-          { name: "Basic Combo (New)", price: 100 },
-          { name: "Basic Combo (Used)", price: 70 },
-          { name: "Mechanical + Gaming Mouse (New)", price: 250 },
-          { name: "Mechanical + Gaming Mouse (Used)", price: 180 },
-          { name: "RGB Mechanical + Wireless Mouse (New)", price: 400 },
-          { name: "RGB Mechanical + Wireless Mouse (Used)", price: 280 },
-          { name: "Logitech G102 + Keyboard (New)", price: 200 },
-          { name: "Logitech G102 + Keyboard (Used)", price: 140 }
-        ]
-      },
-      wifiAdapter: {
-        label: "📡 WiFi / Bluetooth Adapter",
-        items: [
-          { name: "None", price: 0, selected: true },
-          { name: "USB WiFi Dongle (New)", price: 30 },
-          { name: "USB WiFi Dongle (Used)", price: 15 },
-          { name: "PCIe WiFi 6 + BT 5.0 (New)", price: 120 },
-          { name: "PCIe WiFi 6 + BT 5.0 (Used)", price: 80 },
-          { name: "TP-Link Archer T4U (New)", price: 90 },
-          { name: "TP-Link Archer T4U (Used)", price: 60 }
-        ]
-      },
-      os: {
-        label: "🪟 Operating System",
-        items: [
-          { name: "None (I'll install myself)", price: 0, selected: true },
-          { name: "Windows 11 Home (License + Installation)", price: 150 },
-          { name: "Windows 11 Pro (License + Installation)", price: 250 },
-          { name: "Windows 10 Home (License + Installation)", price: 120 },
-          { name: "Windows 10 Pro (License + Installation)", price: 200 }
-        ]
-      },
-      assembly: {
-        label: "🔧 Assembly & Testing",
-        items: [
-          { name: "Free Assembly & Testing", price: 0, selected: true },
-          { name: "Express Assembly (24h) + Cable Management", price: 50 },
-          { name: "Custom Watercooling Loop Setup", price: 300 }
-        ]
-      }
-    };
-
-    function buildPCBuilder() {
-      const container = document.getElementById('pc-builder-container');
-      if (!container) return;
-
-      let html = '<div class="builder-group-list">';
-      for (const [key, category] of Object.entries(componentData)) {
-        html += `
-          <div class="builder-group">
-            <label>${category.label}</label>
-            <select id="${key}Select" class="pc-builder-select">
-        `;
-        category.items.forEach(item => {
-          const selectedAttr = item.selected ? 'selected' : '';
-          const priceText = item.price > 0 ? ` - RM${item.price}` : '';
-          html += `<option value="${item.price}" ${selectedAttr}>${item.name}${priceText}</option>`;
-        });
-        html += `</select></div>`;
-      }
-      html += '</div>';
-
-      html += `
-        <div class="total-price">
-          Estimated Total: <span id="totalPrice">RM0</span>
-        </div>
-        <button id="quoteBtn" class="quote-btn">Request Quote via WhatsApp</button>
-      `;
-      container.innerHTML = html;
-
-      document.querySelectorAll('.pc-builder-select').forEach(select => {
-        select.addEventListener('change', updateTotal);
-      });
-      updateTotal();
-
-      const quoteBtn = document.getElementById('quoteBtn');
-      if (quoteBtn) quoteBtn.addEventListener('click', requestQuote);
-    }
-
-    function updateTotal() {
-      let total = 0;
-      for (const key of Object.keys(componentData)) {
-        const select = document.getElementById(`${key}Select`);
-        if (select) {
-          total += parseInt(select.value) || 0;
-        }
-      }
-      const totalSpan = document.getElementById('totalPrice');
-      if (totalSpan) totalSpan.textContent = `RM${total.toLocaleString()}`;
-    }
-
-    function requestQuote() {
-      let message = "Hi FAZGAME 👋 I'd like to request a quote for a custom PC with these components:\n\n";
-      for (const [key, category] of Object.entries(componentData)) {
-        const select = document.getElementById(`${key}Select`);
-        if (select) {
-          const selectedOption = select.options[select.selectedIndex];
-          const isUnselected = selectedOption.value === "0" && (selectedOption.text.startsWith("-- Select") || selectedOption.text === "None" || selectedOption.text === "None (I'll install myself)" || selectedOption.text === "Free Assembly & Testing");
-          if (isUnselected) {
-            message += `- ${category.label}: Unselected\n`;
-          } else {
-            message += `- ${category.label}: ${selectedOption.text}\n`;
-          }
-        }
-      }
-      const totalSpan = document.getElementById('totalPrice');
-      const total = totalSpan ? totalSpan.textContent : "RM0";
-      message += `\nEstimated Total: ${total}\n\nCan you provide a final price and availability?`;
-      window.open(`https://api.whatsapp.com/send?phone=60163691936&text=${encodeURIComponent(message)}`, '_blank');
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', buildPCBuilder);
-    } else {
-      buildPCBuilder();
-    }
-  })();
-</script>
+<script src="pc-builder.js?v=3"></script>
 
 <script>
   // Back to top
@@ -2936,83 +2621,95 @@
     });
   });
 
-  // Enhanced modal logic with formatted specs
-  const modal = document.getElementById('detailModal');
-  const modalClose = document.getElementById('modalCloseBtn');
-  const modalImg = document.getElementById('modalProductImg');
-  const modalTitle = document.getElementById('modalProductTitle');
-  const modalPrice = document.getElementById('modalProductPrice');
-  const modalSubtitle = document.getElementById('modalSubtitle');
-  const modalSpecList = document.getElementById('modalSpecList');
-  const modalWarranty = document.getElementById('modalWarranty');
-  const modalReserveBtn = document.getElementById('modalReserveBtn');
+  // Modal functions (with image frame + lightbox)
+  const modalElem = document.getElementById('detailModal');
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+  const modalImgElem = document.getElementById('modalProductImg');
+  const modalTitleElem = document.getElementById('modalProductTitle');
+  const modalPriceElem = document.getElementById('modalProductPrice');
+  const modalSubtitleElem = document.getElementById('modalSubtitle');
+  const modalSpecListElem = document.getElementById('modalSpecList');
+  const modalWarrantyElem = document.getElementById('modalWarranty');
+  const modalReserveBtnElem = document.getElementById('modalReserveBtn');
 
-  function formatSpecs(specsArray) {
-    let warrantyText = '';
-    const specItems = [];
-    for (let spec of specsArray) {
-      const [label, ...valueParts] = spec.split(':');
-      const value = valueParts.join(':').trim();
-      if (label.toLowerCase().includes('warranty')) {
-        warrantyText = value || spec;
-      } else {
-        specItems.push({ label: label.trim(), value: value || spec });
-      }
-    }
-    // Build HTML
-    let specsHtml = '';
-    for (let item of specItems) {
-      specsHtml += `
-        <div class="spec-item">
-          <span class="spec-label">${item.label}</span>
-          <span class="spec-value">${item.value}</span>
-        </div>
-      `;
-    }
-    return { specsHtml, warrantyText };
-  }
+  // Lightbox elements
+  const modalLightbox = document.getElementById('modalLightbox');
+  const modalLightboxImg = document.getElementById('modalLightboxImg');
+  const modalLightboxClose = document.getElementById('modalLightboxClose');
 
   function openModal(productData) {
-    modalImg.src = productData.image;
-    modalImg.onerror = function() { this.src = 'https://placehold.co/600x400/222/ffd84d?text=Product'; };
-    modalTitle.textContent = productData.name;
-    modalPrice.textContent = productData.price;
-    
-    // Determine subtitle (e.g., "Pre-Owned · Premium Unit")
-    let isUsed = false;
+    modalImgElem.src = productData.image;
+    modalImgElem.onerror = function() { this.src = 'https://placehold.co/600x400/222/ffd84d?text=Product'; };
+    modalTitleElem.textContent = productData.name;
+    modalPriceElem.textContent = productData.price;
+
+    // Determine subtitle for used items
     let subtitle = '';
     if (productData.specs && productData.specs.some(s => s.toLowerCase().includes('condition: used'))) {
-      isUsed = true;
       subtitle = 'Pre-Owned · Premium Unit';
     }
-    modalSubtitle.textContent = subtitle;
-    
-    const { specsHtml, warrantyText } = formatSpecs(productData.specs || []);
-    modalSpecList.innerHTML = specsHtml;
-    if (warrantyText) {
-      modalWarranty.innerHTML = `✅ ${warrantyText} · Full Functional Test`;
-      modalWarranty.style.display = 'block';
-    } else {
-      modalWarranty.style.display = 'none';
-    }
-    
-    modal.classList.add('show');
-    document.body.style.overflow = 'hidden';
-    modalReserveBtn.onclick = () => {
-      const phone = "60163691936";
-      const message = `Hi FAZGAME 👋 I would like to reserve ${productData.name} (${productData.price}).`;
-      window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`, '_blank');
-    };
-  }
-  
-  function closeModal() {
-    modal.classList.remove('show');
-    document.body.style.overflow = 'auto';
-  }
-  modalClose.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('show')) closeModal(); });
+    modalSubtitleElem.textContent = subtitle;
+    if (!subtitle) modalSubtitleElem.style.display = 'none';
+    else modalSubtitleElem.style.display = 'block';
 
+    // Build spec list
+    let warrantyText = '';
+    const specItems = [];
+    for (let spec of (productData.specs || [])) {
+      const [label, ...valueParts] = spec.split(':');
+      const cleanLabel = label.trim();
+      const value = valueParts.join(':').trim();
+      if (cleanLabel.toLowerCase() === 'warranty') {
+        warrantyText = value || spec;
+      } else {
+        specItems.push({ label: cleanLabel, value: value || spec });
+      }
+    }
+    modalSpecListElem.innerHTML = specItems.map(item => `
+      <li><strong>${item.label}:</strong> ${item.value}</li>
+    `).join('');
+    if (warrantyText) {
+      modalWarrantyElem.innerHTML = `✅ ${warrantyText} · Full Functional Test`;
+      modalWarrantyElem.style.display = 'block';
+    } else {
+      modalWarrantyElem.style.display = 'none';
+    }
+
+    modalElem.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modalElem.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  modalCloseBtn.addEventListener('click', closeModal);
+  modalElem.addEventListener('click', (e) => { if (e.target === modalElem) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalElem.classList.contains('show')) closeModal(); });
+
+  // Lightbox for modal image
+  modalImgElem.addEventListener('click', () => {
+    modalLightboxImg.src = modalImgElem.src;
+    modalLightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+  function closeModalLightbox() {
+    modalLightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  modalLightboxClose.addEventListener('click', closeModalLightbox);
+  modalLightbox.addEventListener('click', (e) => { if (e.target === modalLightbox) closeModalLightbox(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalLightbox.classList.contains('active')) closeModalLightbox(); });
+
+  modalReserveBtnElem.addEventListener('click', () => {
+    const productName = modalTitleElem.textContent;
+    const productPrice = modalPriceElem.textContent;
+    const message = `Hi FAZGAME 👋 I would like to reserve ${productName} (${productPrice}).`;
+    window.open(`https://api.whatsapp.com/send?phone=60163691936&text=${encodeURIComponent(message)}`, '_blank');
+  });
+
+  // Attach click events to hot cards
   document.querySelectorAll('.hot-card').forEach(card => {
     card.addEventListener('click', (e) => {
       if (e.target.closest('.reserve-btn')) return;
@@ -3023,7 +2720,103 @@
     });
   });
 
-  // Event delegation for product-buy buttons
+  // Stock section: wait for external stock.js to populate window.STOCK
+  function initStock() {
+    const grid = document.getElementById('grid');
+    const filters = document.getElementById('filters');
+    const searchInput = document.getElementById('search');
+    
+    if (!window.STOCK || !Array.isArray(window.STOCK) || window.STOCK.length === 0) {
+      if (grid) grid.innerHTML = '<div class="no-data-message">No data loaded. Please check connection.</div>';
+      return;
+    }
+    
+    const products = window.STOCK;
+    const icons = {
+      console: 'https://api.iconify.design/mdi/console.svg',
+      ps5: 'https://api.iconify.design/simple-icons/playstation.svg',
+      ps4: 'https://api.iconify.design/simple-icons/playstation.svg',
+      xbox: 'https://api.iconify.design/simple-icons/xbox.svg',
+      switch: 'https://api.iconify.design/simple-icons/nintendoswitch.svg',
+      pc: 'https://api.iconify.design/mdi/desktop-classic.svg',
+      other: 'https://api.iconify.design/mdi/gamepad-variant.svg'
+    };
+    const categories = ['all', 'console', 'ps5', 'ps4', 'xbox', 'switch', 'pc', 'other'];
+    let activeCat = 'all';
+    
+    function renderProducts() {
+      const q = searchInput ? searchInput.value.toLowerCase() : '';
+      const filtered = products.filter(p => (activeCat === 'all' || p.c === activeCat) && p.n.toLowerCase().includes(q));
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="no-data-message">No items found matching your search.</div>`;
+      } else {
+        grid.innerHTML = filtered.map(p => {
+          const condClass = p.cond === 'new' ? 'var(--badge-new-bg)' : 'var(--badge-used-bg)';
+          const condColor = p.cond === 'new' ? 'var(--badge-new-text)' : 'var(--badge-used-text)';
+          const typeClass = p.type === 'game' ? '#3cff7f' : 'var(--accent)';
+          return `
+          <div class="product-card">
+            <span class="card-badge card-badge-cond" style="background: ${condClass}; color: ${condColor};">${p.cond?.toUpperCase() || 'USED'}</span>
+            <span class="card-badge card-badge-type" style="background: ${typeClass};">${p.type?.toUpperCase() || 'CONSOLE'}</span>
+            <div class="product-icon">
+              <img src="${icons[p.c] || icons.other}" alt="${p.c}">
+            </div>
+            <div class="product-info">
+              <h4>${p.n}</h4>
+              <div class="price-row">
+                <span class="product-price">RM${p.p}</span>
+                <button class="product-buy" data-product-name="${p.n}">CHECK STOCK</button>
+              </div>
+            </div>
+          </div>`;
+        }).join('');
+      }
+      categories.forEach(c => {
+        const el = document.getElementById('count-' + c);
+        if (el) el.textContent = c === 'all' ? products.length : products.filter(p => p.c === c).length;
+      });
+    }
+    
+    if (filters) {
+      filters.innerHTML = '';
+      categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn' + (cat === 'all' ? ' active' : '');
+        btn.innerHTML = `${cat.toUpperCase()} <span class="filter-count" id="count-${cat}">0</span>`;
+        btn.onclick = () => {
+          activeCat = cat;
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderProducts();
+        };
+        filters.appendChild(btn);
+      });
+    }
+    if (searchInput) searchInput.oninput = renderProducts;
+    renderProducts();
+  }
+  
+  // Check if stock already loaded
+  if (window.STOCK && Array.isArray(window.STOCK)) {
+    initStock();
+  } else {
+    // Wait for stock.js to load
+    const checkStockInterval = setInterval(() => {
+      if (window.STOCK && Array.isArray(window.STOCK)) {
+        clearInterval(checkStockInterval);
+        initStock();
+      }
+    }, 100);
+    setTimeout(() => {
+      clearInterval(checkStockInterval);
+      if (!window.STOCK || !Array.isArray(window.STOCK)) {
+        const grid = document.getElementById('grid');
+        if (grid) grid.innerHTML = '<div class="no-data-message">No data loaded. Please check connection.</div>';
+      }
+    }, 5000);
+  }
+
+  // Event delegation for product-buy buttons (stock section)
   document.addEventListener('click', function(e) {
     const button = e.target.closest('.product-buy');
     if (button) {
@@ -3043,14 +2836,15 @@
       }
       return;
     }
-    const card = e.target.closest('.hot-card') || e.target.closest('.product-card');
-    if (card && !card.closest('#stock') && !card.closest('#preorder-console') && !card.closest('#hot')) {
-      const img = card.querySelector('img');
+    // Gallery image lightbox
+    const gallerySlide = e.target.closest('.swiper-slide');
+    if (gallerySlide && !e.target.closest('.swiper-button-next') && !e.target.closest('.swiper-button-prev')) {
+      const img = gallerySlide.querySelector('img');
       if (img) {
-        const modalLightbox = document.getElementById('imageModal');
-        const modalLightboxImg = document.getElementById('modalImg');
-        modalLightboxImg.src = img.src;
-        modalLightbox.classList.add('show');
+        const globalLightbox = document.getElementById('imageModal');
+        const globalLightboxImg = document.getElementById('modalImg');
+        globalLightboxImg.src = img.src;
+        globalLightbox.classList.add('show');
         document.body.style.overflow = 'hidden';
       }
     }
@@ -3089,33 +2883,20 @@
       autoplay: { delay: 3000, disableOnInteraction: false },
       speed: 800,
     });
-    document.querySelectorAll('.swiper-slide').forEach(slide => {
-      slide.addEventListener('click', (e) => {
-        if (e.target.closest('.swiper-button-next') || e.target.closest('.swiper-button-prev')) return;
-        const img = slide.querySelector('img');
-        if (img) {
-          const modalLightbox = document.getElementById('imageModal');
-          const modalLightboxImg = document.getElementById('modalImg');
-          modalLightboxImg.src = img.src;
-          modalLightbox.classList.add('show');
-          document.body.style.overflow = 'hidden';
-        }
-      });
-    });
     const swiperContainer = document.querySelector('.mySwiper');
     swiperContainer.addEventListener('mouseenter', () => swiper.autoplay.stop());
     swiperContainer.addEventListener('mouseleave', () => swiper.autoplay.start());
   }
 
-  // Lightbox close
-  const modalLightbox = document.getElementById('imageModal');
-  modalLightbox.onclick = () => {
-    modalLightbox.classList.remove('show');
+  // Global lightbox for gallery
+  const globalLightbox = document.getElementById('imageModal');
+  globalLightbox.onclick = () => {
+    globalLightbox.classList.remove('show');
     document.body.style.overflow = 'auto';
   };
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalLightbox.classList.contains('show')) {
-      modalLightbox.classList.remove('show');
+    if (e.key === 'Escape' && globalLightbox.classList.contains('show')) {
+      globalLightbox.classList.remove('show');
       document.body.style.overflow = 'auto';
     }
   });
