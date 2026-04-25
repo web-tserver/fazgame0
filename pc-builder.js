@@ -1,5 +1,6 @@
 // pc-builder.js
-// FAZGAME Custom PC Builder - Updated with new component list from price list
+// FAZGAME Custom PC Builder - Updated with new component list from price.xlsx
+// RAM, Storage, and Accessories follow Shopee popular prices.
 // All components start unselected (RM0 total), WhatsApp marks unselected items.
 
 (function() {
@@ -102,6 +103,26 @@
         { name: "COLORFUL BATTLE AX H810M-A WIFI V20 LGA1851 MATX MAINBOARD (3Y)", price: 399 }
       ]
     },
+    ram: {
+      label: "🧠 RAM",
+      items: [
+        { name: "None (Not selected)", price: 0, selected: true, hidePrice: true },
+        { name: "8GB DDR4 2666MHz (New)", price: 120 },
+        { name: "8GB DDR4 2666MHz (Used)", price: 80 },
+        { name: "8GB DDR4 3200MHz (New)", price: 150 },
+        { name: "8GB DDR4 3200MHz (Used)", price: 100 },
+        { name: "16GB DDR4 3200MHz (New)", price: 250 },
+        { name: "16GB DDR4 3200MHz (Used)", price: 180 },
+        { name: "32GB DDR4 3200MHz (New)", price: 450 },
+        { name: "32GB DDR4 3200MHz (Used)", price: 320 },
+        { name: "16GB DDR5 5200MHz (New)", price: 350 },
+        { name: "16GB DDR5 5200MHz (Used)", price: 250 },
+        { name: "16GB DDR5 6000MHz (New - Kingston/Corsair)", price: 420 },
+        { name: "32GB DDR5 5600MHz (New)", price: 650 },
+        { name: "32GB DDR5 5600MHz (Used)", price: 450 },
+        { name: "32GB DDR5 6000MHz (New)", price: 750 }
+      ]
+    },
     gpu: {
       label: "🎮 Graphics Card (GPU)",
       items: [
@@ -121,6 +142,29 @@
         { name: "SAPPHIRE PULSE AMD RADEON RX 9060 XT  GAMING OC 16GB GDDR6 VGA CARD (3Y)", price: 2199 },
         { name: "XFX SWIFT AMD RADEON RX 9060 XT OC TRIPLE FAN GAMING EDITION 16GB GDDR6 VGA GRAPHIC CARD (3Y) - BLACK", price: 2399 },
         { name: "PNY GEFORCE RTX 4070 12GB XLR8 GAMING VERTO EPIC-X RGB TRIPLE FAN VGA CARD (3Y)", price: 2899 }
+      ]
+    },
+    storage: {
+      label: "💾 Storage",
+      items: [
+        { name: "None (Not selected)", price: 0, selected: true, hidePrice: true },
+        { name: "240GB SSD (New)", price: 80 },
+        { name: "240GB SSD (Used)", price: 50 },
+        { name: "480GB SSD (New)", price: 120 },
+        { name: "480GB SSD (Used)", price: 80 },
+        { name: "512GB NVMe SSD (New)", price: 200 },
+        { name: "512GB NVMe SSD (Used)", price: 140 },
+        { name: "1TB HDD (New)", price: 150 },
+        { name: "1TB HDD (Used)", price: 100 },
+        { name: "1TB NVMe SSD (New - Lexar/Kingston)", price: 280 },
+        { name: "1TB NVMe SSD (New - Samsung 980)", price: 350 },
+        { name: "1TB NVMe SSD (Used)", price: 250 },
+        { name: "2TB NVMe SSD (New)", price: 550 },
+        { name: "2TB NVMe SSD (Used)", price: 400 },
+        { name: "1TB HDD + 256GB SSD (New)", price: 250 },
+        { name: "1TB HDD + 256GB SSD (Used)", price: 180 },
+        { name: "2TB HDD + 512GB SSD (New)", price: 380 },
+        { name: "2TB HDD + 512GB SSD (Used)", price: 280 }
       ]
     },
     psu: {
@@ -189,6 +233,21 @@
         { name: "TITAN ARMY P2710G2 27\" FAST IPS 200HZ 1MS HDR GAMING MONITOR (3Y)", price: 529 },
         { name: "TITAN ARMY P43UGD 43.8\" FLAT 120HZ 1MS 32:9 IPS ULTRAWIDE GAMING MONITOR", price: 1999 }
       ]
+    },
+    accessories: {
+      label: "🎧 Accessories (Keyboard + Mouse)",
+      items: [
+        { name: "None (Not selected)", price: 0, selected: true, hidePrice: true },
+        { name: "Basic Combo (New)", price: 100 },
+        { name: "Basic Combo (Used)", price: 70 },
+        { name: "Mechanical Keyboard + Gaming Mouse (New)", price: 250 },
+        { name: "Mechanical Keyboard + Gaming Mouse (Used)", price: 180 },
+        { name: "RGB Mechanical + Wireless Mouse (New)", price: 400 },
+        { name: "RGB Mechanical + Wireless Mouse (Used)", price: 280 },
+        { name: "Logitech G102 + Keyboard (New)", price: 200 },
+        { name: "Logitech G102 + Keyboard (Used)", price: 140 },
+        { name: "Razer Cynosa + Viper Mini (New)", price: 350 }
+      ]
     }
   };
 
@@ -249,7 +308,7 @@
     for (const [key, category] of Object.entries(componentData)) {
       const select = document.getElementById(`${key}Select`);
       if (select) {
-        const selectedOption = select.options[select.selectedIndex];
+        const selectedOption = select.options[selectedIndex];
         const optionText = selectedOption.text;
         if (optionText.includes("None (Not selected)") || optionText.includes("Free Assembly")) {
           message += `- ${category.label}: Unselected\n`;
