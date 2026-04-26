@@ -176,6 +176,47 @@
       opacity: 1;
     }
 
+    /* ===== AUTO-PLAY HINT (only shown if autoplay blocked) ===== */
+    .autoplay-hint {
+      position: fixed;
+      bottom: 100px;
+      left: 20px;
+      z-index: 9999;
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: var(--glass-border);
+      border-radius: 40px;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.2s;
+    }
+    .autoplay-hint.show {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .autoplay-hint span {
+      font-size: 18px;
+    }
+    @media (max-width: 480px) {
+      .autoplay-hint {
+        bottom: 80px;
+        left: 12px;
+        padding: 8px 14px;
+        font-size: 11px;
+      }
+    }
+
     /* ===== MUSIC TOGGLE BUTTON ===== */
     .music-toggle {
       position: fixed;
@@ -203,9 +244,7 @@
       background: var(--card-hover);
       transform: scale(1.1);
     }
-    .music-toggle.muted {
-      opacity: 0.6;
-    }
+    /* No default .muted class – we'll control via JavaScript */
 
     /* ===== PREMIUM 3D SWING LAMP ===== */
     .theme-toggle {
@@ -2228,10 +2267,10 @@
 </head>
 <body>
 
-<!-- Background Music (autoplay muted to comply with browser policies) -->
-<audio id="bg-music" src="music/background.mp3" loop muted autoplay></audio>
-<!-- Music toggle button -->
-<button class="music-toggle muted" id="musicToggle" aria-label="Toggle music" title="Music off">🔇</button>
+<!-- Background Music: unmuted autoplay attempt -->
+<audio id="bg-music" src="music/background.mp3" loop></audio>
+<button class="music-toggle" id="musicToggle" aria-label="Toggle music" title="Music on">🎵</button>
+<div id="autoplayHint" class="autoplay-hint"><span>🎵</span> Tap anywhere to enable background music</div>
 
 <div id="preloader">
   <div class="preloader-content">
@@ -2598,10 +2637,12 @@
 <script src="pc-builder.js?v=3"></script>
 
 <script>
-  // Background music toggle
+  // ========== MUSIC AUTOPLAY (UNMUTED ATTEMPT + ONE-TAP FALLBACK) ==========
   const bgMusic = document.getElementById('bg-music');
   const musicToggle = document.getElementById('musicToggle');
-  
+  const autoplayHint = document.getElementById('autoplayHint');
+  let musicStarted = false;
+
   function updateMusicIcon() {
     if (bgMusic.muted) {
       musicToggle.innerHTML = '🔇';
@@ -2614,29 +2655,46 @@
     }
   }
 
-  musicToggle.addEventListener('click', () => {
-    if (bgMusic.paused) {
-      bgMusic.play().catch(() => {}); // in case autoplay blocked
+  function startMusic() {
+    if (musicStarted) return;
+    bgMusic.muted = false;
+    bgMusic.loop = true;
+    bgMusic.play().then(() => {
+      musicStarted = true;
+      updateMusicIcon();
+      if (autoplayHint) autoplayHint.classList.remove('show');
+    }).catch(err => console.warn("startMusic error:", err));
+  }
+
+  // Try to autoplay unmuted immediately (usually blocked by browsers)
+  bgMusic.muted = false;
+  bgMusic.play().then(() => {
+    musicStarted = true;
+    updateMusicIcon();
+  }).catch(() => {
+    // Autoplay blocked – show hint and wait for user interaction
+    if (autoplayHint) autoplayHint.classList.add('show');
+    const startOnInteraction = () => {
+      startMusic();
+      document.removeEventListener('click', startOnInteraction);
+      document.removeEventListener('touchstart', startOnInteraction);
+    };
+    document.addEventListener('click', startOnInteraction);
+    document.addEventListener('touchstart', startOnInteraction);
+  });
+
+  // Music button toggles mute/unmute, or starts music if not started yet
+  musicToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (!musicStarted) {
+      startMusic();
+      return;
     }
     bgMusic.muted = !bgMusic.muted;
     updateMusicIcon();
   });
 
-  // Ensure music starts playing muted as fallback (browsers may still block)
-  window.addEventListener('load', () => {
-    if (bgMusic.paused) {
-      bgMusic.play().then(() => {
-        if (!bgMusic.muted) {
-          bgMusic.muted = true;
-          updateMusicIcon();
-        }
-      }).catch(() => {
-        // If play fails, try again with muted on next user interaction (handled by toggle)
-        console.log('Autoplay blocked, user can unmute via button.');
-      });
-    }
-  });
-
+  // ========== ALL ORIGINAL JAVASCRIPT (unchanged) ==========
   // Back to top
   const backToTop = document.getElementById('backToTop');
   window.addEventListener('scroll', () => {
@@ -2697,7 +2755,6 @@
   const modalSpecListElem = document.getElementById('modalSpecList');
   const modalWarrantyElem = document.getElementById('modalWarranty');
   const modalReserveBtnElem = document.getElementById('modalReserveBtn');
-
   const modalLightbox = document.getElementById('modalLightbox');
   const modalLightboxImg = document.getElementById('modalLightboxImg');
   const modalLightboxClose = document.getElementById('modalLightboxClose');
