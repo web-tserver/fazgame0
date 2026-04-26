@@ -203,7 +203,9 @@
       background: var(--card-hover);
       transform: scale(1.1);
     }
-    /* No .muted class by default – starts unmuted */
+    .music-toggle.muted {
+      opacity: 0.6;
+    }
 
     /* ===== PREMIUM 3D SWING LAMP ===== */
     .theme-toggle {
@@ -2226,10 +2228,10 @@
 </head>
 <body>
 
-<!-- Background Music: unmuted autoplay (if browser allows) -->
-<audio id="bg-music" src="music/background.mp3" loop></audio>
-<!-- Music toggle button (starts as unmuted) -->
-<button class="music-toggle" id="musicToggle" aria-label="Toggle music" title="Music on">🎵</button>
+<!-- Background Music (autoplay muted to comply with browser policies) -->
+<audio id="bg-music" src="music/background.mp3" loop muted autoplay></audio>
+<!-- Music toggle button -->
+<button class="music-toggle muted" id="musicToggle" aria-label="Toggle music" title="Music off">🔇</button>
 
 <div id="preloader">
   <div class="preloader-content">
@@ -2596,10 +2598,10 @@
 <script src="pc-builder.js?v=3"></script>
 
 <script>
-  // ========== MUSIC: UNMUTED BY DEFAULT, TOGGLE MUTES/UNMUTES ==========
+  // Background music toggle
   const bgMusic = document.getElementById('bg-music');
   const musicToggle = document.getElementById('musicToggle');
-
+  
   function updateMusicIcon() {
     if (bgMusic.muted) {
       musicToggle.innerHTML = '🔇';
@@ -2612,26 +2614,29 @@
     }
   }
 
-  // Start with unmuted autoplay (if browser allows)
-  bgMusic.muted = false;
-  bgMusic.loop = true;
-  bgMusic.play().catch((error) => {
-    // If autoplay is blocked, let user click the music button to start
-    console.warn("Autoplay blocked: ", error);
-    // Set muted flag to false but audio hasn't started; user will click to play
-    updateMusicIcon();
-  });
-  updateMusicIcon();
-
   musicToggle.addEventListener('click', () => {
     if (bgMusic.paused) {
-      bgMusic.play().catch(() => {});
+      bgMusic.play().catch(() => {}); // in case autoplay blocked
     }
     bgMusic.muted = !bgMusic.muted;
     updateMusicIcon();
   });
 
-  // ========== ALL ORIGINAL JAVASCRIPT (unchanged) ==========
+  // Ensure music starts playing muted as fallback (browsers may still block)
+  window.addEventListener('load', () => {
+    if (bgMusic.paused) {
+      bgMusic.play().then(() => {
+        if (!bgMusic.muted) {
+          bgMusic.muted = true;
+          updateMusicIcon();
+        }
+      }).catch(() => {
+        // If play fails, try again with muted on next user interaction (handled by toggle)
+        console.log('Autoplay blocked, user can unmute via button.');
+      });
+    }
+  });
+
   // Back to top
   const backToTop = document.getElementById('backToTop');
   window.addEventListener('scroll', () => {
@@ -2692,6 +2697,7 @@
   const modalSpecListElem = document.getElementById('modalSpecList');
   const modalWarrantyElem = document.getElementById('modalWarranty');
   const modalReserveBtnElem = document.getElementById('modalReserveBtn');
+
   const modalLightbox = document.getElementById('modalLightbox');
   const modalLightboxImg = document.getElementById('modalLightboxImg');
   const modalLightboxClose = document.getElementById('modalLightboxClose');
