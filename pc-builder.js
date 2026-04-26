@@ -50,7 +50,7 @@
         { name: "ID COOLING FX360 LCD ARGB AIO LIQUID COOLER - BLACK", price: 329 },
         { name: "MSI MAG CORELIQUID A15 360MM AIO CPU COOLER (3Y)", price: 449 },
         { name: "MSI MAG CORELIQUID i360 AIO CPU COOLER BULK - WHITE (3Y)", price: 399 },
-        { name: "MSI MEG CORELIQUID S280 280MM AIO CPU COOLER WITH 2.4" IPS DISPLAY BULK (3Y)", price: 499 },
+        { name: 'MSI MEG CORELIQUID S280 280MM AIO CPU COOLER WITH 2.4" IPS DISPLAY BULK (3Y)', price: 499 },
         { name: "OCYPUS SIGMA L24 PRO 240MM AIO LIQUID COOLER WITH 3.5 INCH IPS DISPLAY - BLACK (3Y)", price: 459 },
         { name: "OCYPUS SIGMA L24 PRO 240MM AIO LIQUID COOLER WITH 3.5 INCH IPS DISPLAY - WHITE (3Y)", price: 459 },
         { name: "OCYPUS SIGMA L36 PRO 360MM AIO LIQUID COOLER WITH 3.5 INCH IPS DISPLAY - BLACK (3Y)", price: 559 },
@@ -308,7 +308,7 @@
     for (const [key, category] of Object.entries(componentData)) {
       const select = document.getElementById(`${key}Select`);
       if (select) {
-        const selectedOption = select.options[select.selectedIndex]; // Fixed: use select.selectedIndex
+        const selectedOption = select.options[select.selectedIndex];
         const optionText = selectedOption.text;
         if (optionText.includes("None (Not selected)") || optionText.includes("Free Assembly")) {
           message += `- ${category.label}: Unselected\n`;
