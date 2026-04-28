@@ -1496,7 +1496,7 @@
       }
     }
 
-    /* MODAL - no frame, image 1:1 */
+    /* MODAL – Landscape on desktop: image left, details right */
     .modal {
       display: none;
       position: fixed;
@@ -1528,11 +1528,37 @@
       padding: 20px;
       position: relative;
       box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      transition: max-width 0.3s ease;
     }
     @media (max-width: 480px) {
       .modal-content {
         padding: 16px;
         max-width: 92vw;
+      }
+    }
+    /* Desktop landscape: image left, details right */
+    @media (min-width: 768px) {
+      .modal-content {
+        max-width: 800px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 24px;
+        padding: 24px;
+      }
+      .modal-content .modal-img {
+        width: 45%;
+        max-width: 350px;
+        flex-shrink: 0;
+      }
+      .modal-content .modal-details {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .modal-content .modal-specs {
+        max-height: none;  /* allow full height */
+        overflow-y: visible;
       }
     }
     /* Image 1:1 aspect ratio, cover, no external frame */
@@ -2284,18 +2310,21 @@
 
 <div id="imageModal"><img id="modalImg" src="" alt="Preview"></div>
 
+<!-- The only HTML change: wrapped details in .modal-details for landscape layout -->
 <div id="detailModal" class="modal">
   <div class="modal-content">
     <button class="modal-close" id="modalCloseBtn">&times;</button>
     <img id="modalProductImg" class="modal-img" src="" alt="Product">
-    <h2 id="modalProductTitle" class="modal-title"></h2>
-    <div id="modalProductPrice" class="modal-price"></div>
-    <div id="modalSubtitle" class="modal-subtitle"></div>
-    <div class="modal-specs">
-      <ul id="modalSpecList"></ul>
-      <div id="modalWarranty" class="warranty-badge"></div>
+    <div class="modal-details">
+      <h2 id="modalProductTitle" class="modal-title"></h2>
+      <div id="modalProductPrice" class="modal-price"></div>
+      <div id="modalSubtitle" class="modal-subtitle"></div>
+      <div class="modal-specs">
+        <ul id="modalSpecList"></ul>
+        <div id="modalWarranty" class="warranty-badge"></div>
+      </div>
+      <button id="modalReserveBtn" class="modal-reserve">Reserve Now</button>
     </div>
-    <button id="modalReserveBtn" class="modal-reserve">Reserve Now</button>
   </div>
 </div>
 
@@ -2739,7 +2768,7 @@
     });
   });
 
-  // Modal functions
+  // Modal functions (unchanged, now uses new wrapper layout)
   const modalElem = document.getElementById('detailModal');
   const modalCloseBtn = document.getElementById('modalCloseBtn');
   const modalImgElem = document.getElementById('modalProductImg');
