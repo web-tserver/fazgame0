@@ -1,6 +1,6 @@
 // pc-builder.js
 // FAZGAME Custom PC Builder - Updated with new component list from price.xlsx
-// RAM, Storage, and Accessories follow Shopee popular prices.
+// RAM and Storage updated with simplified lists.
 // All components start unselected (RM0 total), WhatsApp marks unselected items.
 
 (function() {
@@ -107,20 +107,9 @@
       label: "🧠 RAM",
       items: [
         { name: "None (Not selected)", price: 0, selected: true, hidePrice: true },
-        { name: "8GB DDR4 2666MHz (New)", price: 120 },
-        { name: "8GB DDR4 2666MHz (Used)", price: 80 },
-        { name: "8GB DDR4 3200MHz (New)", price: 150 },
-        { name: "8GB DDR4 3200MHz (Used)", price: 100 },
-        { name: "16GB DDR4 3200MHz (New)", price: 250 },
-        { name: "16GB DDR4 3200MHz (Used)", price: 180 },
-        { name: "32GB DDR4 3200MHz (New)", price: 450 },
-        { name: "32GB DDR4 3200MHz (Used)", price: 320 },
-        { name: "16GB DDR5 5200MHz (New)", price: 350 },
-        { name: "16GB DDR5 5200MHz (Used)", price: 250 },
-        { name: "16GB DDR5 6000MHz (New - Kingston/Corsair)", price: 420 },
-        { name: "32GB DDR5 5600MHz (New)", price: 650 },
-        { name: "32GB DDR5 5600MHz (Used)", price: 450 },
-        { name: "32GB DDR5 6000MHz (New)", price: 750 }
+        { name: "RAM 16GB DDR4 3200MHz", price: 300 },
+        { name: "RAM 32GB DDR4 3200MHz", price: 700 },
+        { name: "RAM 16GB DDR5 6000MHz", price: 850 }
       ]
     },
     gpu: {
@@ -148,23 +137,10 @@
       label: "💾 Storage",
       items: [
         { name: "None (Not selected)", price: 0, selected: true, hidePrice: true },
-        { name: "240GB SSD (New)", price: 80 },
-        { name: "240GB SSD (Used)", price: 50 },
-        { name: "480GB SSD (New)", price: 120 },
-        { name: "480GB SSD (Used)", price: 80 },
-        { name: "512GB NVMe SSD (New)", price: 200 },
-        { name: "512GB NVMe SSD (Used)", price: 140 },
-        { name: "1TB HDD (New)", price: 150 },
-        { name: "1TB HDD (Used)", price: 100 },
-        { name: "1TB NVMe SSD (New - Lexar/Kingston)", price: 280 },
-        { name: "1TB NVMe SSD (New - Samsung 980)", price: 350 },
-        { name: "1TB NVMe SSD (Used)", price: 250 },
-        { name: "2TB NVMe SSD (New)", price: 550 },
-        { name: "2TB NVMe SSD (Used)", price: 400 },
-        { name: "1TB HDD + 256GB SSD (New)", price: 250 },
-        { name: "1TB HDD + 256GB SSD (Used)", price: 180 },
-        { name: "2TB HDD + 512GB SSD (New)", price: 380 },
-        { name: "2TB HDD + 512GB SSD (Used)", price: 280 }
+        { name: "SSD 512GB", price: 250 },
+        { name: "SSD 1TB", price: 450 },
+        { name: "HDD 500GB", price: 70 },
+        { name: "HDD 1TB", price: 120 }
       ]
     },
     psu: {
