@@ -1,1828 +1,2692 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>FAZGAME | Home</title>
-  <meta name="description" content="FAZGAME – Faz Service, Faz Gaming. Preorder consoles, custom PCs, and used gaming gear.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,700,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <style>
-    /* ===== LIGHTNING BOLT CURSOR ===== */
-    .btn-primary, .chip, .hot-card, .floating-image, .social-link,
-    .back-to-top, .trade-btn, .reserve-btn, .swiper-slide, .faq-question, .music-toggle,
-    .btn-claim, .notif-close {
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffd84d' d='M13 2L3 14h7l-1 8 10-12h-7l1-8z'/%3E%3C/svg%3E") 12 0, pointer;
-    }
-    @media (pointer: coarse) {
-      .btn-primary, .chip, .hot-card, .floating-image, .social-link,
-      .back-to-top, .trade-btn, .reserve-btn, .swiper-slide, .faq-question, .music-toggle,
-      .btn-claim, .notif-close {
-        cursor: pointer;
-      }
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <title>FAZGAME | Home</title>
+    <meta name="description" content="FAZGAME – Faz Service, Faz Gaming. Preorder consoles, custom PCs, and used gaming gear." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,700,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        /* ===== LIGHTNING BOLT CURSOR ===== */
+        .btn-primary,
+        .chip,
+        .hot-card,
+        .floating-image,
+        .social-link,
+        .back-to-top,
+        .trade-btn,
+        .reserve-btn,
+        .swiper-slide,
+        .faq-question,
+        .music-toggle,
+        .btn-claim,
+        .notif-close {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffd84d' d='M13 2L3 14h7l-1 8 10-12h-7l1-8z'/%3E%3C/svg%3E") 12 0, pointer;
+        }
+        @media (pointer:coarse) {
+            .btn-primary,
+            .chip,
+            .hot-card,
+            .floating-image,
+            .social-link,
+            .back-to-top,
+            .trade-btn,
+            .reserve-btn,
+            .swiper-slide,
+            .faq-question,
+            .music-toggle,
+            .btn-claim,
+            .notif-close {
+                cursor: pointer;
+            }
+        }
 
-    /* ===== LIGHT/DARK MODE VARIABLES ===== */
-    :root {
-      --bg: #0b0b0f;
-      --bg-secondary: #111216;
-      --card-bg: rgba(20, 22, 27, 0.4);
-      --text: #fff;
-      --muted: #a0a0b0;
-      --accent: #ffd84d;
-      --accent-dark: #e6c43d;
-      --accent-glow: 0 0 20px rgba(255,216,77,0.5);
-      --border-color: rgba(255,255,255,0.08);
-      --card-hover: rgba(30, 32, 40, 0.6);
-      --badge-used-bg: rgba(255,255,255,0.12);
-      --badge-used-text: #fff;
-      --badge-new-bg: rgba(255,216,77,0.45);
-      --badge-new-text: #000;
-      --transition: 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
-      --header-bg: rgba(11, 11, 15, 0.5);
-      --card-shadow: 0 8px 32px rgba(0,0,0,0.15);
-      --glass-blur: blur(20px);
-      --glass-border: 1px solid rgba(255,255,255,0.06);
-      --glass-bg: rgba(20, 22, 27, 0.3);
-    }
-    body.light-mode {
-      --bg: #f8fafc;
-      --bg-secondary: #ffffff;
-      --card-bg: rgba(255, 255, 255, 0.9);
-      --text: #0f172a;
-      --muted: #475569;
-      --accent: #eab308;
-      --accent-dark: #ca8a04;
-      --accent-glow: 0 0 20px rgba(234,179,8,0.2);
-      --border-color: rgba(0,0,0,0.1);
-      --card-hover: rgba(255, 255, 255, 1);
-      --badge-used-bg: #1e293b;
-      --badge-used-text: #ffffff;
-      --badge-new-bg: #eab308;
-      --badge-new-text: #0f172a;
-      --header-bg: rgba(255, 255, 255, 0.85);
-      --card-shadow: 0 8px 32px rgba(0,0,0,0.05);
-      --glass-border: 1px solid rgba(0,0,0,0.08);
-      --glass-bg: rgba(255, 255, 255, 0.7);
-    }
+        /* ===== LIGHT/DARK MODE VARIABLES ===== */
+        :root {
+            --bg: #0b0b0f;
+            --bg-secondary: #111216;
+            --card-bg: rgba(20, 22, 27, 0.4);
+            --text: #fff;
+            --muted: #a0a0b0;
+            --accent: #ffd84d;
+            --accent-dark: #e6c43d;
+            --accent-glow: 0 0 20px rgba(255, 216, 77, 0.5);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --card-hover: rgba(30, 32, 40, 0.6);
+            --badge-used-bg: rgba(255, 255, 255, 0.12);
+            --badge-used-text: #fff;
+            --badge-new-bg: rgba(255, 216, 77, 0.45);
+            --badge-new-text: #000;
+            --transition: 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+            --header-bg: rgba(11, 11, 15, 0.5);
+            --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            --glass-blur: blur(20px);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.06);
+            --glass-bg: rgba(20, 22, 27, 0.3);
+        }
+        body.light-mode {
+            --bg: #f8fafc;
+            --bg-secondary: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text: #0f172a;
+            --muted: #475569;
+            --accent: #eab308;
+            --accent-dark: #ca8a04;
+            --accent-glow: 0 0 20px rgba(234, 179, 8, 0.2);
+            --border-color: rgba(0, 0, 0, 0.1);
+            --card-hover: rgba(255, 255, 255, 1);
+            --badge-used-bg: #1e293b;
+            --badge-used-text: #ffffff;
+            --badge-new-bg: #eab308;
+            --badge-new-text: #0f172a;
+            --header-bg: rgba(255, 255, 255, 0.85);
+            --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+            --glass-border: 1px solid rgba(0, 0, 0, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.7);
+        }
 
-    body { transition: background-color 0.5s ease, color 0.3s ease; overflow-x: hidden; }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background: var(--bg); 
-      color: var(--text); 
-      overflow-x: hidden; 
-      line-height: 1.5;
-    }
-    a { text-decoration: none; color: inherit; }
+        body {
+            transition: background-color 0.5s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-    /* ===== MUSIC TOGGLE & AUTOPLAY HINT ===== */
-    .autoplay-hint {
-      position: fixed;
-      bottom: 100px;
-      left: 20px;
-      z-index: 9999;
-      background: var(--glass-bg);
-      backdrop-filter: var(--glass-blur);
-      border: var(--glass-border);
-      border-radius: 40px;
-      padding: 10px 18px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      pointer-events: none;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.2s;
-    }
-    .autoplay-hint.show { opacity: 1; visibility: visible; pointer-events: auto; }
-    .music-toggle {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--glass-bg);
-      backdrop-filter: var(--glass-blur);
-      border: var(--glass-border);
-      color: var(--text);
-      font-size: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 998;
-      box-shadow: var(--card-shadow);
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
+        /* ===== MUSIC TOGGLE & AUTOPLAY HINT ===== */
+        .autoplay-hint {
+            position: fixed;
+            bottom: 100px;
+            left: 20px;
+            z-index: 9999;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border: var(--glass-border);
+            border-radius: 40px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.2s;
+        }
+        .autoplay-hint.show {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .music-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border: var(--glass-border);
+            color: var(--text);
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 998;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
 
-    /* ===== COMPACT RGB GAMING LAMP ===== */
-    .lamp-container {
-      position: fixed;
-      top: 70px;
-      right: 15px;
-      z-index: 1001;
-      cursor: pointer;
-      transform: scale(0.55);
-      transform-origin: top right;
-      transition: filter 0.3s ease;
-    }
-    @media (min-width: 768px) {
-      .lamp-container {
-        top: 80px;
-        right: 25px;
-        transform: scale(0.65);
-      }
-    }
-    @media (max-width: 680px) {
-      .lamp-container {
-        top: 100px !important;
-        right: 15px !important;
-        transform: scale(0.5);
-      }
-    }
-    .room {
-      position: relative;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-    .wall-glow {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 40%, rgba(0, 240, 255, 0.15) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-    .lamp-assembly {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transform-origin: top center;
-      animation: swing 5s ease-in-out infinite alternate;
-      filter: drop-shadow(0px 30px 20px rgba(0,0,0,0.6));
-    }
-    .base {
-      width: 40px;
-      height: 16px;
-      background: #121318;
-      clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
-      border-bottom: 1px solid #23252d;
-    }
-    .cord {
-      width: 8px;
-      height: 120px;
-      background: linear-gradient(90deg, #111 0%, #222 50%, #000 100%);
-      position: relative;
-    }
-    .cord::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 3px;
-      width: 3px; height: 100%;
-      background: #333;
-      transition: background 0.3s ease;
-    }
-    .shade-container {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      margin-top: -3px;
-    }
-    .shade-top {
-      width: 28px;
-      height: 20px;
-      background: #23252d;
-      clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%);
-    }
-    .shade-body {
-      width: 130px;
-      height: 52px;
-      background: linear-gradient(135deg, #121318 0%, #0f111a 100%);
-      clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      border-bottom: 2px solid #111;
-    }
-    .shade-body::before, .shade-body::after {
-      content: '';
-      position: absolute;
-      top: 10%;
-      width: 20px;
-      height: 80%;
-      background: #23252d;
-      z-index: -1;
-    }
-    .shade-body::before { left: 10px; clip-path: polygon(100% 0, 0 100%, 100% 100%); }
-    .shade-body::after { right: 10px; clip-path: polygon(0 0, 100% 100%, 0 100%); }
-    .rgb-ring {
-      position: absolute;
-      bottom: -3px;
-      width: 85px;
-      height: 5px;
-      background: #222;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-    }
-    .led-core {
-      width: 50px;
-      height: 10px;
-      background: #111;
-      clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
-      position: absolute;
-      bottom: -10px;
-      transition: all 0.3s ease;
-    }
-    .hologram-beam {
-      position: absolute;
-      top: 65px;
-      width: 350px;
-      height: 500px;
-      background: linear-gradient(to bottom, rgba(0, 240, 255, 0.3) 0%, rgba(0, 240, 255, 0) 100%);
-      clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%);
-      opacity: 0;
-      pointer-events: none;
-      transform-origin: top center;
-      transition: opacity 0.3s ease;
-      mask-image: repeating-linear-gradient(transparent, transparent 2px, black 2px, black 4px);
-      -webkit-mask-image: repeating-linear-gradient(transparent, transparent 2px, black 2px, black 4px);
-    }
-    @keyframes rgb-cycle {
-      0% { filter: hue-rotate(0deg); }
-      100% { filter: hue-rotate(360deg); }
-    }
-    @keyframes swing {
-      0% { transform: rotate(3deg); }
-      100% { transform: rotate(-3deg); }
-    }
-    body:not(.light-mode) .wall-glow { opacity: 1; }
-    body:not(.light-mode) .cord::after {
-      background: #00f0ff;
-      box-shadow: 0 0 6px #00f0ff;
-    }
-    body:not(.light-mode) .rgb-ring {
-      background: #00f0ff;
-      box-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
-    }
-    body:not(.light-mode) .led-core {
-      background: #ffffff;
-      box-shadow: 0 0 12px #00f0ff, 0 0 24px #00f0ff, 0 0 40px #00f0ff;
-    }
-    body:not(.light-mode) .hologram-beam { opacity: 1; }
-    body:not(.light-mode) .rgb-sync { animation: rgb-cycle 5s linear infinite; }
-    body.light-mode .wall-glow { opacity: 0; }
-    body.light-mode .cord::after { background: #333; box-shadow: none; }
-    body.light-mode .rgb-ring { background: #222; box-shadow: none; }
-    body.light-mode .led-core { background: #111; box-shadow: none; }
-    body.light-mode .hologram-beam { opacity: 0; }
-    body.light-mode .rgb-sync { animation: none; }
+        /* ===== COMPACT RGB GAMING LAMP ===== */
+        .lamp-container {
+            position: fixed;
+            top: 70px;
+            right: 15px;
+            z-index: 1001;
+            cursor: pointer;
+            transform: scale(0.55);
+            transform-origin: top right;
+            transition: filter 0.3s ease;
+        }
+        @media (min-width:768px) {
+            .lamp-container {
+                top: 80px;
+                right: 25px;
+                transform: scale(0.65);
+            }
+        }
+        @media (max-width:680px) {
+            .lamp-container {
+                top: 100px !important;
+                right: 15px !important;
+                transform: scale(0.5);
+            }
+        }
+        .room {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .wall-glow {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 40%, rgba(0, 240, 255, 0.15) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .lamp-assembly {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform-origin: top center;
+            animation: swing 5s ease-in-out infinite alternate;
+            filter: drop-shadow(0px 30px 20px rgba(0, 0, 0, 0.6));
+        }
+        .base {
+            width: 40px;
+            height: 16px;
+            background: #121318;
+            clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+            border-bottom: 1px solid #23252d;
+        }
+        .cord {
+            width: 8px;
+            height: 120px;
+            background: linear-gradient(90deg, #111 0%, #222 50%, #000 100%);
+            position: relative;
+        }
+        .cord::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 3px;
+            width: 3px;
+            height: 100%;
+            background: #333;
+            transition: background 0.3s ease;
+        }
+        .shade-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            margin-top: -3px;
+        }
+        .shade-top {
+            width: 28px;
+            height: 20px;
+            background: #23252d;
+            clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%);
+        }
+        .shade-body {
+            width: 130px;
+            height: 52px;
+            background: linear-gradient(135deg, #121318 0%, #0f111a 100%);
+            clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            border-bottom: 2px solid #111;
+        }
+        .shade-body::before,
+        .shade-body::after {
+            content: '';
+            position: absolute;
+            top: 10%;
+            width: 20px;
+            height: 80%;
+            background: #23252d;
+            z-index: -1;
+        }
+        .shade-body::before {
+            left: 10px;
+            clip-path: polygon(100% 0, 0 100%, 100% 100%);
+        }
+        .shade-body::after {
+            right: 10px;
+            clip-path: polygon(0 0, 100% 100%, 0 100%);
+        }
+        .rgb-ring {
+            position: absolute;
+            bottom: -3px;
+            width: 85px;
+            height: 5px;
+            background: #222;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .led-core {
+            width: 50px;
+            height: 10px;
+            background: #111;
+            clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
+            position: absolute;
+            bottom: -10px;
+            transition: all 0.3s ease;
+        }
+        .hologram-beam {
+            position: absolute;
+            top: 65px;
+            width: 350px;
+            height: 500px;
+            background: linear-gradient(to bottom, rgba(0, 240, 255, 0.3) 0%, rgba(0, 240, 255, 0) 100%);
+            clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%);
+            opacity: 0;
+            pointer-events: none;
+            transform-origin: top center;
+            transition: opacity 0.3s ease;
+            mask-image: repeating-linear-gradient(transparent, transparent 2px, black 2px, black 4px);
+            -webkit-mask-image: repeating-linear-gradient(transparent, transparent 2px, black 2px, black 4px);
+        }
+        @keyframes rgb-cycle {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+        @keyframes swing {
+            0% {
+                transform: rotate(3deg);
+            }
+            100% {
+                transform: rotate(-3deg);
+            }
+        }
+        body:not(.light-mode) .wall-glow {
+            opacity: 1;
+        }
+        body:not(.light-mode) .cord::after {
+            background: #00f0ff;
+            box-shadow: 0 0 6px #00f0ff;
+        }
+        body:not(.light-mode) .rgb-ring {
+            background: #00f0ff;
+            box-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+        }
+        body:not(.light-mode) .led-core {
+            background: #ffffff;
+            box-shadow: 0 0 12px #00f0ff, 0 0 24px #00f0ff, 0 0 40px #00f0ff;
+        }
+        body:not(.light-mode) .hologram-beam {
+            opacity: 1;
+        }
+        body:not(.light-mode) .rgb-sync {
+            animation: rgb-cycle 5s linear infinite;
+        }
+        body.light-mode .wall-glow {
+            opacity: 0;
+        }
+        body.light-mode .cord::after {
+            background: #333;
+            box-shadow: none;
+        }
+        body.light-mode .rgb-ring {
+            background: #222;
+            box-shadow: none;
+        }
+        body.light-mode .led-core {
+            background: #111;
+            box-shadow: none;
+        }
+        body.light-mode .hologram-beam {
+            opacity: 0;
+        }
+        body.light-mode .rgb-sync {
+            animation: none;
+        }
 
-    /* ===== HEADER ===== */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: var(--header-bg);
-      backdrop-filter: var(--glass-blur);
-      border-bottom: var(--glass-border);
-      padding: 12px 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    }
-    @media (min-width: 768px) { header { padding: 16px 24px; } }
-    .header-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .header-left { display: flex; align-items: center; gap: 15px; }
-    .header-left .logo-img { height: 40px; width: auto; }
-    .header-left .logo-text {
-      font-family: 'Clash Display', sans-serif;
-      font-weight: 700;
-      font-size: 24px;
-      letter-spacing: -0.5px;
-    }
-    .header-left .logo-text span:last-child { color: var(--accent); }
-    .header-nav {
-      display: flex;
-      gap: 12px;
-      background: rgba(0,0,0,0.2);
-      backdrop-filter: blur(4px);
-      padding: 6px 16px;
-      border-radius: 60px;
-      border: var(--glass-border);
-    }
-    body.light-mode .header-nav { background: rgba(255,255,255,0.5); }
-    .nav-link {
-      font-weight: 600;
-      font-size: 14px;
-      padding: 8px 14px;
-      border-radius: 40px;
-      transition: 0.2s;
-      color: var(--text);
-      text-decoration: none;
-    }
-    .nav-link:hover { background: var(--accent); color: #000; transform: translateY(-2px); }
-    .header-logos {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-    @media (min-width: 768px) { .header-logos { gap: 20px; } }
-    .header-logos img {
-      width: 20px;
-      transition: var(--transition);
-    }
-    body:not(.light-mode) .header-logos img { filter: invert(1); opacity: 0.7; }
-    body.light-mode .header-logos img { filter: none; opacity: 0.8; }
-    .header-logos img:hover { opacity: 1; transform: translateY(-2px); }
-    @media (max-width: 680px) {
-      .header-inner { flex-direction: column; align-items: stretch; }
-      .header-nav { justify-content: center; order: 2; }
-      .header-logos { order: 3; justify-content: center; }
-    }
+        /* ===== HEADER ===== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--header-bg);
+            backdrop-filter: var(--glass-blur);
+            border-bottom: var(--glass-border);
+            padding: 12px 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        @media (min-width:768px) {
+            header {
+                padding: 16px 24px;
+            }
+        }
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .header-left .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        .header-left .logo-text {
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: -0.5px;
+        }
+        .header-left .logo-text span:last-child {
+            color: var(--accent);
+        }
+        .header-nav {
+            display: flex;
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(4px);
+            padding: 6px 16px;
+            border-radius: 60px;
+            border: var(--glass-border);
+        }
+        body.light-mode .header-nav {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .nav-link {
+            font-weight: 600;
+            font-size: 14px;
+            padding: 8px 14px;
+            border-radius: 40px;
+            transition: 0.2s;
+            color: var(--text);
+            text-decoration: none;
+        }
+        .nav-link:hover {
+            background: var(--accent);
+            color: #000;
+            transform: translateY(-2px);
+        }
+        .header-logos {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        @media (min-width:768px) {
+            .header-logos {
+                gap: 20px;
+            }
+        }
+        .header-logos img {
+            width: 20px;
+            transition: var(--transition);
+        }
+        body:not(.light-mode) .header-logos img {
+            filter: invert(1);
+            opacity: 0.7;
+        }
+        body.light-mode .header-logos img {
+            filter: none;
+            opacity: 0.8;
+        }
+        .header-logos img:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+        @media (max-width:680px) {
+            .header-inner {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .header-nav {
+                justify-content: center;
+                order: 2;
+            }
+            .header-logos {
+                order: 3;
+                justify-content: center;
+            }
+        }
 
-    /* ===== BANNER, CARDS, ETC. ===== */
-    .banner {
-      position: relative;
-      min-height: auto;
-      padding: 20px 0 40px;
-      display: flex;
-      align-items: center;
-      background: var(--bg);
-      overflow: hidden;
-    }
-    @media (min-width: 768px) { .banner { min-height: 700px; padding: 0; } }
-    .banner-bg { position: absolute; inset: 0; z-index: 0; }
-    .banner-bg .shape {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.4;
-    }
-    body.light-mode .banner-bg .shape { opacity: 0.15; }
-    .shape-1 { width: 300px; height: 300px; background: #7928ca; top: -50px; left: -50px; animation: float 20s infinite alternate; }
-    @media (min-width: 768px) { .shape-1 { width: 400px; height: 400px; top: -100px; left: -100px; } }
-    .shape-2 { width: 350px; height: 350px; background: #ff0080; bottom: -80px; right: -80px; animation: float 25s infinite alternate-reverse; }
-    @media (min-width: 768px) { .shape-2 { width: 500px; height: 500px; bottom: -150px; right: -100px; } }
-    .shape-3 { width: 200px; height: 200px; background: var(--accent); top: 50%; left: 30%; filter: blur(80px); opacity: 0.2; animation: pulse 10s infinite; }
-    @media (min-width: 768px) { .shape-3 { width: 300px; height: 300px; filter: blur(100px); } }
-    @keyframes float { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(40px,30px) scale(1.1); } }
-    @keyframes pulse { 0%,100% { opacity:0.2; } 50% { opacity:0.3; } }
-    .banner::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc0IiBudW1PY3RhdmVzPSIzIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4wNCIgLz48L3N2Zz4=');
-      opacity: 0.15;
-      pointer-events: none;
-      z-index: 1;
-    }
-    .banner-container {
-      position: relative;
-      z-index: 2;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 20px 16px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      align-items: center;
-      width: 100%;
-    }
-    .banner-visual { order: -1; }
-    @media (min-width: 768px) {
-      .banner-container { padding: 40px 24px; grid-template-columns: 1fr 1fr; gap: 40px; }
-      .banner-visual { order: 0; }
-    }
-    .banner-content { max-width: 600px; }
-    .hero-title {
-      font-family: 'Clash Display', sans-serif;
-      font-weight: 700;
-      font-size: 40px;
-      line-height: 1.1;
-      margin-bottom: 12px;
-      letter-spacing: -1px;
-      color: var(--text);
-    }
-    @media (min-width: 768px) { .hero-title { font-size: clamp(48px, 8vw, 72px); margin-bottom: 16px; letter-spacing: -2px; } }
-    .hero-title span { color: var(--accent); text-shadow: var(--accent-glow); }
-    .hero-desc { font-size: 16px; color: var(--muted); margin-bottom: 24px; max-width: 500px; }
-    @media (min-width: 768px) { .hero-desc { font-size: 18px; margin-bottom: 32px; } }
-    .service-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 30px; }
-    @media (min-width: 768px) { .service-chips { gap: 12px; margin-bottom: 40px; } }
-    .chip {
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      border: var(--glass-border);
-      border-radius: 60px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text);
-      padding: 10px 18px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 44px;
-      min-height: 44px;
-    }
-    .chip.primary { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
-    .chip:hover { background: var(--accent); border-color: var(--accent); color: #000; transform: translateY(-2px); box-shadow: var(--accent-glow); }
-    .hero-stats { display: flex; gap: 24px; margin: 30px 0; flex-wrap: wrap; }
-    @media (min-width: 768px) { .hero-stats { gap: 48px; margin: 40px 0; } }
-    .stat-item h3 { font-size: 28px; font-weight: 800; font-family: 'Clash Display', sans-serif; color: var(--text); line-height: 1; margin-bottom: 4px; }
-    @media (min-width: 768px) { .stat-item h3 { font-size: 36px; } }
-    .stat-item p { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-    @media (min-width: 768px) { .stat-item p { font-size: 14px; } }
-    .social-row { display: flex; gap: 12px; flex-wrap: wrap; }
-    @media (min-width: 768px) { .social-row { gap: 16px; } }
-    .social-link {
-      border-radius: 50%;
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      border: var(--glass-border);
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.2s;
-    }
-    .social-link:hover { background: var(--accent); transform: translateY(-4px); }
-    .social-link img {
-      width: 20px;
-      filter: invert(1);
-      opacity: 0.8;
-      transition: 0.2s;
-    }
-    body.light-mode .social-link img { filter: invert(0.2); opacity: 0.9; }
-    .social-link:hover img { filter: invert(0); opacity: 1; }
-    body.light-mode .social-link:hover img { filter: invert(0); opacity: 1; }
-    .banner-visual { position: relative; display: flex; justify-content: center; align-items: center; }
-    .orb {
-      position: absolute;
-      width: 150px; height: 150px;
-      border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.4;
-      z-index: 1;
-    }
-    @media (min-width: 768px) { .orb { width: 200px; height: 200px; filter: blur(80px); } }
-    body.light-mode .orb { opacity: 0.15; }
-    .orb-1 { top: 10%; left: 5%; background: #ff4d4d; animation: orbPulse 4s ease-in-out infinite; }
-    .orb-2 { bottom: 5%; right: 5%; background: #4d79ff; animation: orbPulse 4s ease-in-out infinite reverse; }
-    @keyframes orbPulse { 0%,100% { opacity:0.3; transform:scale(1); } 50% { opacity:0.6; transform:scale(1.2); } }
-    .floating-image {
-      width: 100%; max-width: 400px;
-      filter: drop-shadow(0 0 10px rgba(255,216,77,0.4));
-      animation: levitate 6s ease-in-out infinite, glowPulse 4s ease-in-out infinite;
-      position: relative; z-index: 5;
-    }
-    @media (min-width: 768px) { .floating-image { max-width: 650px; filter: drop-shadow(0 0 15px rgba(255,216,77,0.5)); } }
-    body.light-mode .floating-image { filter: drop-shadow(0 0 10px rgba(234,179,8,0.2)); }
-    @keyframes levitate { 0% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(2deg); } 100% { transform: translateY(0) rotate(0deg); } }
-    @keyframes glowPulse { 0%,100% { filter: drop-shadow(0 0 10px rgba(255,216,77,0.4)); } 50% { filter: drop-shadow(0 0 15px rgba(255,216,77,0.6)); } }
-    .sticky-cta {
-      position: sticky; top: 70px; z-index: 900;
-      background: transparent; padding: 12px 0; text-align: center; width: 100%;
-    }
-    .btn-primary {
-      display: block; width: 100%;
-      background: var(--accent); color: #000; border: none;
-      padding: 14px 0; border-radius: 0;
-      font-weight: 700; font-size: 15px;
-      box-shadow: 0 10px 30px -10px rgba(255,216,77,0.3);
-      border: 1px solid rgba(255,216,77,0.3);
-      max-width: none; min-height: 44px;
-    }
-    @media (min-width: 768px) { .btn-primary { padding: 14px 0; font-size: 16px; } }
-    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 20px 30px -10px rgba(255,216,77,0.5); }
+        /* ===== BANNER, CARDS, ETC. ===== */
+        .banner {
+            position: relative;
+            min-height: auto;
+            padding: 20px 0 40px;
+            display: flex;
+            align-items: center;
+            background: var(--bg);
+            overflow: hidden;
+        }
+        @media (min-width:768px) {
+            .banner {
+                min-height: 700px;
+                padding: 0;
+            }
+        }
+        .banner-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .banner-bg .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+        }
+        body.light-mode .banner-bg .shape {
+            opacity: 0.15;
+        }
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: #7928ca;
+            top: -50px;
+            left: -50px;
+            animation: float 20s infinite alternate;
+        }
+        @media (min-width:768px) {
+            .shape-1 {
+                width: 400px;
+                height: 400px;
+                top: -100px;
+                left: -100px;
+            }
+        }
+        .shape-2 {
+            width: 350px;
+            height: 350px;
+            background: #ff0080;
+            bottom: -80px;
+            right: -80px;
+            animation: float 25s infinite alternate-reverse;
+        }
+        @media (min-width:768px) {
+            .shape-2 {
+                width: 500px;
+                height: 500px;
+                bottom: -150px;
+                right: -100px;
+            }
+        }
+        .shape-3 {
+            width: 200px;
+            height: 200px;
+            background: var(--accent);
+            top: 50%;
+            left: 30%;
+            filter: blur(80px);
+            opacity: 0.2;
+            animation: pulse 10s infinite;
+        }
+        @media (min-width:768px) {
+            .shape-3 {
+                width: 300px;
+                height: 300px;
+                filter: blur(100px);
+            }
+        }
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(40px, 30px) scale(1.1);
+            }
+        }
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+        .banner::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc0IiBudW1PY3RhdmVzPSIzIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4wNCIgLz48L3N2Zz4=');
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .banner-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            align-items: center;
+            width: 100%;
+        }
+        .banner-visual {
+            order: -1;
+        }
+        @media (min-width:768px) {
+            .banner-container {
+                padding: 40px 24px;
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+            .banner-visual {
+                order: 0;
+            }
+        }
+        .banner-content {
+            max-width: 600px;
+        }
+        .hero-title {
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 700;
+            font-size: 40px;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+            color: var(--text);
+        }
+        @media (min-width:768px) {
+            .hero-title {
+                font-size: clamp(48px, 8vw, 72px);
+                margin-bottom: 16px;
+                letter-spacing: -2px;
+            }
+        }
+        .hero-title span {
+            color: var(--accent);
+            text-shadow: var(--accent-glow);
+        }
+        .hero-desc {
+            font-size: 16px;
+            color: var(--muted);
+            margin-bottom: 24px;
+            max-width: 500px;
+        }
+        @media (min-width:768px) {
+            .hero-desc {
+                font-size: 18px;
+                margin-bottom: 32px;
+            }
+        }
+        .service-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+        @media (min-width:768px) {
+            .service-chips {
+                gap: 12px;
+                margin-bottom: 40px;
+            }
+        }
+        .chip {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: var(--glass-border);
+            border-radius: 60px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text);
+            padding: 10px 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            min-height: 44px;
+        }
+        .chip.primary {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+            font-weight: 600;
+        }
+        .chip:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: var(--accent-glow);
+        }
+        .hero-stats {
+            display: flex;
+            gap: 24px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        @media (min-width:768px) {
+            .hero-stats {
+                gap: 48px;
+                margin: 40px 0;
+            }
+        }
+        .stat-item h3 {
+            font-size: 28px;
+            font-weight: 800;
+            font-family: 'Clash Display', sans-serif;
+            color: var(--text);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        @media (min-width:768px) {
+            .stat-item h3 {
+                font-size: 36px;
+            }
+        }
+        .stat-item p {
+            font-size: 12px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        @media (min-width:768px) {
+            .stat-item p {
+                font-size: 14px;
+            }
+        }
+        .social-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        @media (min-width:768px) {
+            .social-row {
+                gap: 16px;
+            }
+        }
+        .social-link {
+            border-radius: 50%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: var(--glass-border);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .social-link:hover {
+            background: var(--accent);
+            transform: translateY(-4px);
+        }
+        .social-link img {
+            width: 20px;
+            filter: invert(1);
+            opacity: 0.8;
+            transition: 0.2s;
+        }
+        body.light-mode .social-link img {
+            filter: invert(0.2);
+            opacity: 0.9;
+        }
+        .social-link:hover img {
+            filter: invert(0);
+            opacity: 1;
+        }
+        body.light-mode .social-link:hover img {
+            filter: invert(0);
+            opacity: 1;
+        }
+        .banner-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .orb {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+            z-index: 1;
+        }
+        @media (min-width:768px) {
+            .orb {
+                width: 200px;
+                height: 200px;
+                filter: blur(80px);
+            }
+        }
+        body.light-mode .orb {
+            opacity: 0.15;
+        }
+        .orb-1 {
+            top: 10%;
+            left: 5%;
+            background: #ff4d4d;
+            animation: orbPulse 4s ease-in-out infinite;
+        }
+        .orb-2 {
+            bottom: 5%;
+            right: 5%;
+            background: #4d79ff;
+            animation: orbPulse 4s ease-in-out infinite reverse;
+        }
+        @keyframes orbPulse {
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.2);
+            }
+        }
+        .floating-image {
+            width: 100%;
+            max-width: 400px;
+            filter: drop-shadow(0 0 10px rgba(255, 216, 77, 0.4));
+            animation: levitate 6s ease-in-out infinite, glowPulse 4s ease-in-out infinite;
+            position: relative;
+            z-index: 5;
+        }
+        @media (min-width:768px) {
+            .floating-image {
+                max-width: 650px;
+                filter: drop-shadow(0 0 15px rgba(255, 216, 77, 0.5));
+            }
+        }
+        body.light-mode .floating-image {
+            filter: drop-shadow(0 0 10px rgba(234, 179, 8, 0.2));
+        }
+        @keyframes levitate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        @keyframes glowPulse {
+            0%,
+            100% {
+                filter: drop-shadow(0 0 10px rgba(255, 216, 77, 0.4));
+            }
+            50% {
+                filter: drop-shadow(0 0 15px rgba(255, 216, 77, 0.6));
+            }
+        }
+        .sticky-cta {
+            position: sticky;
+            top: 70px;
+            z-index: 900;
+            background: transparent;
+            padding: 12px 0;
+            text-align: center;
+            width: 100%;
+        }
+        .btn-primary {
+            display: block;
+            width: 100%;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 14px 0;
+            border-radius: 0;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 10px 30px -10px rgba(255, 216, 77, 0.3);
+            border: 1px solid rgba(255, 216, 77, 0.3);
+            max-width: none;
+            min-height: 44px;
+        }
+        @media (min-width:768px) {
+            .btn-primary {
+                padding: 14px 0;
+                font-size: 16px;
+            }
+        }
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 30px -10px rgba(255, 216, 77, 0.5);
+        }
 
-    /* ===== PREORDER CARDS ===== */
-    .hot-grid {
-      display: grid; gap: 14px;
-      grid-template-columns: repeat(3, 1fr);
-      margin: 0 auto; width: 100%;
-    }
-    #hot .hot-grid { gap: 20px; }
-    #preorder-console .hot-card .hot-title { font-size: clamp(12px, 4vw, 16px); white-space: normal; }
-    @media (max-width: 768px) {
-      .hot-grid { gap: 10px; }
-      #hot .hot-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    }
-    @media (max-width: 480px) {
-      .hot-grid { grid-template-columns: repeat(2, 1fr); }
-      #hot .hot-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (min-width: 600px) and (max-width: 1199px) {
-      .hot-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
-      #hot .hot-grid { grid-template-columns: repeat(3, minmax(220px, 1fr)); }
-    }
-    @media (min-width: 1200px) {
-      #preorder-console .hot-grid { grid-template-columns: repeat(6, minmax(140px, 1fr)); }
-      #hot .hot-grid { grid-template-columns: repeat(3, minmax(240px, 1fr)); }
-    }
-    .hot-card {
-      position: relative; border-radius: 20px; overflow: hidden;
-      background: #111; aspect-ratio: 4/5;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      transform-style: preserve-3d; perspective: 1000px;
-      will-change: transform; box-shadow: var(--card-shadow); cursor: pointer;
-    }
-    .hot-card:hover { transform: scale(1.05) translateY(-5px); z-index: 10; }
-    body.light-mode .hot-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-    .hot-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; transform: translateZ(20px); }
-    .hot-card .badge { transform: translateZ(30px); font-size: 9px; padding: 4px 8px; }
-    @media (min-width: 768px) { .hot-card .badge { font-size: 10px; padding: 6px 12px; } }
-    .hot-card-content {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 12px;
-      background: linear-gradient(transparent, rgba(0,0,0,0.5) 60%);
-      z-index: 4; transform: translateZ(20px); pointer-events: none;
-    }
-    .hot-title { font-weight: 800; font-size: 16px; margin-bottom: 6px; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
-    .hot-desc { font-size: 12px; color: rgba(255,255,255,0.9); text-shadow: 0 1px 4px rgba(0,0,0,0.7); font-weight: 600; }
-    .hot-price-row .hot-desc { color: var(--accent); font-weight: 800; }
-    .badge {
-      position: absolute; top: 10px; z-index: 6;
-      font-size: 9px; font-weight: 800; padding: 4px 8px; border-radius: 30px;
-    }
-    @media (min-width: 600px) { .badge { top: 15px; font-size: 10px; padding: 6px 12px; } }
-    .badge-left { left: 10px; background: rgba(255,255,255,0.9); color: #000; }
-    @media (min-width: 600px) { .badge-left { left: 15px; } }
-    .badge-right { right: 10px; background: var(--accent); color: #000; }
-    @media (min-width: 600px) { .badge-right { right: 15px; } }
+        /* ===== PREORDER CARDS ===== */
+        .hot-grid {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(3, 1fr);
+            margin: 0 auto;
+            width: 100%;
+        }
+        #hot .hot-grid {
+            gap: 20px;
+        }
+        #preorder-console .hot-card .hot-title {
+            font-size: clamp(12px, 4vw, 16px);
+            white-space: normal;
+        }
+        @media (max-width:768px) {
+            .hot-grid {
+                gap: 10px;
+            }
+            #hot .hot-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+        }
+        @media (max-width:480px) {
+            .hot-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            #hot .hot-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width:600px) and (max-width:1199px) {
+            .hot-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+            #hot .hot-grid {
+                grid-template-columns: repeat(3, minmax(220px, 1fr));
+            }
+        }
+        @media (min-width:1200px) {
+            #preorder-console .hot-grid {
+                grid-template-columns: repeat(6, minmax(140px, 1fr));
+            }
+            #hot .hot-grid {
+                grid-template-columns: repeat(3, minmax(240px, 1fr));
+            }
+        }
+        .hot-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #111;
+            aspect-ratio: 4/5;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            will-change: transform;
+            box-shadow: var(--card-shadow);
+            cursor: pointer;
+        }
+        .hot-card:hover {
+            transform: scale(1.05) translateY(-5px);
+            z-index: 10;
+        }
+        body.light-mode .hot-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .hot-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+            transform: translateZ(20px);
+        }
+        .hot-card .badge {
+            transform: translateZ(30px);
+            font-size: 9px;
+            padding: 4px 8px;
+        }
+        @media (min-width:768px) {
+            .hot-card .badge {
+                font-size: 10px;
+                padding: 6px 12px;
+            }
+        }
+        .hot-card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.5) 60%);
+            z-index: 4;
+            transform: translateZ(20px);
+            pointer-events: none;
+        }
+        .hot-title {
+            font-weight: 800;
+            font-size: 16px;
+            margin-bottom: 6px;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+        }
+        .hot-desc {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+            font-weight: 600;
+        }
+        .hot-price-row .hot-desc {
+            color: var(--accent);
+            font-weight: 800;
+        }
+        .badge {
+            position: absolute;
+            top: 10px;
+            z-index: 6;
+            font-size: 9px;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 30px;
+        }
+        @media (min-width:600px) {
+            .badge {
+                top: 15px;
+                font-size: 10px;
+                padding: 6px 12px;
+            }
+        }
+        .badge-left {
+            left: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+        }
+        @media (min-width:600px) {
+            .badge-left {
+                left: 15px;
+            }
+        }
+        .badge-right {
+            right: 10px;
+            background: var(--accent);
+            color: #000;
+        }
+        @media (min-width:600px) {
+            .badge-right {
+                right: 15px;
+            }
+        }
 
-    /* ============================================================ */
-    /* ===== SIMPLIFIED PROMO BANNER ===== */
-    /* ============================================================ */
-    .promo-banner {
-      padding: 16px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .promo-container {
-      background: var(--glass-bg);
-      backdrop-filter: var(--glass-blur);
-      border: var(--glass-border);
-      border-radius: 20px;
-      padding: 20px 24px;
-      box-shadow: var(--card-shadow);
-      text-align: center;
-      position: relative;
-    }
-    .promo-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 2px;
-    }
-    .promo-container h3 {
-      font-family: 'Clash Display', sans-serif;
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.3px;
-      margin: 0;
-    }
-    .promo-container h3 span {
-      color: var(--accent);
-    }
-    .limited-tag {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      background: #ff3b30;
-      color: #fff;
-      padding: 2px 12px;
-      border-radius: 30px;
-      letter-spacing: 0.5px;
-      display: inline-block;
-      animation: pulse-tag 1.8s ease-in-out infinite;
-      white-space: nowrap;
-    }
-    @keyframes pulse-tag {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.7; transform: scale(0.96); }
-    }
-    .promo-desc {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 16px;
-      margin-top: 4px;
-    }
-    .promo-desc strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-    .promo-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    @media (max-width: 600px) {
-      .promo-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    .promo-item {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      transition: all 0.25s ease;
-    }
-    .promo-item:hover {
-      border-color: var(--accent);
-      background: rgba(255,216,77,0.05);
-    }
-    .promo-item .item-info {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1px;
-    }
-    .promo-item .item-name {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .promo-item .item-spec {
-      font-size: 11px;
-      color: var(--muted);
-    }
-    .promo-item .item-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .promo-item .item-price {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--accent);
-      white-space: nowrap;
-    }
-    .btn-claim {
-      background: var(--accent);
-      color: #000;
-      border: none;
-      padding: 4px 14px;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 11px;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      min-height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .btn-claim:hover {
-      background: var(--accent-dark);
-      transform: scale(1.05);
-    }
-    @media (max-width: 480px) {
-      .promo-container {
-        padding: 14px 12px;
-      }
-      .promo-container h3 {
-        font-size: 18px;
-      }
-      .promo-item {
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-      .promo-item .item-right {
-        width: 100%;
-        justify-content: flex-end;
-      }
-      .limited-tag {
-        font-size: 10px;
-        padding: 1px 10px;
-      }
-    }
+        /* ============================================================ */
+        /* ===== SIMPLIFIED PROMO BANNER ===== */
+        /* ============================================================ */
+        .promo-banner {
+            padding: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .promo-container {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border: var(--glass-border);
+            border-radius: 20px;
+            padding: 20px 24px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            position: relative;
+        }
+        .promo-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 2px;
+        }
+        .promo-container h3 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.3px;
+            margin: 0;
+        }
+        .promo-container h3 span {
+            color: var(--accent);
+        }
+        .limited-tag {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: #ff3b30;
+            color: #fff;
+            padding: 2px 12px;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            animation: pulse-tag 1.8s ease-in-out infinite;
+            white-space: nowrap;
+        }
+        @keyframes pulse-tag {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(0.96);
+            }
+        }
+        .promo-desc {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 16px;
+            margin-top: 4px;
+        }
+        .promo-desc strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+        .promo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        @media (max-width:600px) {
+            .promo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .promo-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            transition: all 0.25s ease;
+        }
+        .promo-item:hover {
+            border-color: var(--accent);
+            background: rgba(255, 216, 77, 0.05);
+        }
+        .promo-item .item-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1px;
+        }
+        .promo-item .item-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .promo-item .item-spec {
+            font-size: 11px;
+            color: var(--muted);
+        }
+        .promo-item .item-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .promo-item .item-price {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+        .btn-claim {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 11px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            min-height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-claim:hover {
+            background: var(--accent-dark);
+            transform: scale(1.05);
+        }
+        @media (max-width:480px) {
+            .promo-container {
+                padding: 14px 12px;
+            }
+            .promo-container h3 {
+                font-size: 18px;
+            }
+            .promo-item {
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .promo-item .item-right {
+                width: 100%;
+                justify-content: flex-end;
+            }
+            .limited-tag {
+                font-size: 10px;
+                padding: 1px 10px;
+            }
+        }
 
-    /* ============================================================ */
-    /* ===== FAKE LIVE NOTIFICATION POPUP ===== */
-    /* ============================================================ */
-    #live-notification {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      z-index: 9997;
-      background: var(--glass-bg);
-      backdrop-filter: var(--glass-blur);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 12px 16px;
-      max-width: 320px;
-      width: 100%;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      transform: translateX(120%);
-      opacity: 0;
-      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
-      pointer-events: auto;
-    }
-    #live-notification.show {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    #live-notification .notif-icon {
-      width: 36px;
-      height: 36px;
-      min-width: 36px;
-      background: rgba(255,216,77,0.15);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-    #live-notification .notif-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-    #live-notification .notif-content .notif-name {
-      font-weight: 700;
-      font-size: 13px;
-      color: var(--text);
-    }
-    #live-notification .notif-content .notif-action {
-      font-size: 12px;
-      color: var(--muted);
-    }
-    #live-notification .notif-content .notif-item {
-      font-weight: 600;
-      font-size: 13px;
-      color: var(--accent);
-    }
-    #live-notification .notif-content .notif-time {
-      font-size: 10px;
-      color: var(--muted);
-      opacity: 0.6;
-      margin-top: 2px;
-    }
-    #live-notification .notif-close {
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1;
-      padding: 0 4px;
-      cursor: pointer;
-      opacity: 0.4;
-      transition: opacity 0.2s;
-      margin-top: -2px;
-    }
-    #live-notification .notif-close:hover {
-      opacity: 1;
-    }
-    @media (max-width: 480px) {
-      #live-notification {
-        max-width: 280px;
-        right: 10px;
-        bottom: 80px;
-        padding: 10px 12px;
-      }
-    }
+        /* ============================================================ */
+        /* ===== FAKE LIVE NOTIFICATION POPUP ===== */
+        /* ============================================================ */
+        #live-notification {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            z-index: 9997;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 12px 16px;
+            max-width: 320px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            transform: translateX(120%);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+            pointer-events: auto;
+        }
+        #live-notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        #live-notification .notif-icon {
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            background: rgba(255, 216, 77, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        #live-notification .notif-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        #live-notification .notif-content .notif-name {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--text);
+        }
+        #live-notification .notif-content .notif-action {
+            font-size: 12px;
+            color: var(--muted);
+        }
+        #live-notification .notif-content .notif-item {
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--accent);
+        }
+        #live-notification .notif-content .notif-time {
+            font-size: 10px;
+            color: var(--muted);
+            opacity: 0.6;
+            margin-top: 2px;
+        }
+        #live-notification .notif-close {
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1;
+            padding: 0 4px;
+            cursor: pointer;
+            opacity: 0.4;
+            transition: opacity 0.2s;
+            margin-top: -2px;
+        }
+        #live-notification .notif-close:hover {
+            opacity: 1;
+        }
+        @media (max-width:480px) {
+            #live-notification {
+                max-width: 280px;
+                right: 10px;
+                bottom: 80px;
+                padding: 10px 12px;
+            }
+        }
 
-    /* ===== TRADE SECTION ===== */
-    .trade-section {
-      position: relative; background-image: url('images/trade.webp');
-      background-size: cover; background-position: center;
-      border-radius: 24px; padding: 40px 24px; margin: 40px auto;
-      max-width: 1000px; text-align: center;
-      border: var(--glass-border); box-shadow: var(--card-shadow);
-    }
-    .trade-section::before {
-      content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
-      border-radius: 24px; z-index: 0;
-    }
-    body.light-mode .trade-section::before { background: rgba(0,0,0,0.3); }
-    .trade-section > * { position: relative; z-index: 1; }
-    .trade-title { font-size: 32px; font-weight: 800; margin-bottom: 16px; color: #fff; }
-    .trade-desc { font-size: 18px; color: rgba(255,255,255,0.9); margin-bottom: 24px; }
-    .trade-btn {
-      background: var(--accent); color: #000; border: none;
-      padding: 14px 36px; border-radius: 60px; font-weight: 700; font-size: 18px;
-      cursor: pointer; transition: var(--transition); display: inline-block;
-      min-width: 44px; min-height: 44px;
-    }
-    .trade-btn:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 20px 30px -10px rgba(255,216,77,0.5); }
+        /* ===== TRADE SECTION ===== */
+        .trade-section {
+            position: relative;
+            background-image: url('images/trade.webp');
+            background-size: cover;
+            background-position: center;
+            border-radius: 24px;
+            padding: 40px 24px;
+            margin: 40px auto;
+            max-width: 1000px;
+            text-align: center;
+            border: var(--glass-border);
+            box-shadow: var(--card-shadow);
+        }
+        .trade-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            border-radius: 24px;
+            z-index: 0;
+        }
+        body.light-mode .trade-section::before {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .trade-section>* {
+            position: relative;
+            z-index: 1;
+        }
+        .trade-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+        .trade-desc {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 24px;
+        }
+        .trade-btn {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 14px 36px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+            min-width: 44px;
+            min-height: 44px;
+        }
+        .trade-btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 30px -10px rgba(255, 216, 77, 0.5);
+        }
 
-    /* ===== GALLERY ===== */
-    #gallery { padding: 40px 16px !important; max-width: 1200px; margin: 0 auto; overflow: hidden; }
-    #gallery .swiper { width: 100%; padding: 30px 0 60px; overflow: visible; }
-    #gallery .swiper-slide {
-      width: clamp(180px, 35vw, 280px); height: auto; aspect-ratio: 3/4;
-      border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px -5px rgba(0,0,0,0.3);
-      border: 2px solid rgba(255,255,255,0.1); transition: border-color 0.3s ease; cursor: pointer;
-    }
-    #gallery .swiper-slide-active { border-color: var(--accent); }
-    #gallery .swiper-slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
-    #gallery .slide-caption {
-      position: absolute; bottom: 0; left: 0; right: 0; padding: 16px;
-      background: linear-gradient(transparent, rgba(0,0,0,0.7));
-      color: white; font-weight: 600; font-size: 14px; text-align: center;
-      backdrop-filter: blur(2px); transform: translateY(100%);
-      transition: transform 0.3s ease;
-    }
-    #gallery .swiper-slide-active .slide-caption { transform: translateY(0); }
-    #gallery .swiper-pagination-bullet { background: var(--text); opacity: 0.5; transition: all 0.3s ease; }
-    #gallery .swiper-pagination-bullet-active { background: var(--accent); opacity: 1; transform: scale(1.2); }
-    #gallery .swiper-button-next, #gallery .swiper-button-prev {
-      color: var(--accent); background: rgba(0,0,0,0.3);
-      width: 36px; height: 36px; border-radius: 50%; backdrop-filter: blur(4px);
-    }
-    #gallery .swiper-button-next:after, #gallery .swiper-button-prev:after { font-size: 16px; }
-    @media (max-width: 768px) {
-      #gallery .swiper-slide { width: clamp(150px, 40vw, 220px); }
-      #gallery .swiper-button-next, #gallery .swiper-button-prev { display: none; }
-    }
+        /* ===== GALLERY ===== */
+        #gallery {
+            padding: 40px 16px !important;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        #gallery .swiper {
+            width: 100%;
+            padding: 30px 0 60px;
+            overflow: visible;
+        }
+        #gallery .swiper-slide {
+            width: clamp(180px, 35vw, 280px);
+            height: auto;
+            aspect-ratio: 3/4;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: border-color 0.3s ease;
+            cursor: pointer;
+        }
+        #gallery .swiper-slide-active {
+            border-color: var(--accent);
+        }
+        #gallery .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        #gallery .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            backdrop-filter: blur(2px);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        #gallery .swiper-slide-active .slide-caption {
+            transform: translateY(0);
+        }
+        #gallery .swiper-pagination-bullet {
+            background: var(--text);
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+        #gallery .swiper-pagination-bullet-active {
+            background: var(--accent);
+            opacity: 1;
+            transform: scale(1.2);
+        }
+        #gallery .swiper-button-next,
+        #gallery .swiper-button-prev {
+            color: var(--accent);
+            background: rgba(0, 0, 0, 0.3);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            backdrop-filter: blur(4px);
+        }
+        #gallery .swiper-button-next:after,
+        #gallery .swiper-button-prev:after {
+            font-size: 16px;
+        }
+        @media (max-width:768px) {
+            #gallery .swiper-slide {
+                width: clamp(150px, 40vw, 220px);
+            }
+            #gallery .swiper-button-next,
+            #gallery .swiper-button-prev {
+                display: none;
+            }
+        }
 
-    /* ===== PAYMENT SECTION ===== */
-    #payment { padding: 40px 16px; max-width: 1200px; margin: 0 auto; text-align: center; }
-    .trust-badges { display: flex; justify-content: center; gap: 24px; margin: 30px 0 20px; flex-wrap: wrap; }
-    .trust-badge { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text); }
-    .trust-badge .icon { font-size: 1.2em; line-height: 1; }
-    .payment-icons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 20px; }
-    .payment-item {
-      background: var(--glass-bg); backdrop-filter: blur(8px);
-      padding: 8px 20px; border-radius: 40px; border: var(--glass-border);
-      font-size: 14px; font-weight: 500; color: var(--text);
-    }
+        /* ===== PAYMENT SECTION ===== */
+        #payment {
+            padding: 40px 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 30px 0 20px;
+            flex-wrap: wrap;
+        }
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text);
+        }
+        .trust-badge .icon {
+            font-size: 1.2em;
+            line-height: 1;
+        }
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .payment-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            padding: 8px 20px;
+            border-radius: 40px;
+            border: var(--glass-border);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+        }
 
-    /* ===== FAQ SECTION ===== */
-    #faq { padding: 40px 16px; max-width: 800px; margin: 0 auto; }
-    .faq-item { border-bottom: 1px solid var(--border-color); padding: 16px 0; }
-    .faq-question {
-      display: flex; justify-content: space-between; align-items: center;
-      font-weight: 700; font-size: 16px; cursor: pointer;
-      padding: 8px 0; color: var(--text);
-    }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; color: var(--muted); font-size: 14px; line-height: 1.6; }
-    .faq-answer.open { max-height: 200px; padding-top: 12px; }
-    .faq-icon { transition: transform 0.3s ease; display: inline-block; }
-    .faq-icon.open { transform: rotate(45deg); }
+        /* ===== FAQ SECTION ===== */
+        #faq {
+            padding: 40px 16px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 0;
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 8px 0;
+            color: var(--text);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .faq-answer.open {
+            max-height: 200px;
+            padding-top: 12px;
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .faq-icon.open {
+            transform: rotate(45deg);
+        }
 
-    /* ===== MODAL & LIGHTBOX ===== */
-    .modal {
-      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.4); backdrop-filter: blur(16px); z-index: 10002;
-      align-items: center; justify-content: center; overflow-y: auto; padding: 16px;
-    }
-    .modal.show { display: flex; }
-    .modal-content {
-      background: var(--card-bg); backdrop-filter: var(--glass-blur);
-      border: var(--glass-border); border-radius: 28px;
-      width: 100%; max-width: 500px; padding: 20px;
-      position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-      max-height: calc(100vh - 32px); overflow-y: auto;
-    }
-    .modal-img {
-      width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
-      border-radius: 20px; margin-bottom: 16px; cursor: pointer; max-height: 35vh;
-    }
-    @media (min-width: 768px) {
-      .modal-content { max-width: 800px; display: flex; flex-direction: row; align-items: flex-start; gap: 24px; padding: 24px; max-height: 90vh; }
-      .modal-content .modal-img { width: 45%; max-width: 350px; flex-shrink: 0; max-height: none; }
-      .modal-content .modal-details { flex: 1; display: flex; flex-direction: column; min-height: 0; overflow-y: auto; }
-    }
-    .modal-title { font-size: 22px; font-weight: 800; margin: 8px 0 6px; color: var(--text); }
-    .modal-price { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--accent); }
-    .modal-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
-    .modal-specs { margin: 12px 0; border-top: 1px solid var(--border-color); padding-top: 12px; }
-    .modal-specs ul { list-style: none; padding-left: 0; }
-    .modal-specs li { margin-bottom: 8px; font-size: 13px; color: var(--muted); display: flex; align-items: baseline; gap: 8px; }
-    .modal-specs li strong { color: var(--text); min-width: 90px; font-weight: 600; }
-    .warranty-badge {
-      margin-top: 12px; background: rgba(255,216,77,0.15);
-      padding: 8px 12px; border-radius: 40px; font-size: 12px;
-      text-align: center; color: var(--accent); font-weight: 600;
-    }
-    .modal-reserve {
-      background: var(--accent); color: #000; border: none;
-      padding: 12px 24px; border-radius: 60px; font-weight: 700;
-      font-size: 16px; cursor: pointer; width: 100%;
-      transition: transform 0.2s, background 0.2s; margin-top: 16px;
-    }
-    .modal-reserve:hover { background: var(--accent-dark); transform: translateY(-2px); }
-    .modal-lightbox {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6); backdrop-filter: blur(20px);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 10003; visibility: hidden; opacity: 0;
-      transition: visibility 0.2s, opacity 0.25s ease; cursor: pointer;
-    }
-    .modal-lightbox.active { visibility: visible; opacity: 1; }
-    .modal-lightbox-img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 24px; box-shadow: 0 30px 45px rgba(0,0,0,0.4); border: 3px solid rgba(255,255,255,0.1); }
-    #imageModal {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(12px); z-index: 10001;
-      display: none; align-items: center; justify-content: center; cursor: zoom-out;
-    }
-    #imageModal.show { display: flex; }
-    #modalImg { max-width: 90vw; max-height: 90vh; border-radius: 20px; }
-    .back-to-top {
-      position: fixed; bottom: 30px; right: 30px;
-      width: 50px; height: 50px; border-radius: 50%;
-      background: var(--accent); color: #000; border: none;
-      font-size: 24px; display: flex; align-items: center; justify-content: center;
-      cursor: pointer; opacity: 0; visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-      z-index: 999; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-    .back-to-top.visible { opacity: 1; visibility: visible; }
-    .reveal {
-      opacity: 0; transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .reveal.active { opacity: 1; transform: translateY(0); }
-    footer {
-      text-align: center; padding: 30px 20px;
-      color: var(--muted); font-size: 13px;
-      border-top: 1px solid var(--border-color);
-    }
-    section:not(#gallery):not(#payment):not(#faq) { padding: 40px 16px; max-width: 1200px; margin: 0 auto; }
-    .section-title {
-      font-size: 28px; font-weight: 800; font-family: 'Clash Display', sans-serif;
-      margin-bottom: 8px; color: var(--text);
-    }
-    .section-subtitle {
-      font-size: 13px; color: var(--accent); margin-bottom: 20px;
-      opacity: 0.9; letter-spacing: 1px; text-transform: uppercase;
-    }
-    @media (max-width: 380px) {
-      .hero-title { font-size: 32px; }
-      .stat-item h3 { font-size: 24px; }
-      .chip { padding: 6px 12px; font-size: 12px; }
-      .music-toggle { bottom: 20px; left: 20px; width: 38px; height: 38px; font-size: 18px; }
-    }
-  </style>
+        /* ===== MODAL & LIGHTBOX ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(16px);
+            z-index: 10002;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        .modal.show {
+            display: flex;
+        }
+        .modal-content {
+            background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            border: var(--glass-border);
+            border-radius: 28px;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            max-height: calc(100vh - 32px);
+            overflow-y: auto;
+        }
+        .modal-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            cursor: pointer;
+            max-height: 35vh;
+        }
+        @media (min-width:768px) {
+            .modal-content {
+                max-width: 800px;
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 24px;
+                padding: 24px;
+                max-height: 90vh;
+            }
+            .modal-content .modal-img {
+                width: 45%;
+                max-width: 350px;
+                flex-shrink: 0;
+                max-height: none;
+            }
+            .modal-content .modal-details {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                min-height: 0;
+                overflow-y: auto;
+            }
+        }
+        .modal-title {
+            font-size: 22px;
+            font-weight: 800;
+            margin: 8px 0 6px;
+            color: var(--text);
+        }
+        .modal-price {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
+        .modal-subtitle {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        .modal-specs {
+            margin: 12px 0;
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+        }
+        .modal-specs ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .modal-specs li {
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: var(--muted);
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .modal-specs li strong {
+            color: var(--text);
+            min-width: 90px;
+            font-weight: 600;
+        }
+        .warranty-badge {
+            margin-top: 12px;
+            background: rgba(255, 216, 77, 0.15);
+            padding: 8px 12px;
+            border-radius: 40px;
+            font-size: 12px;
+            text-align: center;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .modal-reserve {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, background 0.2s;
+            margin-top: 16px;
+        }
+        .modal-reserve:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+        .modal-lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10003;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.2s, opacity 0.25s ease;
+            cursor: pointer;
+        }
+        .modal-lightbox.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-lightbox-img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 24px;
+            box-shadow: 0 30px 45px rgba(0, 0, 0, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+        }
+        #imageModal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(12px);
+            z-index: 10001;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+        }
+        #imageModal.show {
+            display: flex;
+        }
+        #modalImg {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 20px;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--muted);
+            font-size: 13px;
+            border-top: 1px solid var(--border-color);
+        }
+        section:not(#gallery):not(#payment):not(#faq) {
+            padding: 40px 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 28px;
+            font-weight: 800;
+            font-family: 'Clash Display', sans-serif;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        .section-subtitle {
+            font-size: 13px;
+            color: var(--accent);
+            margin-bottom: 20px;
+            opacity: 0.9;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        @media (max-width:380px) {
+            .hero-title {
+                font-size: 32px;
+            }
+            .stat-item h3 {
+                font-size: 24px;
+            }
+            .chip {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            .music-toggle {
+                bottom: 20px;
+                left: 20px;
+                width: 38px;
+                height: 38px;
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<audio id="bg-music" src="music/background.mp3" loop></audio>
-<button class="music-toggle" id="musicToggle">🎵</button>
-<div id="autoplayHint" class="autoplay-hint"><span>🎵</span> Tap anywhere to enable music</div>
+    <audio id="bg-music" src="music/background.mp3" loop></audio>
+    <button class="music-toggle" id="musicToggle">🎵</button>
+    <div id="autoplayHint" class="autoplay-hint"><span>🎵</span> Tap anywhere to enable music</div>
 
-<div id="imageModal"><img id="modalImg" src="" alt="Preview"></div>
-<div id="detailModal" class="modal">
-  <div class="modal-content">
-    <img id="modalProductImg" class="modal-img" src="" alt="Product">
-    <div class="modal-details">
-      <h2 id="modalProductTitle" class="modal-title"></h2>
-      <div id="modalProductPrice" class="modal-price"></div>
-      <div id="modalSubtitle" class="modal-subtitle"></div>
-      <div class="modal-specs"><ul id="modalSpecList"></ul><div id="modalWarranty" class="warranty-badge"></div></div>
-      <button id="modalReserveBtn" class="modal-reserve">Reserve Now</button>
-    </div>
-  </div>
-</div>
-<div id="modalLightbox" class="modal-lightbox">
-  <img id="modalLightboxImg" class="modal-lightbox-img" alt="Zoomed view">
-</div>
-
-<div class="lamp-container" id="lampContainer">
-  <div class="room">
-    <div class="rgb-sync" style="position: relative; width: 100%; height: 100%;">
-      <div class="wall-glow"></div>
-      <div class="lamp-assembly">
-        <div class="base"></div>
-        <div class="cord"></div>
-        <div class="shade-container">
-          <div class="shade-top"></div>
-          <div class="shade-body"><div class="rgb-ring"></div></div>
-          <div class="led-core"></div>
-          <div class="hologram-beam"></div>
+    <div id="imageModal"><img id="modalImg" src="" alt="Preview"></div>
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <img id="modalProductImg" class="modal-img" src="" alt="Product">
+            <div class="modal-details">
+                <h2 id="modalProductTitle" class="modal-title"></h2>
+                <div id="modalProductPrice" class="modal-price"></div>
+                <div id="modalSubtitle" class="modal-subtitle"></div>
+                <div class="modal-specs">
+                    <ul id="modalSpecList"></ul>
+                    <div id="modalWarranty" class="warranty-badge"></div>
+                </div>
+                <button id="modalReserveBtn" class="modal-reserve">Reserve Now</button>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
-
-<div class="back-to-top" id="backToTop">↑</div>
-
-<header>
-  <div class="header-inner">
-    <div class="header-left">
-      <img src="images/logo1.png" alt="FAZGAME Logo" class="logo-img" onerror="this.src='https://placehold.co/300x300/222/ffd84d?text=FAZGAME';">
-      <div class="logo-text"><span>FAZ</span><span>GAME</span></div>
-    </div>
-    <div class="header-nav">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="pc-builder.html" class="nav-link">PC Builder</a>
-      <a href="shop.html" class="nav-link">Shop</a>
-    </div>
-    <div class="header-logos">
-      <img src="https://api.iconify.design/simple-icons/playstation.svg" alt="PlayStation">
-      <img src="https://api.iconify.design/simple-icons/xbox.svg" alt="Xbox">
-      <img src="https://api.iconify.design/simple-icons/nintendoswitch.svg" alt="Nintendo Switch">
-      <img src="https://api.iconify.design/mdi/desktop-classic.svg" alt="PC">
-    </div>
-  </div>
-</header>
-
-<div class="banner">
-  <div class="banner-bg">
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-    <div class="shape shape-3"></div>
-  </div>
-  <div class="banner-container">
-    <div class="banner-content reveal">
-      <h1 class="hero-title">LEVEL UP<br>YOUR <span>GAMING</span></h1>
-      <p class="hero-desc">Pre‑order the latest consoles, custom PCs, and exclusive accessories.</p>
-      <div class="service-chips">
-        <span class="chip primary" data-scroll="hot">Custom PC Build</span>
-        <span class="chip" data-scroll="preorder-console">Preorder Consoles</span>
-        <span class="chip" data-scroll="trade-section">Trade-in</span>
-        <span class="chip" data-scroll="gallery">Gallery</span>
-        <span class="chip" data-scroll="payment">Payment</span>
-        <span class="chip" data-scroll="faq">FAQ</span>
-      </div>
-      <div class="hero-stats">
-        <div class="stat-item"><h3 data-target="50">0</h3><p>Custom Builds</p></div>
-        <div class="stat-item"><h3 data-target="500">0</h3><p>Happy Customers</p></div>
-        <div class="stat-item"><h3 data-target="4">0</h3><p>up to 4 Years Warranty</p></div>
-      </div>
-      <div class="social-row">
-        <a class="social-link" href="https://www.tiktok.com/@syazeone" target="_blank"><img src="https://api.iconify.design/simple-icons/tiktok.svg" alt="TikTok"></a>
-        <a class="social-link" href="https://wa.me/60163691936" target="_blank"><img src="https://api.iconify.design/simple-icons/whatsapp.svg" alt="WhatsApp"></a>
-        <a class="social-link" href="https://www.instagram.com/fazgame_empire/" target="_blank"><img src="https://api.iconify.design/simple-icons/instagram.svg" alt="Instagram"></a>
-        <a class="social-link" href="https://www.facebook.com/share/1DHZdLi62G/" target="_blank"><img src="https://api.iconify.design/simple-icons/facebook.svg" alt="Facebook"></a>
-        <a class="social-link" href="https://t.me/fazgameofficial" target="_blank"><img src="https://api.iconify.design/simple-icons/telegram.svg" alt="Telegram"></a>
-      </div>
-    </div>
-    <div class="banner-visual reveal">
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
-      <img class="floating-image" src="images/your-floating-image.png" alt="Your Custom Image" loading="eager" onerror="this.src='https://placehold.co/600x600/222/ffd84d?text=YOUR+IMAGE';">
-    </div>
-  </div>
-</div>
-
-<div class="sticky-cta">
-  <button id="cta-whatsapp" class="btn-primary">Chat on WhatsApp</button>
-</div>
-
-<section id="hot" class="reveal">
-  <h2 class="section-title">Preorder PC Builds</h2>
-  <div class="section-subtitle">Custom Gaming PCs • Built On Demand</div>
-  <div class="hot-grid" id="hotGrid">
-
-    <!-- ===== CARD 1: White Setup RTX 3050 ===== -->
-    <div class="hot-card" data-product='{"name":"PC Gaming White Setup RTX 3050 6GB","price":"RM2,300","image":"images/white-setup-rtx3050.webp","specs":["Processor: AMD Ryzen 5 2600","Graphics: RTX 3050 6GB","Motherboard: A520M","RAM: 16GB DDR4 2666Mhz","Storage: 256GB NVMe SSD","PSU: 500W Bronze 80+","Warranty: up to 4 Years"]}'>
-      <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/white-setup-rtx3050.webp" alt="White Setup RTX 3050 6GB" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=White+RTX+3050';">
-      <div class="hot-card-content"><div class="hot-title">White Setup RTX 3050</div><div class="hot-desc">RM2,300</div></div>
+    <div id="modalLightbox" class="modal-lightbox">
+        <img id="modalLightboxImg" class="modal-lightbox-img" alt="Zoomed view">
     </div>
 
-    <!-- ===== CARD 2: BLACK SETUP Custom LCD (RTX 3050) ===== -->
-    <div class="hot-card" data-product='{"name":"BLACK SETUP Custom LCD (RTX 3050 8GB)","price":"RM2,600","image":"images/pc1000.webp","specs":["Processor: AMD RYZEN 5 3600","Graphics: RTX 3050 8GB","RAM: 16GB DDR4","Storage: 256GB NVMe SSD","PSU: 500W Bronze 80+","Case: Black Custom LCD","Warranty: up to 4 Years"]}'>
-      <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/pc1000.webp" alt="BLACK SETUP RTX 3050" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM2600';">
-      <div class="hot-card-content"><div class="hot-title">BLACK SETUP Custom LCD</div><div class="hot-desc">RM2,600</div></div>
-    </div>
-
-    <!-- ===== CARD 3: PC GAMING White Setup RTX 5060 ===== -->
-    <div class="hot-card" data-product='{"name":"PC GAMING White Setup RTX 5060","price":"RM3,400","image":"images/pc-gaming-white-rtx5060.webp","specs":["Processor: AMD Ryzen 5 5600","Motherboard: MSI A520M","Graphics: MSI RTX 5060 8GB","RAM: 16GB DDR4 3200Mhz","Storage: Kingston 500GB NVMe SSD","PSU: 600W 80+","Tower Cooler: Custom LCD Screen","Casing: Aquaron Wibo","Warranty: up to 4 Years"]}'>
-      <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/pc-gaming-white-rtx5060.webp" alt="PC GAMING White RTX 5060" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=White+Gaming+RTX+5060';">
-      <div class="hot-card-content"><div class="hot-title">PC GAMING White RTX 5060</div><div class="hot-desc">RM3,400</div></div>
-    </div>
-
-    <!-- ===== CARD 4: Mini PC White Setup MATX ===== -->
-    <div class="hot-card" data-product='{"name":"Mini PC White Setup MATX","price":"RM3,600","image":"images/mini-white-setup.webp","specs":["Processor: AMD Ryzen 5 5600","Graphics: RTX 5060 8GB","RAM: 16GB DDR4","Storage: 512GB NVMe SSD","PSU: 650W 80+","Case: Deepcool CH160 Plus","Warranty: up to 4 Years"]}'>
-      <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/mini-white-setup.webp" alt="Mini PC White Setup MATX" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM3600';">
-      <div class="hot-card-content"><div class="hot-title">Mini PC White Setup MATX</div><div class="hot-desc">RM3,600</div></div>
-    </div>
-
-    <!-- ===== CARD 5: RTX 3070 Ti-WHITE SETUP ===== -->
-    <div class="hot-card" data-product='{"name":"RTX 3070 Ti-WHITE SETUP","price":"RM3,600","image":"images/techware_vx_prism.webp","specs":["Processor: AMD Ryzen 5 5600","Graphics: RTX 3070 Ti 8GB","RAM: 16GB DDR4","Storage: 512GB NVMe SSD","PSU: 600W Bronze 80+","Case: Techware VX Prism","Warranty: up to 4 Years"]}'>
-      <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/techware_vx_prism.webp" alt="Techware VX Prism RTX 3070 Ti" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM3600';">
-      <div class="hot-card-content"><div class="hot-title">RTX 3070 Ti-WHITE SETUP</div><div class="hot-desc">RM3,600</div></div>
-    </div>
-
-    <!-- ===== CARD 6: BLACK SETUP Custom LCD (RTX 5060) ===== -->
-    <div class="hot-card" data-product='{"name":"BLACK SETUP Custom LCD (RTX 5060)","price":"RM3,700","image":"images/pc-black-rtx5060.webp","specs":["Processor: AMD Ryzen 5 5600","Graphics: RTX 5060 8GB","RAM: 16GB DDR4","Storage: 512GB NVMe SSD","PSU: 600W 80+","Case: Black Custom LCD","Warranty: up to 4 Years"]}'>
-      <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/pc-black-rtx5060.webp" alt="BLACK SETUP RTX 5060" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Black+RTX+5060';">
-      <div class="hot-card-content"><div class="hot-title">BLACK SETUP Custom LCD</div><div class="hot-desc">RM3,700</div></div>
-    </div>
-
-    <!-- ===== CARD 7: WHITE SETUP Custom LCD (RTX 5060) ===== -->
-    <div class="hot-card" data-product='{"name":"WHITE SETUP Custom LCD (RTX 5060)","price":"RM3,750","image":"images/pc2000.webp","specs":["Processor: AMD Ryzen 5 5600","Graphics: RTX 5060 8GB","RAM: 16GB DDR4","Storage: 512GB NVMe SSD","PSU: 600W 80+","Case: White Custom LCD","Warranty: up to 4 Years"]}'>
-      <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/pc2000.webp" alt="WHITE SETUP RTX 5060" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM3750';">
-      <div class="hot-card-content"><div class="hot-title">WHITE SETUP Custom LCD</div><div class="hot-desc">RM3,750</div></div>
-    </div>
-
-    <!-- ===== CARD 8: BLACK SETUP Custom LCD (RTX 5060 Ti) ===== -->
-    <div class="hot-card" data-product='{"name":"BLACK SETUP Custom LCD (RTX 5060 Ti)","price":"RM4,100","image":"images/pc3000.webp","specs":["Processor: AMD Ryzen 5 5600","Graphics: RTX 5060 Ti 8GB","RAM: 16GB DDR4","Storage: 512GB NVMe SSD","PSU: 650W Bronze 80+","Case: Black Custom LCD","Warranty: up to 4 Years"]}'>
-      <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/pc3000.webp" alt="BLACK SETUP RTX 5060 Ti" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM4100';">
-      <div class="hot-card-content"><div class="hot-title">BLACK SETUP Custom LCD</div><div class="hot-desc">RM4,100</div></div>
-    </div>
-
-    <!-- ===== CARD 9: Coolman Spectra LCD ===== -->
-    <div class="hot-card" data-product='{"name":"Coolman Spectra LCD (RTX 5060 Ti / R5 5600X)","price":"RM4,600","image":"images/pc4500.webp","specs":["Processor: AMD Ryzen 5 5600X","Graphics: RTX 5060 Ti 8GB","RAM: 16GB DDR4","Storage: 512GB NVMe SSD","PSU: 650W Bronze 80+","Case: Coolman Spectra","Warranty: up to 4 Years"]}'>
-      <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/pc4500.webp" alt="Coolman Spectra RTX 5060 Ti" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM4600';">
-      <div class="hot-card-content"><div class="hot-title">Coolman Spectra LCD</div><div class="hot-desc">RM4,600</div></div>
-    </div>
-
-    <!-- ===== CARD 10: AM5 Panorama LCD ===== -->
-    <div class="hot-card" data-product='{"name":"SETUP AM5 Panorama LCD Screen RTX 5060TI 16GB","price":"RM6,400","image":"images/am5-panorama.webp","specs":["Processor: AMD Ryzen 5 7500F","Motherboard: B650M Gaming Wifi","Graphics: RTX 5060TI 16GB","RAM: 16GB DDR5 6000Mhz","Storage: 512GB NVMe SSD","PSU: 650W Bronze 80+","Warranty: up to 4 Years"]}'>
-      <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/am5-panorama.webp" alt="AM5 Panorama RTX 5060TI" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=AM5+Panorama';">
-      <div class="hot-card-content"><div class="hot-title">AM5 Panorama LCD</div><div class="hot-desc">RM6,400</div></div>
-    </div>
-
-    <!-- ===== CARD 11: HIGH END SETUP AM5 ===== -->
-    <div class="hot-card" data-product='{"name":"HIGH END SETUP AM5 32GB RTX 5060TI 16GB","price":"RM7,500","image":"images/high-end-am5.webp","specs":["Processor: AMD Ryzen 5 7500F","Motherboard: B850M Gaming Wifi","Graphics: RTX 5060TI 16GB","RAM: 32GB DDR5 6000Mhz","Storage: 1TB Gen 4 NVMe SSD","PSU: 650W Bronze 80+","Case: Touch Screen LCD","Warranty: up to 4 Years"]}'>
-      <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/high-end-am5.webp" alt="HIGH END SETUP AM5" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=AM5+RTX+5060TI+16GB';">
-      <div class="hot-card-content"><div class="hot-title">HIGH END SETUP AM5</div><div class="hot-desc">RM7,500</div></div>
-    </div>
-
-    <!-- ===== CARD 12: Custom PC ===== -->
-    <div class="hot-card" data-product='{"name":"Custom PC","price":"Custom Price","image":"images/custompc.webp","specs":["Build your dream rig","Choose CPU, GPU, RAM, Storage","Free assembly & testing","RGB lighting optional","Warranty: up to 4 Years","Personalized cable management"]}'>
-      <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/custompc.webp" alt="Custom PC" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Custom+PC';">
-      <div class="hot-card-content"><div class="hot-title">Custom PC</div><div class="hot-desc">Free Setup</div></div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- ===== PROMO BANNER ===== -->
-<!-- ============================================================ -->
-<section id="promo-banner" class="reveal promo-banner">
-  <div class="promo-container">
-    <div class="promo-header">
-      <h3>SPECIAL <span>UPGRADE</span> OFFERS</h3>
-      <span class="limited-tag">⏳ Limited Time</span>
-    </div>
-    <p class="promo-desc">Full Set Package (<strong>Monitor</strong> + Free Keyboard &amp; Mouse)</p>
-    <div class="promo-grid">
-      <div class="promo-item">
-        <div class="item-info">
-          <span class="item-name">Gigabyte 24” FHD</span>
-          <span class="item-spec">144Hz</span>
+    <div class="lamp-container" id="lampContainer">
+        <div class="room">
+            <div class="rgb-sync" style="position:relative;width:100%;height:100%;">
+                <div class="wall-glow"></div>
+                <div class="lamp-assembly">
+                    <div class="base"></div>
+                    <div class="cord"></div>
+                    <div class="shade-container">
+                        <div class="shade-top"></div>
+                        <div class="shade-body"><div class="rgb-ring"></div></div>
+                        <div class="led-core"></div>
+                        <div class="hologram-beam"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="item-right">
-          <span class="item-price">+RM300</span>
-          <button class="btn-claim" data-monitor="Gigabyte 24” FHD 144Hz">Claim</button>
+    </div>
+
+    <div class="back-to-top" id="backToTop">↑</div>
+
+    <header>
+        <div class="header-inner">
+            <div class="header-left">
+                <img src="images/logo1.png" alt="FAZGAME Logo" class="logo-img" onerror="this.src='https://placehold.co/300x300/222/ffd84d?text=FAZGAME';">
+                <div class="logo-text"><span>FAZ</span><span>GAME</span></div>
+            </div>
+            <div class="header-nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="pc-builder.html" class="nav-link">PC Builder</a>
+                <a href="shop.html" class="nav-link">Shop</a>
+            </div>
+            <div class="header-logos">
+                <img src="https://api.iconify.design/simple-icons/playstation.svg" alt="PlayStation">
+                <img src="https://api.iconify.design/simple-icons/xbox.svg" alt="Xbox">
+                <img src="https://api.iconify.design/simple-icons/nintendoswitch.svg" alt="Nintendo Switch">
+                <img src="https://api.iconify.design/mdi/desktop-classic.svg" alt="PC">
+            </div>
         </div>
-      </div>
-      <div class="promo-item">
-        <div class="item-info">
-          <span class="item-name">MSI 27” FHD</span>
-          <span class="item-spec">144Hz</span>
+    </header>
+
+    <div class="banner">
+        <div class="banner-bg">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
         </div>
-        <div class="item-right">
-          <span class="item-price">+RM400</span>
-          <button class="btn-claim" data-monitor="MSI 27” FHD 144Hz">Claim</button>
+        <div class="banner-container">
+            <div class="banner-content reveal">
+                <h1 class="hero-title">LEVEL UP<br>YOUR <span>GAMING</span></h1>
+                <p class="hero-desc">Pre‑order the latest consoles, custom PCs, and exclusive accessories.</p>
+                <div class="service-chips">
+                    <span class="chip primary" data-scroll="hot">Custom PC Build</span>
+                    <span class="chip" data-scroll="preorder-console">Preorder Consoles</span>
+                    <span class="chip" data-scroll="trade-section">Trade-in</span>
+                    <span class="chip" data-scroll="gallery">Gallery</span>
+                    <span class="chip" data-scroll="payment">Payment</span>
+                    <span class="chip" data-scroll="faq">FAQ</span>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item"><h3 data-target="50">0</h3><p>Custom Builds</p></div>
+                    <div class="stat-item"><h3 data-target="500">0</h3><p>Happy Customers</p></div>
+                    <div class="stat-item"><h3 data-target="4">0</h3><p>up to 4 Years Warranty</p></div>
+                </div>
+                <div class="social-row">
+                    <a class="social-link" href="https://www.tiktok.com/@syazeone" target="_blank"><img src="https://api.iconify.design/simple-icons/tiktok.svg" alt="TikTok"></a>
+                    <a class="social-link" href="https://wa.me/60163691936" target="_blank"><img src="https://api.iconify.design/simple-icons/whatsapp.svg" alt="WhatsApp"></a>
+                    <a class="social-link" href="https://www.instagram.com/fazgame_empire/" target="_blank"><img src="https://api.iconify.design/simple-icons/instagram.svg" alt="Instagram"></a>
+                    <a class="social-link" href="https://www.facebook.com/share/1DHZdLi62G/" target="_blank"><img src="https://api.iconify.design/simple-icons/facebook.svg" alt="Facebook"></a>
+                    <a class="social-link" href="https://t.me/fazgameofficial" target="_blank"><img src="https://api.iconify.design/simple-icons/telegram.svg" alt="Telegram"></a>
+                </div>
+            </div>
+            <div class="banner-visual reveal">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+                <img class="floating-image" src="images/your-floating-image.png" alt="Your Custom Image" loading="eager" onerror="this.src='https://placehold.co/600x600/222/ffd84d?text=YOUR+IMAGE';">
+            </div>
         </div>
-      </div>
-      <div class="promo-item">
-        <div class="item-info">
-          <span class="item-name">Gigabyte 27” QHD</span>
-          <span class="item-spec">180Hz</span>
+    </div>
+
+    <div class="sticky-cta">
+        <button id="cta-whatsapp" class="btn-primary">Chat on WhatsApp</button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ===== PREORDER PC BUILDS – UPDATED ===== -->
+    <!-- ============================================================ -->
+    <section id="hot" class="reveal">
+        <h2 class="section-title">Preorder PC Builds</h2>
+        <div class="section-subtitle">Custom Gaming PCs • Built On Demand</div>
+        <div class="hot-grid" id="hotGrid">
+
+            <!-- CARD 1: White Setup RTX 3050 (unchanged) -->
+            <div class="hot-card" data-product='{"name":"PC Gaming White Setup RTX 3050 6GB","price":"RM2,300","image":"images/white-setup-rtx3050.webp","specs":["Processor: AMD Ryzen 5 2600","Graphics: RTX 3050 6GB","Motherboard: A520M","RAM: 16GB DDR4 2666Mhz","Storage: 256GB NVMe SSD","PSU: 500W Bronze 80+","Warranty: up to 4 Years"]}'>
+                <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/white-setup-rtx3050.webp" alt="White Setup RTX 3050 6GB" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=White+RTX+3050';">
+                <div class="hot-card-content">
+                    <div class="hot-title">White Setup RTX 3050</div>
+                    <div class="hot-desc">RM2,300</div>
+                </div>
+            </div>
+
+            <!-- CARD 2: Black Setup RTX 3060TI 8GB (formerly BLACK SETUP Custom LCD RTX 3050) -->
+            <div class="hot-card" data-product='{"name":"Black Setup RTX 3060TI 8GB","price":"RM3,200","image":"images/pc1000.webp","specs":["Processor: AMD Ryzen 5 3500X","Graphics: RTX 3060TI 8GB","RAM: DDR4 16GB 3200Mhz","Storage: 512GB NVMe SSD","PSU: 600W Bronze 80+","Warranty: up to 4 Years"]}'>
+                <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/pc1000.webp" alt="Black Setup RTX 3060TI" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Black+RTX+3060TI';">
+                <div class="hot-card-content">
+                    <div class="hot-title">Black Setup RTX 3060TI</div>
+                    <div class="hot-desc">RM3,200</div>
+                </div>
+            </div>
+
+            <!-- CARD 3: PC GAMING White RTX 5060 (updated specs + price) -->
+            <div class="hot-card" data-product='{"name":"PC GAMING White Setup RTX 5060","price":"RM3,450","image":"images/pc-gaming-white-rtx5060.webp","specs":["Processor: AMD Ryzen 5 5500","Graphics: Zotac RTX 5060 8GB","RAM: DDR4 16GB 3200Mhz","Storage: 512GB NVMe SSD","PSU: 600W Bronze 80+","Warranty: up to 4 Years"]}'>
+                <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/pc-gaming-white-rtx5060.webp" alt="PC GAMING White RTX 5060" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=White+Gaming+RTX+5060';">
+                <div class="hot-card-content">
+                    <div class="hot-title">PC GAMING White RTX 5060</div>
+                    <div class="hot-desc">RM3,450</div>
+                </div>
+            </div>
+
+            <!-- CARD 4: Mini PC White Setup MATX – DELETED -->
+
+            <!-- CARD 5: RTX 3070 Ti-WHITE SETUP (processor → Ryzen 5500) -->
+            <div class="hot-card" data-product='{"name":"RTX 3070 Ti-WHITE SETUP","price":"RM3,600","image":"images/techware_vx_prism.webp","specs":["Processor: AMD Ryzen 5 5500","Graphics: RTX 3070 Ti 8GB","RAM: 16GB DDR4","Storage: 512GB NVMe SSD","PSU: 600W Bronze 80+","Case: Techware VX Prism","Warranty: up to 4 Years"]}'>
+                <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/techware_vx_prism.webp" alt="Techware VX Prism RTX 3070 Ti" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM3600';">
+                <div class="hot-card-content">
+                    <div class="hot-title">RTX 3070 Ti-WHITE SETUP</div>
+                    <div class="hot-desc">RM3,600</div>
+                </div>
+            </div>
+
+            <!-- CARD 6: BLACK SETUP Custom LCD (RTX 5060) – DELETED -->
+
+            <!-- CARD 7: WHITE SETUP Custom LCD (RTX 5060) (price RM3850, processor Ryzen 5500) -->
+            <div class="hot-card" data-product='{"name":"WHITE SETUP Custom LCD (RTX 5060)","price":"RM3,850","image":"images/pc2000.webp","specs":["Processor: AMD Ryzen 5 5500","Graphics: RTX 5060 8GB","RAM: 16GB DDR4","Storage: 512GB NVMe SSD","PSU: 600W 80+","Case: White Custom LCD","Warranty: up to 4 Years"]}'>
+                <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/pc2000.webp" alt="WHITE SETUP RTX 5060" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM3850';">
+                <div class="hot-card-content">
+                    <div class="hot-title">WHITE SETUP Custom LCD</div>
+                    <div class="hot-desc">RM3,850</div>
+                </div>
+            </div>
+
+            <!-- CARD 8: BLACK SETUP Custom LCD (RTX 5060 Ti) (price RM4000, processor Ryzen 5500) -->
+            <div class="hot-card" data-product='{"name":"BLACK SETUP Custom LCD (RTX 5060 Ti)","price":"RM4,000","image":"images/pc3000.webp","specs":["Processor: AMD Ryzen 5 5500","Graphics: RTX 5060 Ti 8GB","RAM: 16GB DDR4","Storage: 512GB NVMe SSD","PSU: 650W Bronze 80+","Case: Black Custom LCD","Warranty: up to 4 Years"]}'>
+                <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/pc3000.webp" alt="BLACK SETUP RTX 5060 Ti" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM4000';">
+                <div class="hot-card-content">
+                    <div class="hot-title">BLACK SETUP Custom LCD</div>
+                    <div class="hot-desc">RM4,000</div>
+                </div>
+            </div>
+
+            <!-- CARD 9: Coolman Spectra LCD (RTX 5060) – renamed, price RM4150, updated specs -->
+            <div class="hot-card" data-product='{"name":"Coolman Spectra LCD (RTX 5060)","price":"RM4,150","image":"images/pc4500.webp","specs":["Processor: AMD Ryzen 5 5500","Graphics: RTX 5060 8GB","RAM: 16GB DDR4","Storage: 512GB NVMe SSD","PSU: 600W Bronze 80+","Case: Coolman Spectra","Warranty: up to 4 Years"]}'>
+                <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/pc4500.webp" alt="Coolman Spectra RTX 5060" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM4150';">
+                <div class="hot-card-content">
+                    <div class="hot-title">Coolman Spectra LCD</div>
+                    <div class="hot-desc">RM4,150</div>
+                </div>
+            </div>
+
+            <!-- CARD 10: AM5 Panorama LCD (unchanged) -->
+            <div class="hot-card" data-product='{"name":"SETUP AM5 Panorama LCD Screen RTX 5060TI 16GB","price":"RM6,400","image":"images/am5-panorama.webp","specs":["Processor: AMD Ryzen 5 7500F","Motherboard: B650M Gaming Wifi","Graphics: RTX 5060TI 16GB","RAM: 16GB DDR5 6000Mhz","Storage: 512GB NVMe SSD","PSU: 650W Bronze 80+","Warranty: up to 4 Years"]}'>
+                <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/am5-panorama.webp" alt="AM5 Panorama RTX 5060TI" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=AM5+Panorama';">
+                <div class="hot-card-content">
+                    <div class="hot-title">AM5 Panorama LCD</div>
+                    <div class="hot-desc">RM6,400</div>
+                </div>
+            </div>
+
+            <!-- CARD 11: HIGH END SETUP AM5 – DELETED -->
+
+            <!-- CARD 12: Custom PC (unchanged) -->
+            <div class="hot-card" data-product='{"name":"Custom PC","price":"Custom Price","image":"images/custompc.webp","specs":["Build your dream rig","Choose CPU, GPU, RAM, Storage","Free assembly & testing","RGB lighting optional","Warranty: up to 4 Years","Personalized cable management"]}'>
+                <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/custompc.webp" alt="Custom PC" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Custom+PC';">
+                <div class="hot-card-content">
+                    <div class="hot-title">Custom PC</div>
+                    <div class="hot-desc">Free Setup</div>
+                </div>
+            </div>
+
         </div>
-        <div class="item-right">
-          <span class="item-price">+RM650</span>
-          <button class="btn-claim" data-monitor="Gigabyte 27” QHD 180Hz">Claim</button>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ===== PROMO BANNER ===== -->
+    <!-- ============================================================ -->
+    <section id="promo-banner" class="reveal promo-banner">
+        <div class="promo-container">
+            <div class="promo-header">
+                <h3>SPECIAL <span>UPGRADE</span> OFFERS</h3>
+                <span class="limited-tag">⏳ Limited Time</span>
+            </div>
+            <p class="promo-desc">Full Set Package (<strong>Monitor</strong> + Free Keyboard &amp; Mouse)</p>
+            <div class="promo-grid">
+                <div class="promo-item">
+                    <div class="item-info">
+                        <span class="item-name">Gigabyte 24” FHD</span>
+                        <span class="item-spec">144Hz</span>
+                    </div>
+                    <div class="item-right">
+                        <span class="item-price">+RM300</span>
+                        <button class="btn-claim" data-monitor="Gigabyte 24” FHD 144Hz">Claim</button>
+                    </div>
+                </div>
+                <div class="promo-item">
+                    <div class="item-info">
+                        <span class="item-name">MSI 27” FHD</span>
+                        <span class="item-spec">144Hz</span>
+                    </div>
+                    <div class="item-right">
+                        <span class="item-price">+RM400</span>
+                        <button class="btn-claim" data-monitor="MSI 27” FHD 144Hz">Claim</button>
+                    </div>
+                </div>
+                <div class="promo-item">
+                    <div class="item-info">
+                        <span class="item-name">Gigabyte 27” QHD</span>
+                        <span class="item-spec">180Hz</span>
+                    </div>
+                    <div class="item-right">
+                        <span class="item-price">+RM650</span>
+                        <button class="btn-claim" data-monitor="Gigabyte 27” QHD 180Hz">Claim</button>
+                    </div>
+                </div>
+                <div class="promo-item">
+                    <div class="item-info">
+                        <span class="item-name">Gigabyte 34” WQHD</span>
+                        <span class="item-spec">200Hz</span>
+                    </div>
+                    <div class="item-right">
+                        <span class="item-price">+RM1250</span>
+                        <button class="btn-claim" data-monitor="Gigabyte 34” WQHD 200Hz">Claim</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="promo-item">
-        <div class="item-info">
-          <span class="item-name">Gigabyte 34” WQHD</span>
-          <span class="item-spec">200Hz</span>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ===== FAKE LIVE NOTIFICATION ===== -->
+    <!-- ============================================================ -->
+    <div id="live-notification">
+        <div class="notif-icon">🛒</div>
+        <div class="notif-content">
+            <span class="notif-name">John D.</span>
+            <span class="notif-action">just bought</span>
+            <span class="notif-item">White Setup RTX 3050</span>
+            <span class="notif-time">Just now</span>
         </div>
-        <div class="item-right">
-          <span class="item-price">+RM1250</span>
-          <button class="btn-claim" data-monitor="Gigabyte 34” WQHD 200Hz">Claim</button>
+        <button class="notif-close" id="notifClose">✕</button>
+    </div>
+
+    <section id="preorder-console" class="reveal">
+        <h2 class="section-title">Preorder Consoles</h2>
+        <div class="section-subtitle">Used Units • Reserve Before Stock Arrival</div>
+        <div class="hot-grid" id="consoleGrid">
+            <!-- PS5 Pro Digital -->
+            <div class="hot-card" data-product='{"name":"PS5 Pro Digital","price":"RM2,950","image":"images/ps5-pro.webp","specs":["Condition: Used","Storage: 2TB SSD","Includes: DualSense Controller","Wi-Fi 6, 4K Gaming","Backwards Compatible","Warranty: 14 Days"]}'>
+                <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/ps5-pro.webp" alt="PS5 Pro" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PS5+Pro';">
+                <div class="hot-card-content">
+                    <div class="hot-title">PS5 Pro Digital</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM2,950</span></div>
+                </div>
+            </div>
+            <!-- PS5 Fat Disc -->
+            <div class="hot-card" data-product='{"name":"PS5 Fat Disc","price":"RM1,700","image":"images/ps5-fat.webp","specs":["Condition: Used (Like New)","Storage: 825GB SSD","Version: Disc Edition (4K UHD)","Includes: DualSense Controller","Warranty: 14 Days (Return & Testing)"]}'>
+                <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/ps5-fat.webp" alt="PS5 Fat" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PS5+Fat';">
+                <div class="hot-card-content">
+                    <div class="hot-title">PS5 Fat Disc</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM1,700</span></div>
+                </div>
+            </div>
+            <!-- PS5 Slim Disc -->
+            <div class="hot-card" data-product='{"name":"PS5 Slim Disc","price":"RM1,900","image":"images/ps5-slim.webp","specs":["Condition: Used","Storage: 1TB SSD","Slim Design","Disc Version","Warranty: 14 Days"]}'>
+                <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/ps5-slim.webp" alt="PS5 Slim" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PS5+Slim';">
+                <div class="hot-card-content">
+                    <div class="hot-title">PS5 Slim Disc</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM1,900</span></div>
+                </div>
+            </div>
+            <!-- PS4 Slim -->
+            <div class="hot-card" data-product='{"name":"PS4 Slim 500GB","price":"RM650","image":"images/ps4-slim.webp","specs":["Condition: Used","Storage: 500GB HDD","Includes: DualShock 4","HDMI Cable","Warranty: 14 Days"]}'>
+                <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/ps4-slim.webp" alt="PS4 Slim" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PS4+Slim';">
+                <div class="hot-card-content">
+                    <div class="hot-title">PS4 Slim 500GB</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM650</span></div>
+                </div>
+            </div>
+            <!-- PS4 Pro -->
+            <div class="hot-card" data-product='{"name":"PS4 Pro 1TB","price":"RM750","image":"images/ps4-pro.webp","specs":["Condition: Used","Storage: 1TB HDD","4K Gaming","Includes: DualShock 4","Warranty: 14 Days"]}'>
+                <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/ps4-pro.webp" alt="PS4 Pro" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PS4+Pro';">
+                <div class="hot-card-content">
+                    <div class="hot-title">PS4 Pro 1TB</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM750</span></div>
+                </div>
+            </div>
+            <!-- Switch Lite -->
+            <div class="hot-card" data-product='{"name":"Switch Lite","price":"RM500","image":"images/switch-lite.webp","specs":["Condition: Used","Handheld Only","Battery: 3-7 hours","Includes: Charger","Warranty: 14 Days"]}'>
+                <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/switch-lite.webp" alt="Switch Lite" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Switch+Lite';">
+                <div class="hot-card-content">
+                    <div class="hot-title">Switch Lite</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM500</span></div>
+                </div>
+            </div>
+            <!-- Switch OLED White -->
+            <div class="hot-card" data-product='{"name":"Switch OLED White","price":"RM850","image":"images/switch-oled-white.webp","specs":["Condition: Used","7-inch OLED Screen","64GB Storage","Includes: Joy-Cons","Dock Included","Warranty: 14 Days"]}'>
+                <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/switch-oled-white.webp" alt="Switch OLED White" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=OLED+White';">
+                <div class="hot-card-content">
+                    <div class="hot-title">Switch OLED White</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM850</span></div>
+                </div>
+            </div>
+            <!-- Switch OLED Neon -->
+            <div class="hot-card" data-product='{"name":"Switch OLED Neon","price":"RM850","image":"images/switch-oled-neon.webp","specs":["Condition: Used","7-inch OLED Screen","64GB Storage","Neon Joy-Cons","Dock Included","Warranty: 14 Days"]}'>
+                <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/switch-oled-neon.webp" alt="Switch OLED Neon" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=OLED+Neon';">
+                <div class="hot-card-content">
+                    <div class="hot-title">Switch OLED Neon</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM850</span></div>
+                </div>
+            </div>
+            <!-- Switch OLED Zelda -->
+            <div class="hot-card" data-product='{"name":"Switch OLED Zelda","price":"RM950","image":"images/switch-zelda.webp","specs":["Condition: Used","Limited Edition","7-inch OLED Screen","Zelda Themed Dock","Warranty: 14 Days"]}'>
+                <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/switch-zelda.webp" alt="Switch OLED Zelda" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Zelda+OLED';">
+                <div class="hot-card-content">
+                    <div class="hot-title">Switch OLED Zelda</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM950</span></div>
+                </div>
+            </div>
+            <!-- Switch OLED Splatoon -->
+            <div class="hot-card" data-product='{"name":"Switch OLED Splatoon","price":"RM950","image":"images/switch-splatoon.webp","specs":["Condition: Used","Limited Edition","Splatoon Themed","OLED Screen","Warranty: 14 Days"]}'>
+                <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/switch-splatoon.webp" alt="Switch OLED Splatoon" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Splatoon+OLED';">
+                <div class="hot-card-content">
+                    <div class="hot-title">Switch OLED Splatoon</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM950</span></div>
+                </div>
+            </div>
+            <!-- Switch OLED Mario -->
+            <div class="hot-card" data-product='{"name":"Switch OLED Mario","price":"RM950","image":"images/switch-mario.webp","specs":["Condition: Used","Mario Red Edition","OLED Screen","Includes: Carry Case","Warranty: 14 Days"]}'>
+                <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/switch-mario.webp" alt="Switch OLED Mario" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Mario+OLED';">
+                <div class="hot-card-content">
+                    <div class="hot-title">Switch OLED Mario</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM950</span></div>
+                </div>
+            </div>
+            <!-- Switch OLED Pokemon -->
+            <div class="hot-card" data-product='{"name":"Switch OLED Pokemon","price":"RM950","image":"images/switch-pokemon.webp","specs":["Condition: Used","Pokemon Edition","OLED Screen","Special Backplate","Warranty: 14 Days"]}'>
+                <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/switch-pokemon.webp" alt="Switch OLED Pokemon" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Pokemon+OLED';">
+                <div class="hot-card-content">
+                    <div class="hot-title">Switch OLED Pokemon</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM950</span></div>
+                </div>
+            </div>
+            <!-- Switch 2 Edition -->
+            <div class="hot-card" data-product='{"name":"Switch 2 Edition","price":"RM1,800","image":"images/switch-2.webp","specs":["Condition: Used","Next-gen Switch","Enhanced Performance","Larger Screen","Backwards Compatible","Warranty: 14 Days"]}'>
+                <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
+                <img src="images/switch-2.webp" alt="Switch 2" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Switch+2';">
+                <div class="hot-card-content">
+                    <div class="hot-title">Switch 2 Edition</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM1,800</span></div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ============================================================ -->
-<!-- ===== FAKE LIVE NOTIFICATION POPUP ===== -->
-<!-- ============================================================ -->
-<div id="live-notification">
-  <div class="notif-icon">🛒</div>
-  <div class="notif-content">
-    <span class="notif-name">John D.</span>
-    <span class="notif-action">just bought</span>
-    <span class="notif-item">White Setup RTX 3050</span>
-    <span class="notif-time">Just now</span>
-  </div>
-  <button class="notif-close" id="notifClose">✕</button>
-</div>
+    <section id="gallery" class="reveal">
+        <h2 class="section-title">Gallery</h2>
+        <div class="section-subtitle">Immersive 3D • Custom PC builds and gaming setups</div>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="images/g1.webp" alt="Custom PC 1" loading="lazy" onerror="this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+1';"><div class="slide-caption">Custom PC</div></div>
+                <div class="swiper-slide"><img src="images/g2.webp" alt="Custom PC 2" loading="lazy" onerror="this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+2';"><div class="slide-caption">Custom PC</div></div>
+                <div class="swiper-slide"><img src="images/g3.webp" alt="Custom PC 3" loading="lazy" onerror="this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+3';"><div class="slide-caption">Custom PC</div></div>
+                <div class="swiper-slide"><img src="images/g4.webp" alt="Custom PC 4" loading="lazy" onerror="this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+4';"><div class="slide-caption">Custom PC</div></div>
+                <div class="swiper-slide"><img src="images/g5.webp" alt="Custom PC 5" loading="lazy" onerror="this.src='https://placehold.co/600x800/222/ffd84d?text=Custom+PC+5';"><div class="slide-caption">Custom PC</div></div>
+                <div class="swiper-slide"><img src="images/g6.webp" alt="Custom PC 6" loading="lazy" onerror="this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+6';"><div class="slide-caption">Custom PC</div></div>
+                <div class="swiper-slide"><img src="images/g7.webp" alt="Custom PC 7" loading="lazy" onerror="this.src='https://placehold.co/600x800/222/ffd84d?text=Custom+PC+7';"><div class="slide-caption">Custom PC</div></div>
+                <div class="swiper-slide"><img src="images/g8.webp" alt="Custom PC 8" loading="lazy" onerror="this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+8';"><div class="slide-caption">Custom PC</div></div>
+                <div class="swiper-slide"><img src="images/g9.webp" alt="Custom PC 9" loading="lazy" onerror="this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+9';"><div class="slide-caption">Custom PC</div></div>
+                <div class="swiper-slide"><img src="images/g10.webp" alt="Custom PC 10" loading="lazy" onerror="this.src='https://placehold.co/600x800/222/ffd84d?text=Custom+PC+10';"><div class="slide-caption">Custom PC</div></div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
 
-<section id="preorder-console" class="reveal">
-  <h2 class="section-title">Preorder Consoles</h2>
-  <div class="section-subtitle">Used Units • Reserve Before Stock Arrival</div>
-  <div class="hot-grid" id="consoleGrid">
-    <!-- PS5 Pro Digital -->
-    <div class="hot-card" data-product='{"name":"PS5 Pro Digital","price":"RM2,950","image":"images/ps5-pro.webp","specs":["Condition: Used","Storage: 2TB SSD","Includes: DualSense Controller","Wi-Fi 6, 4K Gaming","Backwards Compatible","Warranty: 14 Days"]}'>
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/ps5-pro.webp" alt="PS5 Pro" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PS5+Pro';">
-      <div class="hot-card-content"><div class="hot-title">PS5 Pro Digital</div><div class="hot-price-row"><span class="hot-desc">RM2,950</span></div></div>
-    </div>
-    <!-- PS5 Fat Disc -->
-    <div class="hot-card" data-product='{"name":"PS5 Fat Disc","price":"RM1,700","image":"images/ps5-fat.webp","specs":["Condition: Used (Like New)","Storage: 825GB SSD","Version: Disc Edition (4K UHD)","Includes: DualSense Controller","Warranty: 14 Days (Return & Testing)"]}'>
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/ps5-fat.webp" alt="PS5 Fat" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PS5+Fat';">
-      <div class="hot-card-content"><div class="hot-title">PS5 Fat Disc</div><div class="hot-price-row"><span class="hot-desc">RM1,700</span></div></div>
-    </div>
-    <!-- PS5 Slim Disc -->
-    <div class="hot-card" data-product='{"name":"PS5 Slim Disc","price":"RM1,900","image":"images/ps5-slim.webp","specs":["Condition: Used","Storage: 1TB SSD","Slim Design","Disc Version","Warranty: 14 Days"]}'>
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/ps5-slim.webp" alt="PS5 Slim" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PS5+Slim';">
-      <div class="hot-card-content"><div class="hot-title">PS5 Slim Disc</div><div class="hot-price-row"><span class="hot-desc">RM1,900</span></div></div>
-    </div>
-    <!-- PS4 Slim -->
-    <div class="hot-card" data-product='{"name":"PS4 Slim 500GB","price":"RM650","image":"images/ps4-slim.webp","specs":["Condition: Used","Storage: 500GB HDD","Includes: DualShock 4","HDMI Cable","Warranty: 14 Days"]}'>
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/ps4-slim.webp" alt="PS4 Slim" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PS4+Slim';">
-      <div class="hot-card-content"><div class="hot-title">PS4 Slim 500GB</div><div class="hot-price-row"><span class="hot-desc">RM650</span></div></div>
-    </div>
-    <!-- PS4 Pro -->
-    <div class="hot-card" data-product='{"name":"PS4 Pro 1TB","price":"RM750","image":"images/ps4-pro.webp","specs":["Condition: Used","Storage: 1TB HDD","4K Gaming","Includes: DualShock 4","Warranty: 14 Days"]}'>
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/ps4-pro.webp" alt="PS4 Pro" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PS4+Pro';">
-      <div class="hot-card-content"><div class="hot-title">PS4 Pro 1TB</div><div class="hot-price-row"><span class="hot-desc">RM750</span></div></div>
-    </div>
-    <!-- Switch Lite -->
-    <div class="hot-card" data-product='{"name":"Switch Lite","price":"RM500","image":"images/switch-lite.webp","specs":["Condition: Used","Handheld Only","Battery: 3-7 hours","Includes: Charger","Warranty: 14 Days"]}'>
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/switch-lite.webp" alt="Switch Lite" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Switch+Lite';">
-      <div class="hot-card-content"><div class="hot-title">Switch Lite</div><div class="hot-price-row"><span class="hot-desc">RM500</span></div></div>
-    </div>
-    <!-- Switch OLED White -->
-    <div class="hot-card" data-product='{"name":"Switch OLED White","price":"RM850","image":"images/switch-oled-white.webp","specs":["Condition: Used","7-inch OLED Screen","64GB Storage","Includes: Joy-Cons","Dock Included","Warranty: 14 Days"]}'>
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/switch-oled-white.webp" alt="Switch OLED White" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=OLED+White';">
-      <div class="hot-card-content"><div class="hot-title">Switch OLED White</div><div class="hot-price-row"><span class="hot-desc">RM850</span></div></div>
-    </div>
-    <!-- Switch OLED Neon -->
-    <div class="hot-card" data-product='{"name":"Switch OLED Neon","price":"RM850","image":"images/switch-oled-neon.webp","specs":["Condition: Used","7-inch OLED Screen","64GB Storage","Neon Joy-Cons","Dock Included","Warranty: 14 Days"]}'>
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/switch-oled-neon.webp" alt="Switch OLED Neon" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=OLED+Neon';">
-      <div class="hot-card-content"><div class="hot-title">Switch OLED Neon</div><div class="hot-price-row"><span class="hot-desc">RM850</span></div></div>
-    </div>
-    <!-- Switch OLED Zelda -->
-    <div class="hot-card" data-product='{"name":"Switch OLED Zelda","price":"RM950","image":"images/switch-zelda.webp","specs":["Condition: Used","Limited Edition","7-inch OLED Screen","Zelda Themed Dock","Warranty: 14 Days"]}'>
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/switch-zelda.webp" alt="Switch OLED Zelda" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Zelda+OLED';">
-      <div class="hot-card-content"><div class="hot-title">Switch OLED Zelda</div><div class="hot-price-row"><span class="hot-desc">RM950</span></div></div>
-    </div>
-    <!-- Switch OLED Splatoon -->
-    <div class="hot-card" data-product='{"name":"Switch OLED Splatoon","price":"RM950","image":"images/switch-splatoon.webp","specs":["Condition: Used","Limited Edition","Splatoon Themed","OLED Screen","Warranty: 14 Days"]}'>
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/switch-splatoon.webp" alt="Switch OLED Splatoon" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Splatoon+OLED';">
-      <div class="hot-card-content"><div class="hot-title">Switch OLED Splatoon</div><div class="hot-price-row"><span class="hot-desc">RM950</span></div></div>
-    </div>
-    <!-- Switch OLED Mario -->
-    <div class="hot-card" data-product='{"name":"Switch OLED Mario","price":"RM950","image":"images/switch-mario.webp","specs":["Condition: Used","Mario Red Edition","OLED Screen","Includes: Carry Case","Warranty: 14 Days"]}'>
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/switch-mario.webp" alt="Switch OLED Mario" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Mario+OLED';">
-      <div class="hot-card-content"><div class="hot-title">Switch OLED Mario</div><div class="hot-price-row"><span class="hot-desc">RM950</span></div></div>
-    </div>
-    <!-- Switch OLED Pokemon -->
-    <div class="hot-card" data-product='{"name":"Switch OLED Pokemon","price":"RM950","image":"images/switch-pokemon.webp","specs":["Condition: Used","Pokemon Edition","OLED Screen","Special Backplate","Warranty: 14 Days"]}'>
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/switch-pokemon.webp" alt="Switch OLED Pokemon" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Pokemon+OLED';">
-      <div class="hot-card-content"><div class="hot-title">Switch OLED Pokemon</div><div class="hot-price-row"><span class="hot-desc">RM950</span></div></div>
-    </div>
-    <!-- Switch 2 Edition -->
-    <div class="hot-card" data-product='{"name":"Switch 2 Edition","price":"RM1,800","image":"images/switch-2.webp","specs":["Condition: Used","Next-gen Switch","Enhanced Performance","Larger Screen","Backwards Compatible","Warranty: 14 Days"]}'>
-      <span class="badge badge-left">USED</span> <span class="badge badge-right">PRE-ORDER</span>
-      <img src="images/switch-2.webp" alt="Switch 2" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Switch+2';">
-      <div class="hot-card-content"><div class="hot-title">Switch 2 Edition</div><div class="hot-price-row"><span class="hot-desc">RM1,800</span></div></div>
-    </div>
-  </div>
-</section>
+    <section id="trade-section" class="trade-section reveal">
+        <h2 class="trade-title">Game & Console Trade‑In</h2>
+        <p class="trade-desc">Got old games or consoles? Trade them in!</p>
+        <button class="trade-btn" id="tradeBtn">Inquire About Trade‑In</button>
+    </section>
 
-<section id="gallery" class="reveal">
-  <h2 class="section-title">Gallery</h2>
-  <div class="section-subtitle">Immersive 3D • Custom PC builds and gaming setups</div>
-  <div class="swiper mySwiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide"><img src="images/g1.webp" alt="Custom PC 1" loading="lazy" onerror="this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+1';"><div class="slide-caption">Custom PC</div></div>
-      <div class="swiper-slide"><img src="images/g2.webp" alt="Custom PC 2" loading="lazy" onerror="this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+2';"><div class="slide-caption">Custom PC</div></div>
-      <div class="swiper-slide"><img src="images/g3.webp" alt="Custom PC 3" loading="lazy" onerror="this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+3';"><div class="slide-caption">Custom PC</div></div>
-      <div class="swiper-slide"><img src="images/g4.webp" alt="Custom PC 4" loading="lazy" onerror="this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+4';"><div class="slide-caption">Custom PC</div></div>
-      <div class="swiper-slide"><img src="images/g5.webp" alt="Custom PC 5" loading="lazy" onerror="this.src='https://placehold.co/600x800/222/ffd84d?text=Custom+PC+5';"><div class="slide-caption">Custom PC</div></div>
-      <div class="swiper-slide"><img src="images/g6.webp" alt="Custom PC 6" loading="lazy" onerror="this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+6';"><div class="slide-caption">Custom PC</div></div>
-      <div class="swiper-slide"><img src="images/g7.webp" alt="Custom PC 7" loading="lazy" onerror="this.src='https://placehold.co/600x800/222/ffd84d?text=Custom+PC+7';"><div class="slide-caption">Custom PC</div></div>
-      <div class="swiper-slide"><img src="images/g8.webp" alt="Custom PC 8" loading="lazy" onerror="this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+8';"><div class="slide-caption">Custom PC</div></div>
-      <div class="swiper-slide"><img src="images/g9.webp" alt="Custom PC 9" loading="lazy" onerror="this.src='https://placehold.co/600x400/222/ffd84d?text=Custom+PC+9';"><div class="slide-caption">Custom PC</div></div>
-      <div class="swiper-slide"><img src="images/g10.webp" alt="Custom PC 10" loading="lazy" onerror="this.src='https://placehold.co/600x800/222/ffd84d?text=Custom+PC+10';"><div class="slide-caption">Custom PC</div></div>
-    </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-pagination"></div>
-  </div>
-</section>
+    <section id="faq" class="reveal">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-question" tabindex="0" role="button" aria-expanded="false"><span>How long does pre‑order take?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer">Pre‑ordered items typically arrive within 7‑14 working days after payment. You'll receive tracking info via WhatsApp.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" tabindex="0" role="button" aria-expanded="false"><span>What's the trade‑in process?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer">Send us photos of your item via WhatsApp, we'll quote you within 24h. If accepted, ship it to us or drop by our store.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" tabindex="0" role="button" aria-expanded="false"><span>Do you offer warranty on used consoles?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer">Yes, all pre-owned consoles come with a 14-day warranty for testing and functional guarantee.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" tabindex="0" role="button" aria-expanded="false"><span>Can I customize my PC build online?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer">Absolutely! Use our PC Builder tool or WhatsApp us your desired components for a custom quote.</div>
+            </div>
+        </div>
+    </section>
 
-<section id="trade-section" class="trade-section reveal">
-  <h2 class="trade-title">Game & Console Trade‑In</h2>
-  <p class="trade-desc">Got old games or consoles? Trade them in!</p>
-  <button class="trade-btn" id="tradeBtn">Inquire About Trade‑In</button>
-</section>
+    <section id="payment" class="reveal">
+        <h2 class="section-title" style="text-align:center;">Payment Methods</h2>
+        <div class="trust-badges">
+            <div class="trust-badge"><span class="icon">✓</span> Verified Business</div>
+            <div class="trust-badge"><span class="icon">🔒</span> Secure Checkout</div>
+            <div class="trust-badge"><span class="icon">🔄</span> 7-Day Returns</div>
+        </div>
+        <div class="payment-icons">
+            <div class="payment-item">Visa</div>
+            <div class="payment-item">Mastercard</div>
+            <div class="payment-item">FPX</div>
+            <div class="payment-item">Touch 'n Go</div>
+            <div class="payment-item">GrabPay</div>
+        </div>
+    </section>
 
-<section id="faq" class="reveal">
-  <h2 class="section-title">Frequently Asked Questions</h2>
-  <div class="faq-list">
-    <div class="faq-item">
-      <div class="faq-question" tabindex="0" role="button" aria-expanded="false"><span>How long does pre‑order take?</span><span class="faq-icon">+</span></div>
-      <div class="faq-answer">Pre‑ordered items typically arrive within 7‑14 working days after payment. You'll receive tracking info via WhatsApp.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question" tabindex="0" role="button" aria-expanded="false"><span>What's the trade‑in process?</span><span class="faq-icon">+</span></div>
-      <div class="faq-answer">Send us photos of your item via WhatsApp, we'll quote you within 24h. If accepted, ship it to us or drop by our store.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question" tabindex="0" role="button" aria-expanded="false"><span>Do you offer warranty on used consoles?</span><span class="faq-icon">+</span></div>
-      <div class="faq-answer">Yes, all pre-owned consoles come with a 14-day warranty for testing and functional guarantee.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question" tabindex="0" role="button" aria-expanded="false"><span>Can I customize my PC build online?</span><span class="faq-icon">+</span></div>
-      <div class="faq-answer">Absolutely! Use our PC Builder tool or WhatsApp us your desired components for a custom quote.</div>
-    </div>
-  </div>
-</section>
+    <footer>© 2026 FAZGAME • Faz Service, Faz Gaming</footer>
 
-<section id="payment" class="reveal">
-  <h2 class="section-title" style="text-align:center;">Payment Methods</h2>
-  <div class="trust-badges">
-    <div class="trust-badge"><span class="icon">✓</span> Verified Business</div>
-    <div class="trust-badge"><span class="icon">🔒</span> Secure Checkout</div>
-    <div class="trust-badge"><span class="icon">🔄</span> 7-Day Returns</div>
-  </div>
-  <div class="payment-icons">
-    <div class="payment-item">Visa</div>
-    <div class="payment-item">Mastercard</div>
-    <div class="payment-item">FPX</div>
-    <div class="payment-item">Touch 'n Go</div>
-    <div class="payment-item">GrabPay</div>
-  </div>
-</section>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js">
+    </script>
+    <script>
+        // MUSIC AUTOPLAY
+        const bgMusic = document.getElementById('bg-music');
+        const musicToggle = document.getElementById('musicToggle');
+        const autoplayHint = document.getElementById('autoplayHint');
+        let musicStarted = false;
 
-<footer>© 2026 FAZGAME • Faz Service, Faz Gaming</footer>
+        function updateMusicIcon() { musicToggle.innerHTML = bgMusic.muted ? '🔇' : '🎵'; }
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-  // MUSIC AUTOPLAY
-  const bgMusic = document.getElementById('bg-music');
-  const musicToggle = document.getElementById('musicToggle');
-  const autoplayHint = document.getElementById('autoplayHint');
-  let musicStarted = false;
-  function updateMusicIcon() { musicToggle.innerHTML = bgMusic.muted ? '🔇' : '🎵'; }
-  function startMusic() {
-    if (musicStarted) return;
-    bgMusic.muted = false;
-    bgMusic.loop = true;
-    bgMusic.play().then(() => {
-      musicStarted = true;
-      updateMusicIcon();
-      if (autoplayHint) autoplayHint.classList.remove('show');
-    }).catch(err => console.warn("startMusic error:", err));
-  }
-  bgMusic.muted = false;
-  bgMusic.play().then(() => { musicStarted = true; updateMusicIcon(); }).catch(() => {
-    if (autoplayHint) autoplayHint.classList.add('show');
-    const startOnInteraction = () => { startMusic(); document.removeEventListener('click', startOnInteraction); document.removeEventListener('touchstart', startOnInteraction); };
-    document.addEventListener('click', startOnInteraction);
-    document.addEventListener('touchstart', startOnInteraction);
-  });
-  musicToggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (!musicStarted) { startMusic(); return; }
-    bgMusic.muted = !bgMusic.muted;
-    updateMusicIcon();
-  });
-
-  // BACK TO TOP
-  const backToTop = document.getElementById('backToTop');
-  window.addEventListener('scroll', () => backToTop.classList.toggle('visible', window.scrollY > 200));
-  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-  // REVEAL ON SCROLL
-  const revealElements = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); observer.unobserve(entry.target); } });
-  }, { threshold: 0.1 });
-  revealElements.forEach(el => observer.observe(el));
-
-  // TRADE BUTTON
-  document.getElementById('tradeBtn').addEventListener('click', () => {
-    window.open(`https://api.whatsapp.com/send?phone=60163691936&text=${encodeURIComponent("Hi FAZGAME 👋 I'm interested in trading in my games/consoles.")}`, '_blank');
-  });
-
-  // COUNTERS
-  function startCounters() {
-    document.querySelectorAll(".stat-item h3").forEach(counter => {
-      const target = parseInt(counter.dataset.target);
-      let current = 0;
-      const update = () => {
-        current += target / 60;
-        if(current < target) { counter.innerText = Math.ceil(current); requestAnimationFrame(update); }
-        else { counter.innerText = target + "+"; }
-      };
-      update();
-    });
-  }
-  startCounters();
-
-  // MODAL LOGIC
-  const modalElem = document.getElementById('detailModal');
-  const modalImgElem = document.getElementById('modalProductImg');
-  const modalTitleElem = document.getElementById('modalProductTitle');
-  const modalPriceElem = document.getElementById('modalProductPrice');
-  const modalSubtitleElem = document.getElementById('modalSubtitle');
-  const modalSpecListElem = document.getElementById('modalSpecList');
-  const modalWarrantyElem = document.getElementById('modalWarranty');
-  const modalReserveBtnElem = document.getElementById('modalReserveBtn');
-  const modalLightbox = document.getElementById('modalLightbox');
-  const modalLightboxImg = document.getElementById('modalLightboxImg');
-  const globalLightbox = document.getElementById('imageModal');
-
-  function closeAllOverlays() {
-    if (modalElem.classList.contains('show')) { modalElem.classList.remove('show'); document.body.style.overflow = ''; }
-    if (modalLightbox.classList.contains('active')) { modalLightbox.classList.remove('active'); }
-    if (globalLightbox.classList.contains('show')) { globalLightbox.classList.remove('show'); document.body.style.overflow = 'auto'; }
-  }
-
-  function openModal(productData) {
-    closeAllOverlays();
-    modalImgElem.src = productData.image;
-    modalImgElem.onerror = function() { this.src = 'https://placehold.co/600x600/222/ffd84d?text=Product'; };
-    modalTitleElem.textContent = productData.name;
-    modalPriceElem.textContent = productData.price;
-    let subtitle = '';
-    if (productData.specs && productData.specs.some(s => s.toLowerCase().includes('condition: used'))) subtitle = 'Pre-Owned · Premium Unit';
-    modalSubtitleElem.textContent = subtitle;
-    if (!subtitle) modalSubtitleElem.style.display = 'none';
-    else modalSubtitleElem.style.display = 'block';
-    let warrantyText = '';
-    const specItems = [];
-    for (let spec of (productData.specs || [])) {
-      const colonIndex = spec.indexOf(':');
-      if (colonIndex !== -1) {
-        const label = spec.substring(0, colonIndex).trim();
-        const value = spec.substring(colonIndex + 1).trim();
-        if (label.toLowerCase() === 'warranty') warrantyText = value || spec;
-        else specItems.push({ label, value });
-      } else specItems.push({ label: '•', value: spec });
-    }
-    modalSpecListElem.innerHTML = specItems.map(item => `<li><strong>${item.label !== '•' ? item.label + ':' : ''}</strong> ${item.value}</li>`).join('');
-    if (warrantyText) { modalWarrantyElem.innerHTML = `✅ ${warrantyText} · Full Functional Test`; modalWarrantyElem.style.display = 'block'; }
-    else modalWarrantyElem.style.display = 'none';
-    modalElem.classList.add('show');
-    document.body.style.overflow = 'hidden';
-    history.pushState({ modalOpen: true }, '', location.href);
-  }
-
-  function closeModal() {
-    modalElem.classList.remove('show');
-    document.body.style.overflow = '';
-    if (modalLightbox.classList.contains('active')) { modalLightbox.classList.remove('active'); }
-  }
-
-  window.addEventListener('popstate', (e) => {
-    if (!e.state) { closeAllOverlays(); }
-  });
-
-  modalElem.addEventListener('click', (e) => { if (e.target === modalElem) closeModal(); });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (modalLightbox.classList.contains('active')) { modalLightbox.classList.remove('active'); }
-      else if (modalElem.classList.contains('show')) { closeModal(); }
-      else if (globalLightbox.classList.contains('show')) { globalLightbox.classList.remove('show'); document.body.style.overflow = 'auto'; }
-    }
-  });
-
-  modalImgElem.addEventListener('click', () => {
-    modalLightboxImg.src = modalImgElem.src;
-    modalLightbox.classList.add('active');
-    history.pushState({ modalLightboxOpen: true }, '', location.href);
-  });
-  modalLightbox.addEventListener('click', (e) => { if (e.target === modalLightbox) { modalLightbox.classList.remove('active'); } });
-
-  modalReserveBtnElem.addEventListener('click', () => {
-    const productName = modalTitleElem.textContent;
-    const productPrice = modalPriceElem.textContent;
-    const message = `Hi FAZGAME 👋 I would like to reserve ${productName} (${productPrice}).`;
-    window.open(`https://api.whatsapp.com/send?phone=60163691936&text=${encodeURIComponent(message)}`, '_blank');
-  });
-
-  // Delegate modal clicks for hot cards (works after sorting)
-  document.addEventListener('click', function(e) {
-    const card = e.target.closest('.hot-card');
-    if (card && !e.target.closest('.reserve-btn')) {
-      const productAttr = card.getAttribute('data-product');
-      if (productAttr) {
-        try { openModal(JSON.parse(productAttr)); } catch (err) { console.warn(err); }
-      }
-    }
-  });
-
-  // GALLERY LIGHTBOX
-  document.addEventListener('click', function(e) {
-    const gallerySlide = e.target.closest('.swiper-slide');
-    if (gallerySlide && !e.target.closest('.swiper-button-next') && !e.target.closest('.swiper-button-prev')) {
-      const img = gallerySlide.querySelector('img');
-      if (img) {
-        const globalLightboxImg = document.getElementById('modalImg');
-        globalLightboxImg.src = img.src;
-        globalLightbox.classList.add('show');
-        document.body.style.overflow = 'hidden';
-        history.pushState({ galleryLightboxOpen: true }, '', location.href);
-      }
-    }
-  });
-  globalLightbox.onclick = () => { globalLightbox.classList.remove('show'); document.body.style.overflow = 'auto'; };
-
-  // SWIPER GALLERY
-  if (document.querySelector('.mySwiper')) {
-    const swiper = new Swiper(".mySwiper", {
-      effect: "coverflow", grabCursor: true, centeredSlides: true, slidesPerView: "auto",
-      coverflowEffect: { rotate: 50, stretch: 0, depth: 100, modifier: 1, slideShadows: true },
-      pagination: { el: ".swiper-pagination", clickable: true },
-      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-      loop: true, autoplay: { delay: 3000, disableOnInteraction: false }, speed: 800,
-    });
-    const swiperContainer = document.querySelector('.mySwiper');
-    swiperContainer.addEventListener('mouseenter', () => swiper.autoplay.stop());
-    swiperContainer.addEventListener('mouseleave', () => swiper.autoplay.start());
-  }
-
-  // SCROLL CHIPS
-  document.querySelectorAll('[data-scroll]').forEach(chip => {
-    chip.onclick = () => {
-      const target = document.getElementById(chip.dataset.scroll);
-      if(target) { const y = target.getBoundingClientRect().top + window.pageYOffset - 120; window.scrollTo({top: y, behavior: 'smooth'}); }
-    };
-  });
-
-  // WHATSAPP BUTTON
-  document.getElementById("cta-whatsapp").addEventListener("click", function(e){
-    e.preventDefault();
-    window.open("https://api.whatsapp.com/send?phone=60163691936&text=" + encodeURIComponent("Hi FAZGAME 👋 I would like to inquire about your products."), '_blank');
-  });
-
-  // LAMP THEME TOGGLE 
-  const lampContainer = document.getElementById('lampContainer');
-  // Initial state setup
-  if (localStorage.getItem('theme') === 'light') {
-    document.body.classList.add('light-mode');
-  } else {
-    document.body.classList.remove('light-mode');
-  }
-  
-  lampContainer.addEventListener('click', (e) => {
-    if (e.target.closest('.shade-container')) {
-      document.body.classList.toggle('light-mode');
-      const isLight = document.body.classList.contains('light-mode');
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    }
-  });
-
-  // FAQ TOGGLE
-  document.querySelectorAll('.faq-question').forEach(question => {
-    question.addEventListener('click', function() {
-      const expanded = this.getAttribute('aria-expanded') !== 'true';
-      this.setAttribute('aria-expanded', expanded);
-      const answer = this.nextElementSibling;
-      const icon = this.querySelector('.faq-icon');
-      if (expanded) {
-        answer.classList.add('open');
-        icon.classList.add('open');
-        icon.textContent = '−';
-      } else {
-        answer.classList.remove('open');
-        icon.classList.remove('open');
-        icon.textContent = '+';
-      }
-    });
-    question.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        question.click();
-      }
-    });
-  });
-
-  // ============================================================
-  // ===== AUTO SORT PC CARDS BY PRICE (LOW → HIGH) =====
-  // ============================================================
-  (function sortPCcards() {
-    const hotGrid = document.getElementById('hotGrid');
-    if (!hotGrid) return;
-    const cards = Array.from(hotGrid.querySelectorAll('.hot-card'));
-    cards.sort((a, b) => {
-      const getPrice = (card) => {
-        const data = card.getAttribute('data-product');
-        if (!data) return Infinity;
-        try {
-          const product = JSON.parse(data);
-          const priceStr = product.price;
-          if (priceStr.toLowerCase().includes('custom')) return Infinity;
-          const num = parseFloat(priceStr.replace(/[^0-9.]/g, ''));
-          return isNaN(num) ? Infinity : num;
-        } catch (e) {
-          return Infinity;
+        function startMusic() {
+            if (musicStarted) return;
+            bgMusic.muted = false;
+            bgMusic.loop = true;
+            bgMusic.play().then(() => {
+                musicStarted = true;
+                updateMusicIcon();
+                if (autoplayHint) autoplayHint.classList.remove('show');
+            }).catch(err => console.warn("startMusic error:", err));
         }
-      };
-      return getPrice(a) - getPrice(b);
-    });
-    cards.forEach(card => hotGrid.appendChild(card));
-  })();
+        bgMusic.muted = false;
+        bgMusic.play().then(() => { musicStarted = true;
+            updateMusicIcon(); }).catch(() => {
+            if (autoplayHint) autoplayHint.classList.add('show');
+            const startOnInteraction = () => { startMusic();
+                document.removeEventListener('click', startOnInteraction);
+                document.removeEventListener('touchstart', startOnInteraction); };
+            document.addEventListener('click', startOnInteraction);
+            document.addEventListener('touchstart', startOnInteraction);
+        });
+        musicToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!musicStarted) { startMusic(); return; }
+            bgMusic.muted = !bgMusic.muted;
+            updateMusicIcon();
+        });
 
-  // ============================================================
-  // ===== AUTO SORT CONSOLES BY TYPE (PS5 → PS4 → Nintendo) =====
-  // ============================================================
-  (function sortConsoleCards() {
-    const consoleGrid = document.getElementById('consoleGrid');
-    if (!consoleGrid) return;
-    const cards = Array.from(consoleGrid.querySelectorAll('.hot-card'));
+        // BACK TO TOP
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => backToTop.classList.toggle('visible', window.scrollY > 200));
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    function getConsoleType(card) {
-      const data = card.getAttribute('data-product');
-      if (!data) return 'other';
-      try {
-        const product = JSON.parse(data);
-        const name = product.name || '';
-        if (name.includes('PS5')) return 'ps5';
-        if (name.includes('PS4')) return 'ps4';
-        return 'nintendo';
-      } catch (e) {
-        return 'other';
-      }
-    }
+        // REVEAL ON SCROLL
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active');
+                    observer.unobserve(entry.target); } });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => observer.observe(el));
 
-    function getPrice(card) {
-      const data = card.getAttribute('data-product');
-      if (!data) return Infinity;
-      try {
-        const product = JSON.parse(data);
-        const priceStr = product.price;
-        const num = parseFloat(priceStr.replace(/[^0-9.]/g, ''));
-        return isNaN(num) ? Infinity : num;
-      } catch (e) {
-        return Infinity;
-      }
-    }
+        // TRADE BUTTON
+        document.getElementById('tradeBtn').addEventListener('click', () => {
+            window.open(
+                `https://api.whatsapp.com/send?phone=60163691936&text=${encodeURIComponent("Hi FAZGAME 👋 I'm interested in trading in my games/consoles.")}`,
+                '_blank');
+        });
 
-    cards.sort((a, b) => {
-      const typeA = getConsoleType(a);
-      const typeB = getConsoleType(b);
-      const typeOrder = { ps5: 0, ps4: 1, nintendo: 2, other: 3 };
-      if (typeA !== typeB) {
-        return typeOrder[typeA] - typeOrder[typeB];
-      }
-      return getPrice(a) - getPrice(b);
-    });
+        // COUNTERS
+        function startCounters() {
+            document.querySelectorAll(".stat-item h3").forEach(counter => {
+                const target = parseInt(counter.dataset.target);
+                let current = 0;
+                const update = () => {
+                    current += target / 60;
+                    if (current < target) { counter.innerText = Math.ceil(current);
+                        requestAnimationFrame(update); } else { counter.innerText = target + "+"; }
+                };
+                update();
+            });
+        }
+        startCounters();
 
-    cards.forEach(card => consoleGrid.appendChild(card));
-  })();
+        // MODAL LOGIC
+        const modalElem = document.getElementById('detailModal');
+        const modalImgElem = document.getElementById('modalProductImg');
+        const modalTitleElem = document.getElementById('modalProductTitle');
+        const modalPriceElem = document.getElementById('modalProductPrice');
+        const modalSubtitleElem = document.getElementById('modalSubtitle');
+        const modalSpecListElem = document.getElementById('modalSpecList');
+        const modalWarrantyElem = document.getElementById('modalWarranty');
+        const modalReserveBtnElem = document.getElementById('modalReserveBtn');
+        const modalLightbox = document.getElementById('modalLightbox');
+        const modalLightboxImg = document.getElementById('modalLightboxImg');
+        const globalLightbox = document.getElementById('imageModal');
 
-  // ============================================================
-  // ===== FAKE LIVE NOTIFICATION — ONLY PC & CONSOLES =====
-  // ============================================================
-  (function liveNotification() {
-    const notif = document.getElementById('live-notification');
-    const notifName = notif.querySelector('.notif-name');
-    const notifItem = notif.querySelector('.notif-item');
-    const notifTime = notif.querySelector('.notif-time');
-    const notifClose = document.getElementById('notifClose');
+        function closeAllOverlays() {
+            if (modalElem.classList.contains('show')) { modalElem.classList.remove('show');
+                document.body.style.overflow = ''; }
+            if (modalLightbox.classList.contains('active')) { modalLightbox.classList.remove('active'); }
+            if (globalLightbox.classList.contains('show')) { globalLightbox.classList.remove('show');
+                document.body.style.overflow = 'auto'; }
+        }
 
-    // All preorder PC builds + consoles (for social proof)
-    const items = [
-      // PC Builds
-      'White Setup RTX 3050', 'BLACK SETUP RTX 3050', 'PC GAMING White RTX 5060',
-      'Mini PC White Setup', 'RTX 3070 Ti-WHITE SETUP', 'BLACK SETUP RTX 5060',
-      'WHITE SETUP RTX 5060', 'BLACK SETUP RTX 5060 Ti', 'Coolman Spectra LCD',
-      'AM5 Panorama LCD', 'HIGH END SETUP AM5',
-      // Consoles
-      'PS5 Pro Digital', 'PS5 Fat Disc', 'PS5 Slim Disc',
-      'PS4 Slim 500GB', 'PS4 Pro 1TB',
-      'Switch Lite', 'Switch OLED White', 'Switch OLED Neon',
-      'Switch OLED Zelda', 'Switch OLED Splatoon', 'Switch OLED Mario',
-      'Switch OLED Pokemon', 'Switch 2 Edition'
-    ];
+        function openModal(productData) {
+            closeAllOverlays();
+            modalImgElem.src = productData.image;
+            modalImgElem.onerror = function() { this.src = 'https://placehold.co/600x600/222/ffd84d?text=Product'; };
+            modalTitleElem.textContent = productData.name;
+            modalPriceElem.textContent = productData.price;
+            let subtitle = '';
+            if (productData.specs && productData.specs.some(s => s.toLowerCase().includes('condition: used'))) subtitle =
+                'Pre-Owned · Premium Unit';
+            modalSubtitleElem.textContent = subtitle;
+            if (!subtitle) modalSubtitleElem.style.display = 'none';
+            else modalSubtitleElem.style.display = 'block';
+            let warrantyText = '';
+            const specItems = [];
+            for (let spec of (productData.specs || [])) {
+                const colonIndex = spec.indexOf(':');
+                if (colonIndex !== -1) {
+                    const label = spec.substring(0, colonIndex).trim();
+                    const value = spec.substring(colonIndex + 1).trim();
+                    if (label.toLowerCase() === 'warranty') warrantyText = value || spec;
+                    else specItems.push({ label, value });
+                } else specItems.push({ label: '•', value: spec });
+            }
+            modalSpecListElem.innerHTML = specItems.map(item =>
+                `<li><strong>${item.label !== '•' ? item.label + ':' : ''}</strong> ${item.value}</li>`).join('');
+            if (warrantyText) { modalWarrantyElem.innerHTML = `✅ ${warrantyText} · Full Functional Test`;
+                modalWarrantyElem.style.display = 'block'; } else modalWarrantyElem.style.display = 'none';
+            modalElem.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            history.pushState({ modalOpen: true }, '', location.href);
+        }
 
-    const buyers = [
-      'Ahmad R.', 'Siti N.', 'Kevin T.', 'Amanda L.', 'Daniel C.',
-      'Farah H.', 'Iqbal M.', 'Zara Y.', 'Hakim Z.', 'Aina S.',
-      'Rizwan K.', 'Maya P.', 'Joel W.', 'Sara E.', 'Adam F.',
-      'Nadia A.', 'Rafiq J.', 'Wong K.L.', 'Priya S.', 'Omar H.'
-    ];
+        function closeModal() {
+            modalElem.classList.remove('show');
+            document.body.style.overflow = '';
+            if (modalLightbox.classList.contains('active')) { modalLightbox.classList.remove('active'); }
+        }
 
-    const timePhrases = ['Just now', '1 min ago', '2 mins ago', '3 mins ago', '5 mins ago', '8 mins ago', '12 mins ago'];
+        window.addEventListener('popstate', (e) => {
+            if (!e.state) { closeAllOverlays(); }
+        });
 
-    let isVisible = false;
-    let timeoutId = null;
-    let dismissed = false;
+        modalElem.addEventListener('click', (e) => { if (e.target === modalElem) closeModal(); });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (modalLightbox.classList.contains('active')) { modalLightbox.classList.remove('active'); } else if (
+                    modalElem.classList.contains('show')) { closeModal(); } else if (globalLightbox.classList.contains(
+                        'show')) { globalLightbox.classList.remove('show');
+                    document.body.style.overflow = 'auto'; }
+            }
+        });
 
-    function showNextNotification() {
-      if (dismissed) return;
+        modalImgElem.addEventListener('click', () => {
+            modalLightboxImg.src = modalImgElem.src;
+            modalLightbox.classList.add('active');
+            history.pushState({ modalLightboxOpen: true }, '', location.href);
+        });
+        modalLightbox.addEventListener('click', (e) => { if (e.target === modalLightbox) { modalLightbox.classList.remove(
+                    'active'); } });
 
-      const randomBuyer = buyers[Math.floor(Math.random() * buyers.length)];
-      const randomItem = items[Math.floor(Math.random() * items.length)];
-      const randomTime = timePhrases[Math.floor(Math.random() * timePhrases.length)];
+        modalReserveBtnElem.addEventListener('click', () => {
+            const productName = modalTitleElem.textContent;
+            const productPrice = modalPriceElem.textContent;
+            const message = `Hi FAZGAME 👋 I would like to reserve ${productName} (${productPrice}).`;
+            window.open(
+                `https://api.whatsapp.com/send?phone=60163691936&text=${encodeURIComponent(message)}`, '_blank');
+        });
 
-      notifName.textContent = randomBuyer;
-      notifItem.textContent = randomItem;
-      notifTime.textContent = randomTime;
+        // Delegate modal clicks for hot cards
+        document.addEventListener('click', function(e) {
+            const card = e.target.closest('.hot-card');
+            if (card && !e.target.closest('.reserve-btn')) {
+                const productAttr = card.getAttribute('data-product');
+                if (productAttr) {
+                    try { openModal(JSON.parse(productAttr)); } catch (err) { console.warn(err); }
+                }
+            }
+        });
 
-      notif.classList.add('show');
-      isVisible = true;
+        // GALLERY LIGHTBOX
+        document.addEventListener('click', function(e) {
+            const gallerySlide = e.target.closest('.swiper-slide');
+            if (gallerySlide && !e.target.closest('.swiper-button-next') && !e.target.closest('.swiper-button-prev')) {
+                const img = gallerySlide.querySelector('img');
+                if (img) {
+                    const globalLightboxImg = document.getElementById('modalImg');
+                    globalLightboxImg.src = img.src;
+                    globalLightbox.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                    history.pushState({ galleryLightboxOpen: true }, '', location.href);
+                }
+            }
+        });
+        globalLightbox.onclick = () => { globalLightbox.classList.remove('show');
+            document.body.style.overflow = 'auto'; };
 
-      // Auto-hide after 4-6 seconds
-      const displayDuration = 4000 + Math.random() * 3000;
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        notif.classList.remove('show');
-        isVisible = false;
-        // Schedule next after random gap (1–30 seconds)
-        const gap = (1000 + Math.random() * 29000);
-        setTimeout(() => {
-          if (!dismissed) {
-            showNextNotification();
-          }
-        }, gap);
-      }, displayDuration);
-    }
+        // SWIPER GALLERY
+        if (document.querySelector('.mySwiper')) {
+            const swiper = new Swiper(".mySwiper", {
+                effect: "coverflow",
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: "auto",
+                coverflowEffect: { rotate: 50, stretch: 0, depth: 100, modifier: 1, slideShadows: true },
+                pagination: { el: ".swiper-pagination", clickable: true },
+                navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+                loop: true,
+                autoplay: { delay: 3000, disableOnInteraction: false },
+                speed: 800,
+            });
+            const swiperContainer = document.querySelector('.mySwiper');
+            swiperContainer.addEventListener('mouseenter', () => swiper.autoplay.stop());
+            swiperContainer.addEventListener('mouseleave', () => swiper.autoplay.start());
+        }
 
-    // Dismiss permanently
-    notifClose.addEventListener('click', function(e) {
-      e.stopPropagation();
-      dismissed = true;
-      notif.classList.remove('show');
-      isVisible = false;
-      clearTimeout(timeoutId);
-    });
+        // SCROLL CHIPS
+        document.querySelectorAll('[data-scroll]').forEach(chip => {
+            chip.onclick = () => {
+                const target = document.getElementById(chip.dataset.scroll);
+                if (target) { const y = target.getBoundingClientRect().top + window.pageYOffset - 120;
+                    window.scrollTo({ top: y, behavior: 'smooth' }); }
+            };
+        });
 
-    // Start after 3–8 seconds
-    const initialDelay = 3000 + Math.random() * 5000;
-    setTimeout(() => {
-      if (!dismissed) {
-        showNextNotification();
-      }
-    }, initialDelay);
-  })();
+        // WHATSAPP BUTTON
+        document.getElementById("cta-whatsapp").addEventListener("click", function(e) {
+            e.preventDefault();
+            window.open(
+                "https://api.whatsapp.com/send?phone=60163691936&text=" + encodeURIComponent(
+                    "Hi FAZGAME 👋 I would like to inquire about your products."), '_blank');
+        });
 
-  // ============================================================
-  // ===== PROMO "CLAIM" BUTTONS → WHATSAPP =====
-  // ============================================================
-  document.querySelectorAll('.btn-claim').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const monitor = this.dataset.monitor || 'Monitor Package';
-      const msg = `Hi FAZGAME 👋 I want to claim the FULLSET offer: ${monitor} + Free Keyboard & Mouse.`;
-      window.open(`https://api.whatsapp.com/send?phone=60163691936&text=${encodeURIComponent(msg)}`, '_blank');
-    });
-  });
-</script>
+        // LAMP THEME TOGGLE
+        const lampContainer = document.getElementById('lampContainer');
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        } else {
+            document.body.classList.remove('light-mode');
+        }
+
+        lampContainer.addEventListener('click', (e) => {
+            if (e.target.closest('.shade-container')) {
+                document.body.classList.toggle('light-mode');
+                const isLight = document.body.classList.contains('light-mode');
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            }
+        });
+
+        // FAQ TOGGLE
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const expanded = this.getAttribute('aria-expanded') !== 'true';
+                this.setAttribute('aria-expanded', expanded);
+                const answer = this.nextElementSibling;
+                const icon = this.querySelector('.faq-icon');
+                if (expanded) {
+                    answer.classList.add('open');
+                    icon.classList.add('open');
+                    icon.textContent = '−';
+                } else {
+                    answer.classList.remove('open');
+                    icon.classList.remove('open');
+                    icon.textContent = '+';
+                }
+            });
+            question.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    question.click();
+                }
+            });
+        });
+
+        // ============================================================
+        // ===== AUTO SORT PC CARDS BY PRICE (LOW → HIGH) =====
+        // ============================================================
+        (function sortPCcards() {
+            const hotGrid = document.getElementById('hotGrid');
+            if (!hotGrid) return;
+            const cards = Array.from(hotGrid.querySelectorAll('.hot-card'));
+            cards.sort((a, b) => {
+                const getPrice = (card) => {
+                    const data = card.getAttribute('data-product');
+                    if (!data) return Infinity;
+                    try {
+                        const product = JSON.parse(data);
+                        const priceStr = product.price;
+                        if (priceStr.toLowerCase().includes('custom')) return Infinity;
+                        const num = parseFloat(priceStr.replace(/[^0-9.]/g, ''));
+                        return isNaN(num) ? Infinity : num;
+                    } catch (e) {
+                        return Infinity;
+                    }
+                };
+                return getPrice(a) - getPrice(b);
+            });
+            cards.forEach(card => hotGrid.appendChild(card));
+        })();
+
+        // ============================================================
+        // ===== AUTO SORT CONSOLES BY TYPE (PS5 → PS4 → Nintendo) =====
+        // ============================================================
+        (function sortConsoleCards() {
+            const consoleGrid = document.getElementById('consoleGrid');
+            if (!consoleGrid) return;
+            const cards = Array.from(consoleGrid.querySelectorAll('.hot-card'));
+
+            function getConsoleType(card) {
+                const data = card.getAttribute('data-product');
+                if (!data) return 'other';
+                try {
+                    const product = JSON.parse(data);
+                    const name = product.name || '';
+                    if (name.includes('PS5')) return 'ps5';
+                    if (name.includes('PS4')) return 'ps4';
+                    return 'nintendo';
+                } catch (e) {
+                    return 'other';
+                }
+            }
+
+            function getPrice(card) {
+                const data = card.getAttribute('data-product');
+                if (!data) return Infinity;
+                try {
+                    const product = JSON.parse(data);
+                    const priceStr = product.price;
+                    const num = parseFloat(priceStr.replace(/[^0-9.]/g, ''));
+                    return isNaN(num) ? Infinity : num;
+                } catch (e) {
+                    return Infinity;
+                }
+            }
+
+            cards.sort((a, b) => {
+                const typeA = getConsoleType(a);
+                const typeB = getConsoleType(b);
+                const typeOrder = { ps5: 0, ps4: 1, nintendo: 2, other: 3 };
+                if (typeA !== typeB) {
+                    return typeOrder[typeA] - typeOrder[typeB];
+                }
+                return getPrice(a) - getPrice(b);
+            });
+
+            cards.forEach(card => consoleGrid.appendChild(card));
+        })();
+
+        // ============================================================
+        // ===== FAKE LIVE NOTIFICATION — ONLY PC & CONSOLES =====
+        // ============================================================
+        (function liveNotification() {
+            const notif = document.getElementById('live-notification');
+            const notifName = notif.querySelector('.notif-name');
+            const notifItem = notif.querySelector('.notif-item');
+            const notifTime = notif.querySelector('.notif-time');
+            const notifClose = document.getElementById('notifClose');
+
+            const items = [
+                'White Setup RTX 3050', 'Black Setup RTX 3060TI', 'PC GAMING White RTX 5060',
+                'RTX 3070 Ti-WHITE SETUP', 'WHITE SETUP Custom LCD', 'BLACK SETUP Custom LCD',
+                'Coolman Spectra LCD', 'AM5 Panorama LCD',
+                'PS5 Pro Digital', 'PS5 Fat Disc', 'PS5 Slim Disc',
+                'PS4 Slim 500GB', 'PS4 Pro 1TB',
+                'Switch Lite', 'Switch OLED White', 'Switch OLED Neon',
+                'Switch OLED Zelda', 'Switch OLED Splatoon', 'Switch OLED Mario',
+                'Switch OLED Pokemon', 'Switch 2 Edition'
+            ];
+
+            const buyers = [
+                'Ahmad R.', 'Siti N.', 'Kevin T.', 'Amanda L.', 'Daniel C.',
+                'Farah H.', 'Iqbal M.', 'Zara Y.', 'Hakim Z.', 'Aina S.',
+                'Rizwan K.', 'Maya P.', 'Joel W.', 'Sara E.', 'Adam F.',
+                'Nadia A.', 'Rafiq J.', 'Wong K.L.', 'Priya S.', 'Omar H.'
+            ];
+
+            const timePhrases = ['Just now', '1 min ago', '2 mins ago', '3 mins ago', '5 mins ago', '8 mins ago',
+                '12 mins ago'
+            ];
+
+            let isVisible = false;
+            let timeoutId = null;
+            let dismissed = false;
+
+            function showNextNotification() {
+                if (dismissed) return;
+                const randomBuyer = buyers[Math.floor(Math.random() * buyers.length)];
+                const randomItem = items[Math.floor(Math.random() * items.length)];
+                const randomTime = timePhrases[Math.floor(Math.random() * timePhrases.length)];
+
+                notifName.textContent = randomBuyer;
+                notifItem.textContent = randomItem;
+                notifTime.textContent = randomTime;
+
+                notif.classList.add('show');
+                isVisible = true;
+
+                const displayDuration = 4000 + Math.random() * 3000;
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                    notif.classList.remove('show');
+                    isVisible = false;
+                    const gap = (1000 + Math.random() * 29000);
+                    setTimeout(() => {
+                        if (!dismissed) {
+                            showNextNotification();
+                        }
+                    }, gap);
+                }, displayDuration);
+            }
+
+            notifClose.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dismissed = true;
+                notif.classList.remove('show');
+                isVisible = false;
+                clearTimeout(timeoutId);
+            });
+
+            const initialDelay = 3000 + Math.random() * 5000;
+            setTimeout(() => {
+                if (!dismissed) {
+                    showNextNotification();
+                }
+            }, initialDelay);
+        })();
+
+        // ============================================================
+        // ===== PROMO "CLAIM" BUTTONS → WHATSAPP =====
+        // ============================================================
+        document.querySelectorAll('.btn-claim').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const monitor = this.dataset.monitor || 'Monitor Package';
+                const msg =
+                    `Hi FAZGAME 👋 I want to claim the FULLSET offer: ${monitor} + Free Keyboard & Mouse.`;
+                window.open(
+                    `https://api.whatsapp.com/send?phone=60163691936&text=${encodeURIComponent(msg)}`,
+                    '_blank');
+            });
+        });
+    </script>
+
 </body>
 </html>
