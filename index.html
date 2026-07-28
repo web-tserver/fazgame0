@@ -990,10 +990,33 @@
             text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
             font-weight: 600;
         }
+
+        /* ===== PRICE STYLING – NO PILL, CLEAN TEXT ===== */
         .hot-price-row .hot-desc {
-            color: var(--accent);
+            font-size: 18px;
             font-weight: 800;
+            color: var(--accent);
+            letter-spacing: 0.3px;
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(255, 216, 77, 0.3);
         }
+        @media (max-width: 480px) {
+            .hot-price-row .hot-desc {
+                font-size: 15px;
+            }
+        }
+
+        /* ===== CONSOLE PRICES: SMALLER, CARD-APPROPRIATE ===== */
+        #preorder-console .hot-price-row .hot-desc {
+            font-size: 13px;
+            text-shadow: 0 0 6px rgba(255, 216, 77, 0.2);
+        }
+        @media (max-width: 480px) {
+            #preorder-console .hot-price-row .hot-desc {
+                font-size: 11px;
+            }
+        }
+
         .badge {
             position: absolute;
             top: 10px;
@@ -1893,99 +1916,93 @@
         <div class="section-subtitle">Custom Gaming PCs • Built On Demand</div>
         <div class="hot-grid" id="hotGrid">
 
-            <!-- CARD 1: White Setup RTX 3050 (unchanged) -->
+            <!-- CARD 1: White Setup RTX 3050 -->
             <div class="hot-card" data-product='{"name":"PC Gaming White Setup RTX 3050 6GB","price":"RM2,300","image":"images/white-setup-rtx3050.webp","specs":["Processor: AMD Ryzen 5 2600","Graphics: RTX 3050 6GB","Motherboard: A520M","RAM: 16GB DDR4 2666Mhz","Storage: 256GB NVMe SSD","PSU: 500W Bronze 80+","Warranty: up to 4 Years"]}'>
                 <span class="badge badge-right">PRE-ORDER</span>
                 <img src="images/white-setup-rtx3050.webp" alt="White Setup RTX 3050 6GB" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=White+RTX+3050';">
                 <div class="hot-card-content">
                     <div class="hot-title">White Setup RTX 3050</div>
-                    <div class="hot-desc">RM2,300</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM2,300</span></div>
                 </div>
             </div>
 
-            <!-- CARD 2: Black Setup RTX 3060TI 8GB (formerly BLACK SETUP Custom LCD RTX 3050) -->
+            <!-- CARD 2: Black Setup RTX 3060TI 8GB -->
             <div class="hot-card" data-product='{"name":"Black Setup RTX 3060TI 8GB","price":"RM3,200","image":"images/pc1000.webp","specs":["Processor: AMD Ryzen 5 3500X","Graphics: RTX 3060TI 8GB","RAM: DDR4 16GB 3200Mhz","Storage: 512GB NVMe SSD","PSU: 600W Bronze 80+","Warranty: up to 4 Years"]}'>
                 <span class="badge badge-right">PRE-ORDER</span>
                 <img src="images/pc1000.webp" alt="Black Setup RTX 3060TI" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Black+RTX+3060TI';">
                 <div class="hot-card-content">
                     <div class="hot-title">Black Setup RTX 3060TI</div>
-                    <div class="hot-desc">RM3,200</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM3,200</span></div>
                 </div>
             </div>
 
-            <!-- CARD 3: PC GAMING White RTX 5060 (updated specs + price) -->
+            <!-- CARD 3: PC GAMING White RTX 5060 -->
             <div class="hot-card" data-product='{"name":"PC GAMING White Setup RTX 5060","price":"RM3,450","image":"images/pc-gaming-white-rtx5060.webp","specs":["Processor: AMD Ryzen 5 5500","Graphics: Zotac RTX 5060 8GB","RAM: DDR4 16GB 3200Mhz","Storage: 512GB NVMe SSD","PSU: 600W Bronze 80+","Warranty: up to 4 Years"]}'>
                 <span class="badge badge-right">PRE-ORDER</span>
                 <img src="images/pc-gaming-white-rtx5060.webp" alt="PC GAMING White RTX 5060" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=White+Gaming+RTX+5060';">
                 <div class="hot-card-content">
                     <div class="hot-title">PC GAMING White RTX 5060</div>
-                    <div class="hot-desc">RM3,450</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM3,450</span></div>
                 </div>
             </div>
 
-            <!-- CARD 4: Mini PC White Setup MATX – DELETED -->
-
-            <!-- CARD 5: RTX 3070 Ti-WHITE SETUP (processor → Ryzen 5500) -->
+            <!-- CARD 4: RTX 3070 Ti-WHITE SETUP -->
             <div class="hot-card" data-product='{"name":"RTX 3070 Ti-WHITE SETUP","price":"RM3,600","image":"images/techware_vx_prism.webp","specs":["Processor: AMD Ryzen 5 5500","Graphics: RTX 3070 Ti 8GB","RAM: 16GB DDR4","Storage: 512GB NVMe SSD","PSU: 600W Bronze 80+","Case: Techware VX Prism","Warranty: up to 4 Years"]}'>
                 <span class="badge badge-right">PRE-ORDER</span>
                 <img src="images/techware_vx_prism.webp" alt="Techware VX Prism RTX 3070 Ti" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM3600';">
                 <div class="hot-card-content">
                     <div class="hot-title">RTX 3070 Ti-WHITE SETUP</div>
-                    <div class="hot-desc">RM3,600</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM3,600</span></div>
                 </div>
             </div>
 
-            <!-- CARD 6: BLACK SETUP Custom LCD (RTX 5060) – DELETED -->
-
-            <!-- CARD 7: WHITE SETUP Custom LCD (RTX 5060) (price RM3850, processor Ryzen 5500) -->
+            <!-- CARD 5: WHITE SETUP Custom LCD (RTX 5060) -->
             <div class="hot-card" data-product='{"name":"WHITE SETUP Custom LCD (RTX 5060)","price":"RM3,850","image":"images/pc2000.webp","specs":["Processor: AMD Ryzen 5 5500","Graphics: RTX 5060 8GB","RAM: 16GB DDR4","Storage: 512GB NVMe SSD","PSU: 600W 80+","Case: White Custom LCD","Warranty: up to 4 Years"]}'>
                 <span class="badge badge-right">PRE-ORDER</span>
                 <img src="images/pc2000.webp" alt="WHITE SETUP RTX 5060" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM3850';">
                 <div class="hot-card-content">
                     <div class="hot-title">WHITE SETUP Custom LCD</div>
-                    <div class="hot-desc">RM3,850</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM3,850</span></div>
                 </div>
             </div>
 
-            <!-- CARD 8: BLACK SETUP Custom LCD (RTX 5060 Ti) (price RM4000, processor Ryzen 5500) -->
+            <!-- CARD 6: BLACK SETUP Custom LCD (RTX 5060 Ti) -->
             <div class="hot-card" data-product='{"name":"BLACK SETUP Custom LCD (RTX 5060 Ti)","price":"RM4,000","image":"images/pc3000.webp","specs":["Processor: AMD Ryzen 5 5500","Graphics: RTX 5060 Ti 8GB","RAM: 16GB DDR4","Storage: 512GB NVMe SSD","PSU: 650W Bronze 80+","Case: Black Custom LCD","Warranty: up to 4 Years"]}'>
                 <span class="badge badge-right">PRE-ORDER</span>
                 <img src="images/pc3000.webp" alt="BLACK SETUP RTX 5060 Ti" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM4000';">
                 <div class="hot-card-content">
                     <div class="hot-title">BLACK SETUP Custom LCD</div>
-                    <div class="hot-desc">RM4,000</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM4,000</span></div>
                 </div>
             </div>
 
-            <!-- CARD 9: Coolman Spectra LCD (RTX 5060) – renamed, price RM4150, updated specs -->
+            <!-- CARD 7: Coolman Spectra LCD (RTX 5060) -->
             <div class="hot-card" data-product='{"name":"Coolman Spectra LCD (RTX 5060)","price":"RM4,150","image":"images/pc4500.webp","specs":["Processor: AMD Ryzen 5 5500","Graphics: RTX 5060 8GB","RAM: 16GB DDR4","Storage: 512GB NVMe SSD","PSU: 600W Bronze 80+","Case: Coolman Spectra","Warranty: up to 4 Years"]}'>
                 <span class="badge badge-right">PRE-ORDER</span>
                 <img src="images/pc4500.webp" alt="Coolman Spectra RTX 5060" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=PC+RM4150';">
                 <div class="hot-card-content">
                     <div class="hot-title">Coolman Spectra LCD</div>
-                    <div class="hot-desc">RM4,150</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM4,150</span></div>
                 </div>
             </div>
 
-            <!-- CARD 10: AM5 Panorama LCD (unchanged) -->
+            <!-- CARD 8: AM5 Panorama LCD -->
             <div class="hot-card" data-product='{"name":"SETUP AM5 Panorama LCD Screen RTX 5060TI 16GB","price":"RM6,400","image":"images/am5-panorama.webp","specs":["Processor: AMD Ryzen 5 7500F","Motherboard: B650M Gaming Wifi","Graphics: RTX 5060TI 16GB","RAM: 16GB DDR5 6000Mhz","Storage: 512GB NVMe SSD","PSU: 650W Bronze 80+","Warranty: up to 4 Years"]}'>
                 <span class="badge badge-right">PRE-ORDER</span>
                 <img src="images/am5-panorama.webp" alt="AM5 Panorama RTX 5060TI" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=AM5+Panorama';">
                 <div class="hot-card-content">
                     <div class="hot-title">AM5 Panorama LCD</div>
-                    <div class="hot-desc">RM6,400</div>
+                    <div class="hot-price-row"><span class="hot-desc">RM6,400</span></div>
                 </div>
             </div>
 
-            <!-- CARD 11: HIGH END SETUP AM5 – DELETED -->
-
-            <!-- CARD 12: Custom PC (unchanged) -->
+            <!-- CARD 9: Custom PC -->
             <div class="hot-card" data-product='{"name":"Custom PC","price":"Custom Price","image":"images/custompc.webp","specs":["Build your dream rig","Choose CPU, GPU, RAM, Storage","Free assembly & testing","RGB lighting optional","Warranty: up to 4 Years","Personalized cable management"]}'>
                 <span class="badge badge-right">PRE-ORDER</span>
                 <img src="images/custompc.webp" alt="Custom PC" loading="lazy" onerror="this.src='https://placehold.co/400x500/222/ffd84d?text=Custom+PC';">
                 <div class="hot-card-content">
                     <div class="hot-title">Custom PC</div>
-                    <div class="hot-desc">Free Setup</div>
+                    <div class="hot-price-row"><span class="hot-desc">Free Setup</span></div>
                 </div>
             </div>
 
